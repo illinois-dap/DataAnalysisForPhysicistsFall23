@@ -1,16 +1,16 @@
 # Data Analysis for Physicists
 
-* Physics 246, Fall 2022
-* Thursday 4:00-5:50pm CST
-* Room: Loomis 222
-* 2 credit hours
+* Physics 398DAP, Fall 2023
+* Tuesday & Thursday 10:30 - 11:30 am CST
+* Room: Loomis 226
+* 3 credit hours
 * Course Texts: This one!
 
 Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. In this course, you are going to learn and put into practice the fundamentals of probability and data analysis from a physics perspective. The methods of extracting meaningful information from data using probability theory and statistical analyses will be presented. Additionally, students will gain familiarity with the concepts through programming exercises using Python notebooks. Topics to be covered include: basics of statistics and probability theory, probability distributions, estimators, uncertainties, confidence intervals and hypothesis testing, Fourier and Monte Carlo methods.
 ## Course Logistics
  - **In class sessions for lectures and excercises:** Tuesdays and Thursdays 10:30-11:50pm
- - **Professor:** [Anne Sickles]()
-    - email: @illinois.edu
+ - **Professor:** [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles)
+    - email: sickles@illinois.edu
     - Office Hours: TBD
  - **Professor:** [Mark Neubauer](https://marksneubauer.com)
     - email: msn@illinois.edu
