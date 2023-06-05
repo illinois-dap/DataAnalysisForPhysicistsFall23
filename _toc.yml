@@ -1,0 +1,40 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+#
+# For students (and web build)
+#
+- file: _sources/N_Ways_of_Measuring_PI
+- file: _sources/Dynamics
+- file: _sources/OrbitalDynamics
+- file: _sources/Exoplanets
+- file: _sources/Chaos
+- file: _sources/OrbitalDynamics2
+- file: _sources/ParticlePhysics
+- file: _sources/RandomWalks
+- file: _sources/MarkovChains
+- file: _sources/Predator-Prey
+- file: _sources/FluidDynamics
+- file: _sources/MachineLearningGalaxies
+- file: _sources/QC1
+- file: _sources/QC2
+#
+# With solutions
+#
+#- file: _soln/N_Ways_of_Measuring_PI
+#- file: _soln/Dynamics
+#- file: _soln/OrbitalDynamics
+#- file: _soln/Exoplanets
+#- file: _soln/Chaos
+#- file: _soln/OrbitalDynamics2
+#- file: _soln/ParticlePhysics
+#- file: _soln/RandomWalks
+#- file: _soln/MarkovChains
+#- file: _soln/Predator-Prey
+#- file: _soln/FluidDynamics
+#- file: _soln/MachineLearningGalaxies
+#- file: _soln/QC1
+#- file: _soln/QC2
