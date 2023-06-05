@@ -20,7 +20,7 @@ Welcome! Data is everywhere. Efficient data analysis leading to solid conclusion
      - Office Hours: TBD
 
 ## Online Tools
-See [Useful Links](#useful-links) for more information about how to use these tools
+See [Useful Links](#useful-links) for more information about how to use these awesome tools
 
 * **Campuswire**: We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.
 * **Google Colab**: Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
