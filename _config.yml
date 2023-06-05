@@ -2,9 +2,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 title: PHYS 246
-author: Mark Neubauer, Bryan Clark, George Gollin, Ryan Levy 
+author: Jeff Filippini, Mark Neubauer, Anne Sickles 
 logo: logo.png
-copyright: '2022'
+copyright: '2023'
 only_build_toc_files : true
 
 

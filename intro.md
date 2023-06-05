@@ -6,17 +6,20 @@
 * 2 credit hours
 * Course Texts: This one!
 
-Welcome!  Computation is powerful. In this course, you are going to learn how to use computation to do amazing simulations: compute how general relativity changes the orbit of Mercury; simulate turbulence; compute the effect of predator and preys on an ecosystem; run a quantum algorithm; and more! We've searched and distilled from the world some of the coolest physics we know for you to learn to simulate. Our primary goal in this class will be to help you make these simulations, visualizations and other calculations that empower you to understand physics!
-
+Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. In this course, you are going to learn and put into practice the fundamentals of probability and data analysis from a physics perspective. The methods of extracting meaningful information from data using probability theory and statistical analyses will be presented. Additionally, students will gain familiarity with the concepts through programming exercises using Python notebooks. Topics to be covered include: basics of statistics and probability theory, probability distributions, estimators, uncertainties, confidence intervals and hypothesis testing, Fourier and Monte Carlo methods.
 ## Course Logistics
- - **Lectures:** Thursdays 4:00-5:50pm
+ - **In class sessions for lectures and excercises:** Tuesdays and Thursdays 10:30-11:50pm
  - **Professor:** [Mark Neubauer](https://marksneubauer.com)
     - email: msn@illinois.edu
-    - Office Hours: Monday 5-6pm via [Zoom link](https://illinois.zoom.us/my/msneubauer?pwd=OE9VQW9aQWdSOGkxV1B1dFcxK3cvdz09)
+    - Office Hours: TBD
 
-  - **TA:** Pin-Yi Li 
-     - email: pinyili2@illinois.edu
-     - Office Hours: Wednesdays 5-6pm via [Zoom link](https://illinois.zoom.us/j/8670194809?pwd=SFpNMmZOLzZOTHJnQ1RwSW5QSGJFZz09)
+ - **Professor:** [Anne Sickles]()
+    - email: @illinois.edu
+    - Office Hours: TBD
+
+  - **TA:** TBD
+     - email: @illinois.edu
+     - Office Hours: TBD
 
 ## Online Tools
 See [Useful Links](#useful-links) for more information about how to use these tools
@@ -27,22 +30,24 @@ See [Useful Links](#useful-links) for more information about how to use these to
 
 ## Calendar
 
-| Date          | Assignment                 |
-|---------------|----------------------------|
-|    August 25	 | N Ways to Measure PI       |
-| September 01	 | Dynamics                   |
-| September 08	 | Orbital Dynamics           |
-| September 15	 | Exoplanets                 |
-| September 22	 | Chaos                      |
-| September 29  | Many-Body Simulations      | 
-|   October 06  | Particle Physics           |
-|   October 13	 | Random Walks               |
-|   October 20  | Markov Chains              |
-|   October 27  | Predator-Prey              |
-|  November 03  | Fluid Dynamics             |
-|  November 10	 | Classifying Galaxies       |
-|  November 17	 | Quantum Computing I and II |
-|  December 01  | Quantum Computing Hardware |
+| Date          | Assignment                                  |
+|---------------|---------------------------------------------|
+|    August 21	 | Introduction to Statistics and Data Science |
+|    August 28  | Probability Theory                          |
+| September 04	 | Important Probability Distributions         |
+| September 11	 | Theory of Estimators                        |
+| September 18	 | Correlation and Covariance                  |
+| September 25  | Measurements and Uncertainties              | 
+|   October 02  | Frequentist and Bayesian Methods            |
+|   October 09	 | Confidence Intervals                        |
+|   October 16  | Hypothesis Testing                          |
+|   October 23  | Response, Convolution and Unfolding         |
+|   October 30  | Fourier Methods                             |
+|  November 06	 | Time Series Analysis                        |
+|  November 13	 | Monte Carlo Methods                         |
+|  November 20  | FALL BREAK - NO CLASSES                     |
+|  November 27  | Bias and Blind Analysis                     |
+|  December 04  | Machine Learning for Statistical Inference  |
 
 ## Coursework
 
