@@ -52,26 +52,20 @@ See [Useful Links](#useful-links) for more information about how to use these to
 
 ## Coursework
 
-### Computational Assignments
-The heart of this course will be a series of computational assignments.
-* You will work on the assignments both during class and as homework.
-* Each assignment is due at the beginning of the next class unless otherwise noted. You may turn assignment in up to one week late for 50% credit (except that all assignments are strictly due the day before reading day).
+### Homework Assignments
+You will be assigned weekly homework assignments that will put into practice what you learned in lecture for the week. 
+* You will work on the assignments both during the in-class session on Thursdays and as homework.
+* Each assignment is due at the beginning of the next class unless otherwise noted. You may turn assignment in up to one week late for 50% credit (except that all assignments are strictly due the day before Reading Day).
 * Solutions to the homeworks will not be given.
-* The assignments consist of 95% of your grade.
 * You may collaborate on assignments but must submit your own work.
 * Graded homework will be available through [Gradescope](https://www.gradescope.com)
 
-### Take-Home Final
-The take-home final is 5% of your grade will involve demonstrating and extending your work in class by doing something cool and interesting.  You must work alone on this (i.e. without collaboration). The list of possible cool and interesting extensions are in the right-bar under "cool extensions for final."  Many of these are projects that are scheduled for future versions of this course but just aren't written yet (and so are at the difficulty level of the other course projects).  If you have a good idea that you would like to propose, please let the course staff know and we may approve it. The projects are not all equally easy (but there are plenty of easy ones if that is your goal.)  The projects are graded on a very coarse-grained 5 point scale:
-* 0 points: didn't submit anything
-* 1 point: submitted something but nothing really works
-* 4 points: most of the project works but it is not complete 
-* 5 points: everything works correctly. 
-* 2 and 3 points will interpolate between 1-4 points.  
+### Final Project
+Near the end of the course, you will select from a list of projects that involve demonstrating and extending your work in class by doing something cool and interesting in data analysys. You must work alone on this (i.e. without collaboration). 
 
-For the take-home final you will put together a jupyter notebook that demonstrates your extension project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could read and learn from. It is submitted in an analogous way as the regular course assignments.
+For the final project you will put together a jupyter notebook that demonstrates your project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could, in principle, read and learn from. It is submitted in an analogous way as the regular course assignments.
 
-The final notebook must be submitted via Gradescope for grading on or before ___Friday, December 16, 2022 at 5:00 pm US Central time___.
+The final notebook must be submitted via Gradescope for grading on or before ___Xday, December XX, 2023 at 5:00 pm US Central time___.
 
 ## Grading
 * Class attendence and participation: 10%
