@@ -4,7 +4,7 @@
 * Tuesday & Thursday 10:30 - 11:50 am CST
 * Room: Loomis 226
 * 3 credit hours
-* Course Text: This one! However see supplementary reading suggestions throughout the course. 
+* Course Text: This one! However, see supplementary reading suggestions throughout the course. 
 
 Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. In this course, you are going to learn and put into practice the fundamentals of probability and data analysis from a physics perspective. The methods of extracting meaningful information from data using probability theory and statistical analyses will be presented. Additionally, students will gain familiarity with the concepts through programming exercises using Python notebooks. Topics to be covered include: basics of statistics and probability theory, probability distributions, estimators, uncertainties, confidence intervals and hypothesis testing, Fourier and Monte Carlo methods.
 ## Course Logistics
@@ -74,16 +74,27 @@ For the take-home final you will put together a jupyter notebook that demonstrat
 The final notebook must be submitted via Gradescope for grading on or before ___Friday, December 16, 2022 at 5:00 pm US Central time___.
 
 ## Grading
-* Computational Assignments: 95%
-* Take-home final: 5%
+* Class attendence and participation: 10%
+* Homework: 70%
+* Final Project: 20%
 
-Your final numerical score is computed as
-100 x (0.95 x (Homework Points + Extra Credit Ponts)/(Total Homework Points) + 0.05 x Final
+Letter grades will be assigned as follows:
 
-Unless otherwise noted, every exercise in a problem set counts an equal fraction of the assignment and every part (a,b,c,...) of an exercise counts as an equal fraction of the exercise. 5 points of the problem set will be for mandatory questions (e.g. time spent on assignment, references, collaborators).
-
-Sometimes there are typos in the assignment (although we are working hard to remove them). Please ask when confused! Don't spin your wheels a long time on something that might be a typo. These aren't trick questions - we are trying to ask reasonable things.
-
+| Letter | Low % | High % |
+|--------|-------|--------|
+| A+     | 97.0  | 100.0  |
+| A      | 93.0  | 96.9   |
+| A-     | 90.0  | 92.9   |
+| B+     | 87.0  | 89.9   |
+| B      | 83.0  | 86.9   |
+| B-     | 80.0  | 82.9   |
+| C+     | 77.0  | 79.9   |
+| C      | 73.0  | 76.9   |
+| C-     | 70.0  | 72.9   |
+| D+     | 67.0  | 69.9   |
+| D      | 63.0  | 66.9   |
+| D-     | 60.0  | 62.9   |
+| F      | 00.0  | 59.9   |
 ## Policies
 
 ### Covid 
@@ -91,10 +102,8 @@ Sometimes there are typos in the assignment (although we are working hard to rem
 * Policies as it relates to COVID-19 can be found at https://covid19.illinois.edu
 * If you feel ill or are unable to come to class or complete class assignments due to issues related to COVID-19, including but not limited to testing positive yourself, feeling ill, caring for a family member with COVID-19, or having unexpected child-care obligations, you should contact your instructor immediately, and you are encouraged to copy your academic advisor. 
   
-### About using code you find on the web
+### About using code you find on the web for homework and project(s)
 The quickest way to deal with the arcana of programing is to ask Google for examples of what you are seeking to accomplish. But you will need to use your judgment in doing this: the Google search “how do I use color maps in python?” is fine, while “show me a script that calculates pi” is not. And you should always credit the original source of code that you paste into your own programs in a comment that includes the URL for the original code. If an author says that his/her code is not to be copied or incorporated into your programs, then DON’T.
-
-I have two principal goals in this course. I want all of you to become fearless coders with the confidence to walk up to baffling problems and pound them into submission. And I want you to develop numerical descriptions of cool systems normally thought to be too difficult for students at your level, whose analytic descriptions might obscure the underlying physics. For this to work, you’ll need to write your own code.
 
 ### Academic Integrity
 You must never submit the work of someone else as your own. We understand that many of you will find it helpful to work with other students to master Physics 398DAP. But when you collaborate with your study group on homework assignments, you must be a full, active participant in developing the solutions that you submit for credit.
