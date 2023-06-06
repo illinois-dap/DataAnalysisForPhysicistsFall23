@@ -107,7 +107,7 @@ It is cheating to receive answers from another student and then use them as your
 All activities in this course, are subject to the Academic Integrity rules as described in [Article 1, Part 4, Academic Integrity](https://studentcode.illinois.edu/article1/part4/1-401), of the [Student Code](https://studentcode.illinois.edu).
 
 ## Acknowledgements
-This course was developed by [Jeff Filippini](https://physics.illinois.edu/people/directory/profile/jpf), [Mark Neubauer](https://msneubauer.github.io) and [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles) in 2023. It was first taught by [Mark Neubauer](https://msneubauer.github.io) and [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles) during the Fall 2023 semester. 
+This course was developed by [Jeff Filippini](https://physics.illinois.edu/people/directory/profile/jpf), [Mark Neubauer](https://msneubauer.github.io) and [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles) during 2023. It was first taught by [Mark Neubauer](https://msneubauer.github.io) and [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles) during the Fall 2023 semester.
 
 ## Useful Links
 Here are some useful links
