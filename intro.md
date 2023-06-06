@@ -1,4 +1,4 @@
-# Data Analysis for Physicists
+# Data Analysis for Physics
 
 * Physics 398DAP, Fall 2023
 * Tuesday & Thursday 10:30 - 11:50 am CST
@@ -8,7 +8,10 @@
 
 Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. In this course, you are going to learn and put into practice the fundamentals of probability and data analysis from a physics perspective. The methods of extracting meaningful information from data using probability theory and statistical analyses will be presented. Additionally, students will gain familiarity with the concepts through programming exercises using Python notebooks. Topics to be covered include: basics of statistics and probability theory, probability distributions, estimators, uncertainties, confidence intervals and hypothesis testing, Fourier and Monte Carlo methods.
 ## Course Logistics
- - **In class sessions for lectures and excercises:** Tuesday and Thursday 10:30-11:50pm
+  - **Course Format:**
+    - This course will consist of two meetings per week. This will involve one lecture period and one in-class practical session.
+      - Lecture: Tuesday from 10:30 am - 11:50 am in 226 Loomis
+      - Practical Session: Thursday from 10:30 am - 11:50 am in 226 Loomis
  - **Professor:** [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles)
     - email: sickles@illinois.edu
     - Office Hours: TBD
@@ -20,7 +23,7 @@ Welcome! Data is everywhere. Efficient data analysis leading to solid conclusion
      - Office Hours: TBD
 
 ## Online Tools
-See [Useful Links](#useful-links) for more information about how to use these awesome tools
+See [Useful Links](#useful-links) for more information about how to use these tools
 
 * **Campuswire**: We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.
 * **Google Colab**: Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
@@ -69,13 +72,6 @@ The take-home final is 5% of your grade will involve demonstrating and extending
 For the take-home final you will put together a jupyter notebook that demonstrates your extension project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could read and learn from. It is submitted in an analogous way as the regular course assignments.
 
 The final notebook must be submitted via Gradescope for grading on or before ___Friday, December 16, 2022 at 5:00 pm US Central time___.
-
-### Extra Credit
-There will be occassional opportunities to get extra credit. To zeroth order these exist because I think they are cool and useful for understanding computational physics but I can't justify within the 2 credit hours of the course.
-
-Extra credit assignments will often be described poorly (maybe even something like, `get a full solar system simulation working'). If you have questions about it, please ask before you spend too much time on it. Also, we have no obligation to make extra credit typo-free. Please try to answer the question we mean to be asking.
-
-For the extra credit, per exercise, the grading is all or nothing. We aren't going to hunt for typos and give partial credit for sortof working code. The amount of extra credit per exercise/etc is listed on the assignment.
 
 ## Grading
 * Computational Assignments: 95%
