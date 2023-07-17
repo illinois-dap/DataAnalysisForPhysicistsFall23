@@ -1,20 +1,22 @@
-# Data Analysis for Physics
+# Instrumentation Physics Applications of Machine Learning
 
-* Physics 398DAP, Fall 2023
-* Tuesday & Thursday 10:30 - 11:50 am CST
-* Room: Loomis 226
-* 3 credit hours
+* Physics 503, Fall 2023
+* Meeting: Mondays and Wednesdays from 1:00 pm to 2:15 pm
+* Room: 262 Loomis Laboratory
+* 4 credit hours
 * Course Text: This one! However, see supplementary reading suggestions throughout the course. 
 
-Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. In this course, you are going to learn and put into practice the fundamentals of probability and data analysis from a physics perspective. The methods of extracting meaningful information from data using probability theory and statistical analyses will be presented. Additionally, students will gain familiarity with the concepts through programming exercises using Python notebooks. Topics to be covered include: basics of statistics and probability theory, probability distributions, estimators, uncertainties, confidence intervals and hypothesis testing, Fourier and Monte Carlo methods.
+## Overview
+Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. 
+
+This course is designed to give students a solid foundation in machine learning applications to physics, positioning itself at the intersection of machine learning and data-intensive science. This course will introduce students to the fundamentals of analysis and interpretation of scientific data, and applications of machine learning to problems common in laboratory science such as classification and regression. There will be two 75-minute classes each week, split into discussions of core principles and hands-on exercises involving coding and data. There will be a few projects throughout semester that will build on the course material and utilize open source software and open data in physics and related fields. The list of topics will evolve, according to the interests of the class and instructors. Material will be clustered into units of varying duration, as indicated below. The lists of suggested readings and references are advisory; a large amount of material of excellent quality is now available on the worldwide web, particularly on the sites of university courses addressing the topics of each unit.
+
+A distinguishing feature of this course is its sharp focus on endeavors in the data-rich physical sciences as the arenas in which modern machine learning techniques are taught. The course uses open scientific data, open source software from data science and physics-related fields, and publically-available information as enabling elements. Research-inspired projects are an important part of the course and students will not only execute them but will play an active role in helping define and shape them. Example projects might include machine learning approaches to searches for new particles or interactions at high-energy colliders; methods of particle tracking and reconstruction; identification, classification and measurement of astrophysical phenomena; novel approaches to medical imaging and simulation using techniques from physics and machine learning; machine learning in quantum information science. Through these projects and the course material, students will learn how large datasets in physics are generated, curated, and analyzed, using machine learning as a tool to generate key insights in both experimental and theoretical science.
 ## Course Logistics
   - **Course Format:**
     - This course will consist of two meetings per week. This will involve one lecture period and one in-class practical session.
-      - Lecture: Tuesday from 10:30 am - 11:50 am in 226 Loomis
-      - Practical Session: Thursday from 10:30 am - 11:50 am in 226 Loomis
- - **Professor:** [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles)
-    - email: sickles@illinois.edu
-    - Office Hours: TBD
+      - Lecture: Monday from 1:00 pm - 2:15 pm in 262 Loomis
+      - Practical Session: Wendesday from 1:00 pm - 2:15 pm in 262 Loomis
  - **Professor:** [Mark Neubauer](https://marksneubauer.com)
     - email: msn@illinois.edu
     - Office Hours: TBD
@@ -31,24 +33,24 @@ See [Useful Links](#useful-links) for more information about how to use these to
 
 ## Calendar
 
-| Date          | Assignment                                  |
-|---------------|---------------------------------------------|
-|    August 21	 | Introduction to Statistics and Data Science |
-|    August 28  | Probability Theory                          |
-| September 04	 | Important Probability Distributions         |
-| September 11	 | Theory of Estimators                        |
-| September 18	 | Correlation and Covariance                  |
-| September 25  | Measurements and Uncertainties              | 
-|   October 02  | Frequentist and Bayesian Methods            |
-|   October 09	 | Confidence Intervals                        |
-|   October 16  | Hypothesis Testing                          |
-|   October 23  | Response, Convolution and Unfolding         |
-|   October 30  | Fourier Methods                             |
-|  November 06	 | Time Series Analysis                        |
-|  November 13	 | Monte Carlo Methods                         |
-|  November 20  | FALL BREAK - NO CLASSES                     |
-|  November 27  | Bias and Blind Analysis                     |
-|  December 04  | Machine Learning for Statistical Inference  |
+| Date          | Topic                                                   |
+|---------------|---------------------------------------------------------|
+|    August 21	| Introduction to Data Science                            |
+|    August 28  | Introduction to Data Science                            |
+| September 04	| Introduction to Data Science                            |
+| September 11	| Probability and Statistics                              |
+| September 18	| Bayesian Inference                                      |
+| September 25  | Bayesian Inference                                      | 
+|   October 02  | Bayesian Inference                                      |
+|   October 09	| Supervised Learning                                     |
+|   October 16  | Learning and Inference using Artificial Neural Networks |
+|   October 23  | Deep Learning                                           |
+|   October 30  | Deep Learning                                           | 
+|  November 06	| Deep Learning                                           |
+|  November 13	| Deep Learning                                           |
+|  November 20  | FALL BREAK - NO CLASSES                                 |
+|  November 27  | Methods for Accelerated Machine Learning and Inference  |
+|  December 04  | Methods for Accelerated Machine Learning and Inference  |
 
 ## Coursework
 
@@ -61,16 +63,16 @@ You will be assigned weekly homework assignments that will put into practice wha
 * Graded homework will be available through [Gradescope](https://www.gradescope.com)
 
 ### Final Project
-Near the end of the course, you will select from a list of projects that involve demonstrating and extending your work in class by doing something cool and interesting in data analysys. You must work alone on this (i.e. without collaboration). 
+At appropriate times throughout the course, you will select from a list of projects that involve demonstrating and extending your work in class by doing something cool and interesting in data analysys. You must work alone on this (i.e. without collaboration). 
 
 For the final project you will put together a jupyter notebook that demonstrates your project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could, in principle, read and learn from. It is submitted in an analogous way as the regular course assignments.
 
 The final notebook must be submitted via Gradescope for grading on or before ___Xday, December XX, 2023 at 5:00 pm US Central time___.
 
 ## Grading
-* Class attendence and participation: 10%
-* Homework: 70%
-* Final Project: 20%
+* Class attendence and participation: 5%
+* Homework: 65%
+* Projects: 30%
 
 Letter grades will be assigned as follows:
 
@@ -107,7 +109,7 @@ It is cheating to receive answers from another student and then use them as your
 All activities in this course, are subject to the Academic Integrity rules as described in [Article 1, Part 4, Academic Integrity](https://studentcode.illinois.edu/article1/part4/1-401), of the [Student Code](https://studentcode.illinois.edu).
 
 ## Acknowledgements
-This course was developed by [Jeff Filippini](https://physics.illinois.edu/people/directory/profile/jpf), [Mark Neubauer](https://msneubauer.github.io) and [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles) during 2023. It was first taught by [Mark Neubauer](https://msneubauer.github.io) and [Anne Sickles](https://physics.illinois.edu/people/directory/profile/sickles) during the Fall 2023 semester.
+This course was developed by [Mark Neubauer](https://msneubauer.github.io) during the Fall 2023 semester.
 
 ## Useful Links
 Here are some useful links
