@@ -1,4 +1,4 @@
-# Introduction to Computational Physics (PHYS 246)
+# Data Analysis for Physicists (PHYS 398 DAP)
 
 All instructions, including creating a simple book, and referenes can be found at https://jupyterbook.org
 
