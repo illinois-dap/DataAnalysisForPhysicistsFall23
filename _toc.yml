@@ -4,6 +4,11 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Introduction and Data Science (Unit 1)
+  - caption: Introduction and Data Science
     chapters:
+    - url: https://docs.google.com/presentation/d/1XXAOds1SSP_VV4k4NdjQqomghaKQ7bk1YXzJvtOGk7Q/edit?usp=sharing
+      title: Lecture Slides
     - file: _sources/Template
+      title: Lecture Notebook
+    - file: _sources/Assignment_01
+      title: Assignment Notebook
