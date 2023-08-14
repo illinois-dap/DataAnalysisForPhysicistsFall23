@@ -3,8 +3,7 @@
 
 format: jb-book
 root: intro
-chapters:
-#
-# For students (and web build)
-#
-- file: _sources/MarkovChains
+parts:
+  - caption: Introduction and Data Science (Unit 1)
+    chapters:
+    - file: _sources/Template
