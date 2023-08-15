@@ -32,8 +32,8 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build .
-
+#        jupyter-book build .
+        jupyter-book build --config _config.yml --toc _toc.yml .
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
