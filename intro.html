@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Data Analysis for Physics &#8212; PHYS 398 DAP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction to Statisics and Data Science" href="_sources/Unit_01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Data Analysis for Physics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Statistics and Data Science</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_01.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1XXAOds1SSP_VV4k4NdjQqomghaKQ7bk1YXzJvtOGk7Q/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_01.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probability Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_02.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/ProbabilityTheory.html">Probability Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_02.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Important Probability Distributions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_03.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/ProbabilityDistributions.html">Probability Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_03.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory of Estimators</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_04.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/TheoryOfEstimators.html">Theory of Estimators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_04.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation and Covariance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_05.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/CorrelationCovariance.html">Correlation and Covariance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_05.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Sources of Uncertainty</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_06.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/SourcesOfUncertainty.html">Sources of Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_06.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Frequentist and Bayesian Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_07.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/FrequentistBayesian.html">Frequentist and Bayesian Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_07.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Confidence Intervals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_08.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/ConfidenceIntervals.html">Confidence Intervals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_08.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hypothesis Testing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_09.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/HypothesisTesting.html">Hypothesis Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_09.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Response, Convolution and Unfolding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_10.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/ResponseConvolutionUnfolding.html">Response, Convolution and Unfolding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_10.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fourier Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_11.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/FourierMethods.html">Fourier Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_11.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time Series</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_12.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/TimeSeries.html">Time Series</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_12.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Monte Carlo and Sampling Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_13.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/MonteCarloSamplingMethods.html">Monte Carlo and Sampling Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_13.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bias and Blind Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_14.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/BiasBlindAnalysis.html">Bias and Blind Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_14.html">Assignment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Methods for Inference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="_sources/Unit_15.html">Lecture Materials</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sources/MachineLearningMethodsInference.html">Machine Learning Methods for Inference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sources/Assignment_15.html">Assignment</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Analysis for Physics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-syllabus">Overview / Syllabus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-logistics">Course Logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-tools">Online Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar">Calendar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coursework">Coursework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignments">Homework Assignments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#policies">Policies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covid">Covid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-using-code-you-find-on-the-web-for-homework-and-project-s">About using code you find on the web for homework and project(s)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#academic-integrity">Academic Integrity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-links">Useful Links</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-analysis-for-physics">
+<h1>Data Analysis for Physics<a class="headerlink" href="#data-analysis-for-physics" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Physics 398 DAP, Fall 2023</p></li>
+<li><p>Meeting: Tuesdays and Thursdays from 10:30 am to 11:50 am</p></li>
+<li><p>Room: 236 Loomis Laboratory</p></li>
+<li><p>3 credit hours</p></li>
+<li><p>Course Text: This one! However, see supplementary reading suggestions throughout the course.</p></li>
+</ul>
+<section id="overview-syllabus">
+<h2>Overview / Syllabus<a class="headerlink" href="#overview-syllabus" title="Permalink to this heading">#</a></h2>
+<p>Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods.</p>
+<p>Maybe you have data and not sure how to analyze it. Maybe you are looking to make the most of your precious scientific data and derive sound conclusions not sure how. If so, this course is for you!</p>
+<p>This course is designed to provide students with an introduction to data analysis from a physics perspective. Upon completion of this course, students will learn to:</p>
+<ol class="arabic simple">
+<li><p>Understand common probability distributions and identify examples of where these distributions occur in physics</p></li>
+<li><p>Identify sources of statistical &amp; systematic uncertainties and bias, and properly handle them to interpret scientific data</p></li>
+<li><p>Implement key analysis tasks such as parameter estimation, unfolding, auto/cross-correlation, confidence intervals, hypothesis testing, Monte Carlo simulation, and much more!</p></li>
+</ol>
+<p>You can find more detail in the <span class="xref myst">Calendar</span> section on the specific topics that will be covered in this course.</p>
+</section>
+<section id="course-logistics">
+<h2>Course Logistics<a class="headerlink" href="#course-logistics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Course Format:</strong></p>
+<ul>
+<li><p>This course will consist of two meetings per week. This will involve one lecture period and one in-class practical session where you will work on an assignment due the following week. There is also a project component to the course.</p>
+<ul>
+<li><p>Lecture: Tuesday from 10:30 am - 11:50 am in 236 Loomis</p></li>
+<li><p>Practical Session: Thursday from 10:30 am - 11:50 am in 236 Loomis</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Professor:</strong> <a class="reference external" href="http://heavyions.physics.illinois.edu">Anne Sickles</a></p>
+<ul>
+<li><p>email: <a class="reference external" href="mailto:sickles&#37;&#52;&#48;illinois&#46;edu">sickles<span>&#64;</span>illinois<span>&#46;</span>edu</a></p></li>
+<li><p>Office Hours: TBD</p></li>
+</ul>
+</li>
+<li><p><strong>Professor:</strong> <a class="reference external" href="https://marksneubauer.com">Mark Neubauer</a></p>
+<ul>
+<li><p>email: <a class="reference external" href="mailto:msn&#37;&#52;&#48;illinois&#46;edu">msn<span>&#64;</span>illinois<span>&#46;</span>edu</a></p></li>
+<li><p>Office Hours: TBD</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="online-tools">
+<h2>Online Tools<a class="headerlink" href="#online-tools" title="Permalink to this heading">#</a></h2>
+<p>See <span class="xref myst">Useful Links</span> for more information about how to use these tools</p>
+<ul class="simple">
+<li><p><strong>Campuswire</strong>: We will use <a class="reference external" href="https://campuswire.com">Campuswire</a> as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.</p></li>
+<li><p><strong>Google Colab</strong>: Using <a class="reference external" href="https://colab.research.google.com">Google Colab</a>, you will be able to program your code in a jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).</p></li>
+<li><p><strong>Gradescope</strong>: On <a class="reference external" href="https://www.gradescope.com">Gradescope</a>, you will submit your assignments and find your graded assignments.</p></li>
+</ul>
+</section>
+<section id="calendar">
+<h2>Calendar<a class="headerlink" href="#calendar" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date (Week)</p></th>
+<th class="head"><p>Topic</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>August 21</p></td>
+<td><p>Introduction to Statisics and Data Science</p></td>
+</tr>
+<tr class="row-odd"><td><p>August 28</p></td>
+<td><p>Probability Theory</p></td>
+</tr>
+<tr class="row-even"><td><p>September 04</p></td>
+<td><p>Important Probability Distributions</p></td>
+</tr>
+<tr class="row-odd"><td><p>September 11</p></td>
+<td><p>Theory of Estimators</p></td>
+</tr>
+<tr class="row-even"><td><p>September 18</p></td>
+<td><p>Correlation and Covariance</p></td>
+</tr>
+<tr class="row-odd"><td><p>September 25</p></td>
+<td><p>Sources of Uncertainty</p></td>
+</tr>
+<tr class="row-even"><td><p>October 02</p></td>
+<td><p>Frequentist and Bayesian Methods</p></td>
+</tr>
+<tr class="row-odd"><td><p>October 09</p></td>
+<td><p>Confidence Intervals</p></td>
+</tr>
+<tr class="row-even"><td><p>October 16</p></td>
+<td><p>Hypothesis Testing</p></td>
+</tr>
+<tr class="row-odd"><td><p>October 23</p></td>
+<td><p>Response, Convolution and Unfolding</p></td>
+</tr>
+<tr class="row-even"><td><p>October 30</p></td>
+<td><p>Fourier Methods</p></td>
+</tr>
+<tr class="row-odd"><td><p>November 06</p></td>
+<td><p>Time Series</p></td>
+</tr>
+<tr class="row-even"><td><p>November 13</p></td>
+<td><p>Monte Carlo and Sampling Methods</p></td>
+</tr>
+<tr class="row-odd"><td><p>November 20</p></td>
+<td><p>FALL BREAK - NO CLASSES</p></td>
+</tr>
+<tr class="row-even"><td><p>November 27</p></td>
+<td><p>Bias and Blind Analysis</p></td>
+</tr>
+<tr class="row-odd"><td><p>December 04</p></td>
+<td><p>Machine Learning Methods for Inference</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="coursework">
+<h2>Coursework<a class="headerlink" href="#coursework" title="Permalink to this heading">#</a></h2>
+<section id="homework-assignments">
+<h3>Homework Assignments<a class="headerlink" href="#homework-assignments" title="Permalink to this heading">#</a></h3>
+<p>You will be assigned weekly homework assignments that will put into practice what you learned in lecture for the week.</p>
+<ul class="simple">
+<li><p>You will work on the assignments both during the in-class session on Thursdays and as homework.</p></li>
+<li><p>Each assignment is due at the beginning of the next class unless otherwise noted. You may turn assignment in up to one week late for 50% credit (except that all assignments are strictly due the day before Reading Day).</p></li>
+<li><p>Solutions to the homeworks will not be given.</p></li>
+<li><p>You may collaborate on assignments but must submit your own work.</p></li>
+<li><p>Graded homework will be available through <a class="reference external" href="https://www.gradescope.com">Gradescope</a></p></li>
+</ul>
+</section>
+<section id="final-project">
+<h3>Final Project<a class="headerlink" href="#final-project" title="Permalink to this heading">#</a></h3>
+<p>At appropriate times throughout the course, you will select from a list of projects that involve demonstrating and extending your work in class by doing something cool and interesting in data analysys. You must work alone on this (i.e. without collaboration).</p>
+<p>For the final project you will put together a jupyter notebook that demonstrates your project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could, in principle, read and learn from. It is submitted in an analogous way as the regular course assignments.</p>
+<p>The final notebook must be submitted via Gradescope for grading on or before <em><strong>Xday, December XX, 2023 at 5:00 pm US Central time</strong></em>.</p>
+</section>
+</section>
+<section id="grading">
+<h2>Grading<a class="headerlink" href="#grading" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Class attendence and participation: 10%</p></li>
+<li><p>Homework: 70%</p></li>
+<li><p>Projects: 20%</p></li>
+</ul>
+<p>Letter grades will be assigned as follows:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letter</p></th>
+<th class="head"><p>Low %</p></th>
+<th class="head"><p>High %</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A+</p></td>
+<td><p>97.0</p></td>
+<td><p>100.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>A</p></td>
+<td><p>93.0</p></td>
+<td><p>96.9</p></td>
+</tr>
+<tr class="row-even"><td><p>A-</p></td>
+<td><p>90.0</p></td>
+<td><p>92.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>B+</p></td>
+<td><p>87.0</p></td>
+<td><p>89.9</p></td>
+</tr>
+<tr class="row-even"><td><p>B</p></td>
+<td><p>83.0</p></td>
+<td><p>86.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>B-</p></td>
+<td><p>80.0</p></td>
+<td><p>82.9</p></td>
+</tr>
+<tr class="row-even"><td><p>C+</p></td>
+<td><p>77.0</p></td>
+<td><p>79.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>C</p></td>
+<td><p>73.0</p></td>
+<td><p>76.9</p></td>
+</tr>
+<tr class="row-even"><td><p>C-</p></td>
+<td><p>70.0</p></td>
+<td><p>72.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>D+</p></td>
+<td><p>67.0</p></td>
+<td><p>69.9</p></td>
+</tr>
+<tr class="row-even"><td><p>D</p></td>
+<td><p>63.0</p></td>
+<td><p>66.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>D-</p></td>
+<td><p>60.0</p></td>
+<td><p>62.9</p></td>
+</tr>
+<tr class="row-even"><td><p>F</p></td>
+<td><p>00.0</p></td>
+<td><p>59.9</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="policies">
+<h2>Policies<a class="headerlink" href="#policies" title="Permalink to this heading">#</a></h2>
+<section id="covid">
+<h3>Covid<a class="headerlink" href="#covid" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Policies as it relates to COVID-19 can be found at <a class="reference external" href="https://covid19.illinois.edu">https://covid19.illinois.edu</a></p></li>
+<li><p>If you feel ill or are unable to come to class or complete class assignments due to issues related to COVID-19, including but not limited to testing positive yourself, feeling ill, caring for a family member with COVID-19, or having unexpected child-care obligations, you should contact your instructor immediately, and you are encouraged to copy your academic advisor.</p></li>
+</ul>
+</section>
+<section id="about-using-code-you-find-on-the-web-for-homework-and-project-s">
+<h3>About using code you find on the web for homework and project(s)<a class="headerlink" href="#about-using-code-you-find-on-the-web-for-homework-and-project-s" title="Permalink to this heading">#</a></h3>
+<p>The quickest way to deal with the arcana of programing is to ask Google for examples of what you are seeking to accomplish. But you will need to use your judgment in doing this: the Google search “how do I use color maps in python?” is fine, while “show me a script that calculates pi” is not. And you should always credit the original source of code that you paste into your own programs in a comment that includes the URL for the original code. If an author says that his/her code is not to be copied or incorporated into your programs, then DON’T.</p>
+</section>
+<section id="academic-integrity">
+<h3>Academic Integrity<a class="headerlink" href="#academic-integrity" title="Permalink to this heading">#</a></h3>
+<p>You must never submit the work of someone else as your own. We understand that many of you will find it helpful to work with other students to master Physics 398DAP. But when you collaborate with your study group on homework assignments, you must be a full, active participant in developing the solutions that you submit for credit.</p>
+<p>It is cheating to receive answers from another student and then use them as your own. It is cheating to submit as your own work solutions that you find by searching on the worldwide web (though see “About using code you find on the web”), or by subscribing to an online service that suborns cheating. It is cheating—and a violation of U.S. copyright law—to give (or sell) course material to someone else who intends to redistribute and/or sell it.</p>
+<p>All activities in this course, are subject to the Academic Integrity rules as described in <a class="reference external" href="https://studentcode.illinois.edu/article1/part4/1-401">Article 1, Part 4, Academic Integrity</a>, of the <a class="reference external" href="https://studentcode.illinois.edu">Student Code</a>.</p>
+</section>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h2>
+<p>This course was developed by <a class="reference external" href="http://heavyions.physics.illinois.edu">Anne Sickles</a>, <a class="reference external" href="http://jpf.web.engr.illinois.edu">Jeff Filippini</a>, and <a class="reference external" href="https://msneubauer.github.io">Mark Neubauer</a>. It was first taught by <a class="reference external" href="http://heavyions.physics.illinois.edu">Anne Sickles</a> and <a class="reference external" href="https://msneubauer.github.io">Mark Neubauer</a> during the Fall 2023 semester.</p>
+</section>
+<section id="useful-links">
+<h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this heading">#</a></h2>
+<p>Here are some useful links</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://wiki.python.org/moin/BeginnersGuide/Programmers">Python Programming Resources</a></p></li>
+<li><p><a class="reference external" href="https://developers.google.com/edu/python">Google’s Python Programming Class</a></p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="right-next"
+       href="_sources/Unit_01.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Introduction to Statisics and Data Science</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-syllabus">Overview / Syllabus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-logistics">Course Logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-tools">Online Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar">Calendar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coursework">Coursework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignments">Homework Assignments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#policies">Policies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covid">Covid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-using-code-you-find-on-the-web-for-homework-and-project-s">About using code you find on the web for homework and project(s)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#academic-integrity">Academic Integrity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-links">Useful Links</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Neubauer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
