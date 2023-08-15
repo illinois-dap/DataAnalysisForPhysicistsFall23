@@ -21,7 +21,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/ProbabilityTheory
       - file: _sources/Assignment_02
         title: Assignment
   - caption: Important Probability Distributions
@@ -31,7 +31,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/ProbabilityDistributions
       - file: _sources/Assignment_03
         title: Assignment
   - caption: Theory of Estimators
@@ -41,7 +41,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/TheoryOfEstimators
       - file: _sources/Assignment_04
         title: Assignment
   - caption: Correlation and Covariance
@@ -51,7 +51,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/CorrelationCovariance
       - file: _sources/Assignment_05
         title: Assignment
   - caption: Sources of Uncertainty
@@ -61,7 +61,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/SourcesOfUncertainty
       - file: _sources/Assignment_06
         title: Assignment
   - caption: Frequentist and Bayesian Methods
@@ -71,7 +71,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/FrequentistBayesian
       - file: _sources/Assignment_07
         title: Assignment
   - caption: Confidence Intervals
@@ -81,7 +81,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/ConfidenceIntervals
       - file: _sources/Assignment_08
         title: Assignment
   - caption: Hypothesis Testing
@@ -91,7 +91,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/HypothesisTesting
       - file: _sources/Assignment_09
         title: Assignment
   - caption: Response, Convolution and Unfolding
@@ -101,7 +101,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/ResponseConvolutionUnfolding
       - file: _sources/Assignment_10
         title: Assignment
   - caption: Fourier Methods
@@ -111,7 +111,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/FourierMethods
       - file: _sources/Assignment_11
         title: Assignment
   - caption: Time Series
@@ -121,7 +121,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/TimeSeries
       - file: _sources/Assignment_12
         title: Assignment
   - caption: Monte Carlo and Sampling Methods
@@ -131,7 +131,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing
           title: Slides
- #       - file: _sources/JupyterNumpy
+        - file: _sources/MonteCarloSamplingMethods
       - file: _sources/Assignment_13
         title: Assignment
   - caption: Bias and Blind Analysis
@@ -141,7 +141,7 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/BiasBlindAnalysis
       - file: _sources/Assignment_14
         title: Assignment
   - caption: Machine Learning Methods for Inference
@@ -151,6 +151,6 @@ parts:
         sections:
         - url: https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing
           title: Slides
-#        - file: _sources/JupyterNumpy
+        - file: _sources/MachineLearningMethodsInference
       - file: _sources/Assignment_15
         title: Assignment
