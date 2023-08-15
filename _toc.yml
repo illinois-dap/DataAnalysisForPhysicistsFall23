@@ -4,11 +4,153 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Introduction and Data Science
+  - caption: Introduction to Statistics and Data Science
     chapters:
-    - url: https://docs.google.com/presentation/d/1XXAOds1SSP_VV4k4NdjQqomghaKQ7bk1YXzJvtOGk7Q/edit?usp=sharing
-      title: Lecture Slides
-    - file: _sources/Template
-      title: Lecture Notebook
-    - file: _sources/Assignment_01
-      title: Assignment Notebook
+      - file: _sources/Unit_01
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1XXAOds1SSP_VV4k4NdjQqomghaKQ7bk1YXzJvtOGk7Q/edit?usp=sharing
+          title: Slides
+        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_01
+        title: Assignment
+  - caption: Probability Theory
+    chapters:
+      - file: _sources/Unit_02
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_02
+        title: Assignment
+  - caption: Important Probability Distributions
+    chapters:
+      - file: _sources/Unit_03
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_03
+        title: Assignment
+  - caption: Theory of Estimators
+    chapters:
+      - file: _sources/Unit_04
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_04
+        title: Assignment
+  - caption: Correlation and Covariance
+    chapters:
+      - file: _sources/Unit_05
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_05
+        title: Assignment
+  - caption: Sources of Uncertainty
+    chapters:
+      - file: _sources/Unit_06
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_06
+        title: Assignment
+  - caption: Frequentist and Bayesian Methods
+    chapters:
+      - file: _sources/Unit_07
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_07
+        title: Assignment
+  - caption: Confidence Intervals
+    chapters:
+      - file: _sources/Unit_08
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_08
+        title: Assignment
+  - caption: Hypothesis Testing
+    chapters:
+      - file: _sources/Unit_09
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_09
+        title: Assignment
+  - caption: Response, Convolution and Unfolding
+    chapters:
+      - file: _sources/Unit_10
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_10
+        title: Assignment
+  - caption: Fourier Methods
+    chapters:
+      - file: _sources/Unit_11
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_11
+        title: Assignment
+  - caption: Time Series
+    chapters:
+      - file: _sources/Unit_12
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_12
+        title: Assignment
+  - caption: Monte Carlo and Sampling Methods
+    chapters:
+      - file: _sources/Unit_13
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing
+          title: Slides
+ #       - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_13
+        title: Assignment
+  - caption: Bias and Blind Analysis
+    chapters:
+      - file: _sources/Unit_14
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_14
+        title: Assignment
+  - caption: Machine Learning Methods for Inference
+    chapters:
+      - file: _sources/Unit_15
+        title: Lecture Materials
+        sections:
+        - url: https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing
+          title: Slides
+#        - file: _sources/JupyterNumpy
+      - file: _sources/Assignment_15
+        title: Assignment

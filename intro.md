@@ -6,7 +6,7 @@
 * 3 credit hours
 * Course Text: This one! However, see supplementary reading suggestions throughout the course.
 
-## Overview
+## Overview / Syllabus
 Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods.
 
 Maybe you have data and not sure how to analyze it. Maybe you are looking to make the most of your precious scientific data and derive sound conclusions not sure how. If so, this course is for you!
@@ -15,6 +15,8 @@ This course is designed to provide students with an introduction to data analysi
 1. Understand common probability distributions and identify examples of where these distributions occur in physics
 2. Identify sources of statistical & systematic uncertainties and bias, and properly handle them to interpret scientific data
 3. Implement key analysis tasks such as parameter estimation, unfolding, auto/cross-correlation, confidence intervals, hypothesis testing, Monte Carlo simulation, and much more!
+
+You can find more detail in the [Calendar](#calendar) section on the specific topics that will be covered in this course. 
 
 ## Course Logistics
   - **Course Format:**
