@@ -12,8 +12,8 @@ Welcome! Data is everywhere. Efficient data analysis leading to solid conclusion
 Maybe you have data and not sure how to analyze it. Maybe you are looking to make the most of your precious scientific data and derive sound conclusions not sure how. If so, this course is for you!
 
 This course is designed to provide students with an introduction to data analysis from a physics perspective. Upon completion of this course, students will learn to:
-1. Understand common probability distributions and identify examples of where these distributions occur in physics.
-2. Identify sources of statistical & systematic uncertainties and bias, and properly handle them to interpret scientific data.
+1. Understand common probability distributions and identify examples of where these distributions occur in physics
+2. Identify sources of statistical & systematic uncertainties and bias, and properly handle them to interpret scientific data
 3. Implement key analysis tasks such as parameter estimation, unfolding, auto/cross-correlation, confidence intervals, hypothesis testing, Monte Carlo simulation, and much more!
 
 You can find more detail in the [Calendar](#calendar) section on the specific topics that will be covered in this course. 
@@ -31,7 +31,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
     - Office Hours: TBD
 
 ## Online Tools
-See [Useful Links](#useful-links) for more information about how to use these tools.
+See [Useful Links](#useful-links) for more information about how to use these tools
 
 * **Campuswire**: We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.
 * **Google Colab**: Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
@@ -114,9 +114,10 @@ It is cheating to receive answers from another student and then use them as your
 
 All activities in this course, are subject to the Academic Integrity rules as described in [Article 1, Part 4, Academic Integrity](https://studentcode.illinois.edu/article1/part4/1-401), of the [Student Code](https://studentcode.illinois.edu).
 
-## Acknowledgements
-This course was developed by [Anne Sickles](http://heavyions.physics.illinois.edu), [Jeff Filippini](http://jpf.web.engr.illinois.edu), and [Mark Neubauer](https://msneubauer.github.io). It was first taught by [Anne Sickles](http://heavyions.physics.illinois.edu) and [Mark Neubauer](https://msneubauer.github.io) during the Fall 2023 semester.
 ## Useful Links
 Here are some useful links
 * [Python Programming Resources](https://wiki.python.org/moin/BeginnersGuide/Programmers)
 * [Google's Python Programming Class](https://developers.google.com/edu/python)
+
+## Acknowledgements
+This course was developed by [Anne Sickles](http://heavyions.physics.illinois.edu), [Jeff Filippini](http://jpf.web.engr.illinois.edu), and [Mark Neubauer](https://msneubauer.github.io). It was first taught by [Anne Sickles](http://heavyions.physics.illinois.edu) and [Mark Neubauer](https://msneubauer.github.io) during the Fall 2023 semester.
