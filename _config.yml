@@ -36,7 +36,7 @@ parse:
 # HTML-specific settings
 html:
   use_issues_button: false
-  use_repository_button: false
+  use_repository_button: true
 
 #######################################################################################
 # LaTeX-specific settings

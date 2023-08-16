@@ -1,22 +1,11 @@
-# Data Analysis for Physicists (PHYS 398 DAP)
+# Data Analysis for Physics (PHYS 398DAP)
 
-All instructions, including creating a simple book, and referenes can be found at https://jupyterbook.org
+This is the course repository for PHYS 398DAP offered by the University of Illinois Physics Department.
 
-## Create a template book
-`jupyter-book create IntroComputationalPhysics`
+A [Jupyterbook](https://jupyterbook.org) from this repository can be built with:
 
-## Build the book to make the html
-`cd IntroComputationalPhysics`
-### For solutions version
-`jupyter-book build --config _config.yml --toc _toc_wSoln.yml ./`
-### For student version
 `jupyter-book build --config _config.yml --toc _toc.yml ./`
 
-## Clean the build
-`jupyter-book clean ./`
+The jupyterbook for this course is automatically built and can be found at:
 
-## Copy to illinois course server (MacOS with course server mounted)
-```
-cd ~/repos/illinois-dap/DataAnalysisForPhysicists`
-cp -rp ./_build/html/* /Volumes/phys398dap/fa2023/secure/html/
-```
+[](https://illinois-dap.github.io/DataAnalysisForPhysicists)
