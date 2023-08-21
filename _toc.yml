@@ -41,6 +41,7 @@ chapters:
     title: Slides
   - file: _sources/lectures/SourcesOfUncertainty
   - file: _sources/homework/Homework_06
+  - file: _sources/projects/Project_01
 - file: _sources/Week_07
   sections:
   - url: https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing
@@ -71,6 +72,7 @@ chapters:
     title: Slides
   - file: _sources/lectures/FourierMethods
   - file: _sources/homework/Homework_11
+  - file: _sources/projects/Project_02
 - file: _sources/Week_12
   sections:
   - url: https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing
