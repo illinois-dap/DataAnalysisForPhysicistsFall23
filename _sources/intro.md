@@ -31,9 +31,9 @@ __Note__: *This schedule will evolve throughout the semseter*
 | Nov 27  | {doc}`_sources/Week_14`     | [HW 13](_sources/homework/Homework_14) |                                        |
 | Dec 04  | {doc}`_sources/Week_15`     | [HW 13](_sources/homework/Homework_15) |                                        |
 
+## <span style="color:Red">Overview</span>
 
-## Overview / Syllabus
-Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods.
+Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. 
 
 Maybe you have data and not sure how to analyze it. Maybe you are looking to make the most of your precious scientific data and derive sound conclusions not sure how. If so, this course is for you!
 
@@ -44,106 +44,111 @@ This course is designed to provide students with an introduction to data analysi
 
 You can find more detail in the [Calendar](#calendar) section on the specific topics that will be covered in this course. 
 
-## Course Logistics
-  - **Course Format:**
-    - This course will consist of two meetings per week. This will involve one lecture period and one in-class practical session where you will work on an assignment due the following week. There is also a project component to the course. 
-      - Lecture: Tuesday from 10:30 am - 11:50 am in 236 Loomis
-      - Practical Session: Thursday from 10:30 am - 11:50 am in 236 Loomis
- - **Professor:** [Anne Sickles](http://heavyions.physics.illinois.edu)
-    - email: sickles@illinois.edu
-    - Office Hours: TBD
- -  **Professor:** [Mark Neubauer](https://marksneubauer.com)
-    - email: msn@illinois.edu
-    - Office Hours: TBD
+## <span style="color:Red">Course Logistics</span>
+### Format
+* This course will consist of two meetings per week: one lecture period and one in-class practical session.
+* Lecture: Tuesday from 10:30 am - 11:50 am in 236 Loomis
+* Practical Session: Thursday from 10:30 am - 11:50 am in 236 Loomis
 
-## Online Tools
-See [Useful Links](#useful-links) for more information about how to use these tools
+### Instructors
+* Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
+  * email: sickles@illinois.edu
+  * Office Hour: TBD
+* Professor [Mark Neubauer](https://marksneubauer.com)
+  * email: msn@illinois.edu
+  * Office Hour: TBD
 
-* **Campuswire**: We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.
-* **Google Colab**: Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
-* **Gradescope**: On [Gradescope](https://www.gradescope.com), you will submit your assignments and find your graded assignments.
+## <span style="color:Red">Online Tools</span>
 
-## Calendar
+There are several online tools you will need to use as part of this course. 
 
-| Date (Week)   | Topic                                                   |
-|---------------|---------------------------------------------------------|
-|    August 21	| Introduction to Statisics and Data Science              |
-|    August 28  | Probability Theory                                      |
-| September 04	| Important Probability Distributions                     |
-| September 11	| Theory of Estimators                                    |
-| September 18	| Correlation and Covariance                              |
-| September 25  | Sources of Uncertainty                                  | 
-|   October 02  | Frequentist and Bayesian Methods                        |
-|   October 09	| Confidence Intervals                                    |
-|   October 16  | Hypothesis Testing                                      |
-|   October 23  | Response, Convolution and Unfolding                     |
-|   October 30  | Fourier Methods                                         | 
-|  November 06	| Time Series                                             |
-|  November 13	| Monte Carlo and Sampling Methods                        |
-|  November 20  | FALL BREAK - NO CLASSES                                 |
-|  November 27  | Bias and Blind Analysis                                 |
-|  December 04  | Machine Learning Methods for Inference                  |
+### Campuswire
+We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.
+### Google Colab
+Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a Jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
+### Gradescope
+On [Gradescope](https://www.gradescope.com), you will submit your assignments and find your graded assignments.
 
-## Coursework
+## <span style="color:Red">Coursework</span>
 
 ### Homework Assignments
 You will be assigned weekly homework assignments that will put into practice what you learned in lecture for the week. 
-* You will work on the assignments both during the in-class session on Thursdays and as homework.
+* You will work on the assignments both during the in-class session on Wednesdays and as homework.
+* You will submit your __executed__ (i.e. with "RunAll") homework notebook via [Gradescope](https://www.gradescope.com).
 * Each assignment is due at the beginning of the next class unless otherwise noted. You may turn assignment in up to one week late for 50% credit (except that all assignments are strictly due the day before Reading Day).
 * Solutions to the homeworks will not be given.
 * You may collaborate on assignments but must submit your own work.
-* Graded homework will be available through [Gradescope](https://www.gradescope.com)
+* Graded homework will be available through [Gradescope](https://www.gradescope.com).
 
-### Final Project
+### Projects
 At appropriate times throughout the course, you will select from a list of projects that involve demonstrating and extending your work in class by doing something cool and interesting in data analysys. You must work alone on this (i.e. without collaboration). 
 
-For the final project you will put together a jupyter notebook that demonstrates your project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could, in principle, read and learn from. It is submitted in an analogous way as the regular course assignments.
+For projects you will put together a Jupyter notebook that demonstrates your project. The notebook should have code and demonstrate the task but also be written in an expository way that other students could, in principle, read and learn from. It is submitted in an analogous way as the regular course assignments.
 
-The final notebook must be submitted via Gradescope for grading on or before ___Xday, December XX, 2023 at 5:00 pm US Central time___.
+Each project notebook must be submitted via Gradescope for grading.
 
-## Grading
+## <span style="color:Red">Grading</span>
 * Class attendence and participation: 5%
 * Homework: 70%
 * Projects: 25%
 
 Letter grades will be assigned as follows:
 
-| Letter | Low % | High % |
-|--------|-------|--------|
-| A+     | 97.0  | 100.0  |
-| A      | 93.0  | 96.9   |
-| A-     | 90.0  | 92.9   |
-| B+     | 87.0  | 89.9   |
-| B      | 83.0  | 86.9   |
-| B-     | 80.0  | 82.9   |
-| C+     | 77.0  | 79.9   |
-| C      | 73.0  | 76.9   |
-| C-     | 70.0  | 72.9   |
-| D+     | 67.0  | 69.9   |
-| D      | 63.0  | 66.9   |
-| D-     | 60.0  | 62.9   |
-| F      | 00.0  | 59.9   |
-## Policies
+* A+  &nbsp; [97.0 - 100.0]
+* A   &nbsp; &nbsp; [93.0 - 96.9]
+* A-  &nbsp; [90.0 - 92.9]
+* B+  &nbsp; [87.0 - 89.9]
+* B   &nbsp; &nbsp; [83.0 - 86.9]
+* B-  &nbsp; [80.0 - 82.9]
+* C+  &nbsp; [77.0 - 79.9]
+* C   &nbsp; &nbsp; [73.0 - 76.9]
+* C-  &nbsp; [70.0 - 72.9]
+* D+  &nbsp; [67.0 - 69.9]
+* D   &nbsp; &nbsp; [63.0 - 66.9]
+* D-  &nbsp; [60.0 - 62.9]
+* F   &nbsp; &nbsp; [00.0 - 59.9]
+
+## <span style="color:Red">Policies</span>
 
 ### Covid 
 
 * Policies as it relates to COVID-19 can be found at https://covid19.illinois.edu
 * If you feel ill or are unable to come to class or complete class assignments due to issues related to COVID-19, including but not limited to testing positive yourself, feeling ill, caring for a family member with COVID-19, or having unexpected child-care obligations, you should contact your instructor immediately, and you are encouraged to copy your academic advisor. 
   
-### About using code you find on the web for homework and project(s)
-The quickest way to deal with the arcana of programing is to ask Google for examples of what you are seeking to accomplish. But you will need to use your judgment in doing this: the Google search “how do I use color maps in python?” is fine, while “show me a script that calculates pi” is not. And you should always credit the original source of code that you paste into your own programs in a comment that includes the URL for the original code. If an author says that his/her code is not to be copied or incorporated into your programs, then DON’T.
+### About using code you find on the web or generative AI for homework and projects
+The quickest way to deal with the arcana of programing is to ask Google or ChatGPT for examples of what you are seeking to accomplish. But you will need to use your own judgment in terms of value added for your learning in using these techologies Your generation will need to how learn to work productively in-concert with AI. That - that's a technological genie out of the bottle. Finding its way back into the bottle is as a likely as a broken glass spontaeously reassembling.  Inrregardless, as with any external resource, you must always credit the original source of code and other information that you paste into your own programs, notebooks, projects, etc in a comment that includes the original source. If an author says that his/her code is not to be copied or incorporated into your programs, then DON’T.
 
 ### Academic Integrity
-You must never submit the work of someone else as your own. We understand that many of you will find it helpful to work with other students to master Physics 398DAP. But when you collaborate with your study group on homework assignments, you must be a full, active participant in developing the solutions that you submit for credit.
+You must never submit the work of someone else as your own. We understand that many of you will find it helpful to work with other students to master the course. But when you collaborate with your study group on homework assignments, you must be a full, active participant in developing the solutions that you submit for credit.
 
-It is cheating to receive answers from another student and then use them as your own. It is cheating to submit as your own work solutions that you find by searching on the worldwide web (though see "About using code you find on the web"), or by subscribing to an online service that suborns cheating. It is cheating—and a violation of U.S. copyright law—to give (or sell) course material to someone else who intends to redistribute and/or sell it.
+It is cheating to receive answers from another student and then use them as your own. It is cheating to submit as your own work solutions that you find by searching on the worldwide web (though see "About using code you find on the web") or using online tools such as ChatGPT, or by subscribing to an online service that suborns cheating. It is cheating—and a violation of U.S. copyright law—to give (or sell) course material to someone else who intends to redistribute and/or sell it.
 
 All activities in this course, are subject to the Academic Integrity rules as described in [Article 1, Part 4, Academic Integrity](https://studentcode.illinois.edu/article1/part4/1-401), of the [Student Code](https://studentcode.illinois.edu).
 
-## Useful Links
-Here are some useful links
+## <span style="color:Red">Resources</span>
+
+### Useful references
 * [Python Programming Resources](https://wiki.python.org/moin/BeginnersGuide/Programmers)
 * [Google's Python Programming Class](https://developers.google.com/edu/python)
 
-## Acknowledgements
+### Quick guides
+* [Linux Bash Shell](https://learncodethehardway.org/unix/bash_cheat_sheet.pdf)
+* [Github](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
+* [Python](http://ehmatthes.github.io/pcc/cheatsheets/README.html)
+* [Markdown](http://packetlife.net/media/library/16/Markdown.pdf)
+* Jupyter Notebooks: [Interface](http://datacamp-community.s3.amazonaws.com/48093c40-5303-45f4-bbf9-0c96c0133c40), [Keyboard shortcuts](https://www.cheatography.com/weidadeyue/cheat-sheets/jupyter-notebook/pdf_bw)
+
+### Tools
+* Sharing code snippets: [gist.github.com](https://gist.github.com/)
+* Asking questions of broader development community: [Stack Overflow](http://stackoverflow.com/)
+
+#### *Git* and *GitHub*
+* [Official GitHub Help](https://help.github.com/)
+* [Recommended resources](http://hackerhours.org/resources.html#github)
+
+#### *Project Jupyter*
+* [Official site](http://jupyter.org)
+* [nbviewer](https://nbviewer.jupyter.org)
+
+## <span style="color:Red">Acknowledgements</span>
 This course was developed by [Anne Sickles](http://heavyions.physics.illinois.edu), [Jeff Filippini](http://jpf.web.engr.illinois.edu), and [Mark Neubauer](https://msneubauer.github.io). It was first taught by [Anne Sickles](http://heavyions.physics.illinois.edu) and [Mark Neubauer](https://msneubauer.github.io) during the Fall 2023 semester.
