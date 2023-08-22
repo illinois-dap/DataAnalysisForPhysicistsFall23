@@ -6,7 +6,7 @@
   * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
 * *Class Meetings*: 
   * Tuesdays and Thursdays from 10:30 am to 11:50 am
-  * *Room*: 236 Loomis Laboratory
+  * *Room*: 276 Loomis Laboratory
 * 3 credit hours
 
 ## <span style="color:Red">Calendar</span>
@@ -47,8 +47,8 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 ## <span style="color:Red">Course Logistics</span>
 ### Format
 * This course will consist of two meetings per week: one lecture period and one in-class practical session.
-* Lecture: Tuesday from 10:30 am - 11:50 am in 236 Loomis
-* Practical Session: Thursday from 10:30 am - 11:50 am in 236 Loomis
+* Lecture: Tuesday from 10:30 am - 11:50 am in 276 Loomis
+* Practical Session: Thursday from 10:30 am - 11:50 am in 276 Loomis
 
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
