@@ -2,8 +2,8 @@
 
 <font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2023* </font>
 * *Instructors:* 
-  * Professor [Mark Neubauer](https://marksneubauer.com)
   * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
+  * Professor [Mark Neubauer](https://marksneubauer.com)
 * *Class Meetings*: 
   * Tuesdays and Thursdays from 10:30 am to 11:50 am
   * *Room*: 276 Loomis Laboratory
@@ -73,7 +73,7 @@ On [Gradescope](https://www.gradescope.com), you will submit your assignments an
 
 ### Homework Assignments
 You will be assigned weekly homework assignments that will put into practice what you learned in lecture for the week. 
-* You will work on the assignments both during the in-class session on Wednesdays and as homework.
+* You will work on the assignments both during the in-class session on Thursdays and as homework.
 * You will submit your __executed__ (i.e. with "RunAll") homework notebook via [Gradescope](https://www.gradescope.com).
 * Each assignment is due at the beginning of the next class unless otherwise noted. You may turn assignment in up to one week late for 50% credit (except that all assignments are strictly due the day before Reading Day).
 * Solutions to the homeworks will not be given.
