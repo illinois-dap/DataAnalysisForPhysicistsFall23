@@ -1,16 +1,15 @@
-# <span style="color: blue;"><b>Kernel Density Estimation and Statistics</b></span>
+# <span style="color: blue;"><b>Estimating Probability Density from Data</b></span>
 
 ## *Overview*
-You will learn about kernel density estimation and statistics
+You will learn about estimatimng probability density from data through kernel density estimation methods
 
 ## *Goals*
-* Estimate probability density
-* Learn about Statistical Methods
+* Estimate probability density from data
+* Learn about kernal density estimation methods
 
 ## *Lecture Materials*
 * [Slides](https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing)
 * {doc}`lectures/Density`
-* {doc}`lectures/Statistics`
 
 ## *Homework Assignment*
 * {doc}`homework/Homework_05`
