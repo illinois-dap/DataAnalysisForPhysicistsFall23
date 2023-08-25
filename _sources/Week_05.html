@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Kernel Density Estimation and Statistics &#8212; PHYS 398 DAP</title>
+    <title>Estimating Probability Density from Data &#8212; PHYS 398 DAP</title>
   
   
   
@@ -182,14 +182,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="homework/Homework_04.html">Assignment 04: Theory of Estimators</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><span style="color: blue;"><b>Kernel Density Estimation and Statistics</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lectures/Density.html">Kernel Density Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lectures/Statistics.html">Statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homework/Homework_05.html">Assignment 05: Correlation and Covariance</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="Week_06.html"><span style="color: blue;"><b>Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lectures/SourcesOfUncertainty.html">Sources of Uncertainty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homework/Homework_06.html">Assignment 06: Sources of Uncertainty</a></li>
@@ -402,7 +402,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><span style="color: blue;"><b>Kernel Density Estimation and Statistics</b></span></h1>
+    <h1><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -428,17 +428,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="span-style-color-blue-b-kernel-density-estimation-and-statistics-b-span">
-<h1><span style="color: blue;"><b>Kernel Density Estimation and Statistics</b></span><a class="headerlink" href="#span-style-color-blue-b-kernel-density-estimation-and-statistics-b-span" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="span-style-color-blue-b-estimating-probability-density-from-data-b-span">
+<h1><span style="color: blue;"><b>Estimating Probability Density from Data</b></span><a class="headerlink" href="#span-style-color-blue-b-estimating-probability-density-from-data-b-span" title="Permalink to this heading">#</a></h1>
 <section id="overview">
 <h2><em>Overview</em><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>You will learn about kernel density estimation and statistics</p>
+<p>You will learn about estimatimng probability density from data through kernel density estimation methods</p>
 </section>
 <section id="goals">
 <h2><em>Goals</em><a class="headerlink" href="#goals" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Estimate probability density</p></li>
-<li><p>Learn about Statistical Methods</p></li>
+<li><p>Estimate probability density from data</p></li>
+<li><p>Learn about kernal density estimation methods</p></li>
 </ul>
 </section>
 <section id="lecture-materials">
@@ -446,7 +446,6 @@ document.write(`
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></p></li>
 <li><p><a class="reference internal" href="lectures/Density.html"><span class="doc">Kernel Density Estimation</span></a></p></li>
-<li><p><a class="reference internal" href="lectures/Statistics.html"><span class="doc">Statistics</span></a></p></li>
 </ul>
 </section>
 <section id="homework-assignment">
