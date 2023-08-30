@@ -53,7 +53,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
-  * Office Hour: TBD
+  * Office Hour: Wednesday from 3-4 pm, Loomis 403
 
 * Professor [Mark Neubauer](https://marksneubauer.com)
   * email: msn@illinois.edu
