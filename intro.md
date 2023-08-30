@@ -54,9 +54,11 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
   * Office Hour: TBD
+
 * Professor [Mark Neubauer](https://marksneubauer.com)
   * email: msn@illinois.edu
-  * Office Hour: TBD
+  * Office Hour: Wednesday from 5:30 - 6:30 pm
+  * [Zoom](https://illinois.zoom.us/j/85255234488?pwd=eTF3NDVtU1FSZXNpK3BFck9vKzNZdz09)
 
 ## <span style="color:Red">Online Tools</span>
 
