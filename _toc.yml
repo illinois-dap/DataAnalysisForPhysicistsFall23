@@ -16,6 +16,7 @@ chapters:
   - url: https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/ProbabilityTheory
+  - file: _sources/lectures/ProbabilityTheory2
   - file: _sources/lectures/Visualization
   - file: _sources/homework/Homework_02
 - file: _sources/Week_03 # Important Probability Distributions
