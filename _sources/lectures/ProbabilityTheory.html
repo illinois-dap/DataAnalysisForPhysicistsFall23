@@ -172,13 +172,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="ProbabilityTheory2.html"><span style="color:Orange">Bayes’ Rule</span></a></li>
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="Visualization.html">Visualizing Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_02.html">Homework 02: Probability Theory</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_03.html"><span style="color: blue;"><b>Important Probability Distributions</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProbabilityDistributions.html">Probability Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityDistributions.html">Important Probability Distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_03.html">Assignment 03: Important Probability Distributions</a></li>
 </ul>
 </li>
@@ -459,6 +460,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-sampling-a-probability-density-span"><span style="color:Orange">Sampling a Probability Density</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-joint-marginal-and-conditional-probability-density-span"><span style="color:Orange">Joint, Marginal and Conditional Probability Density</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-practical-probability-calculus-span"><span style="color:Orange">Practical Probability Calculus</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgments-span"><span style="color:Orange">Acknowledgments</span></a></li>
 </ul>
             </nav>
         </div>
@@ -718,6 +720,9 @@ F_X(x) &amp;= \lim_{\Delta x\rightarrow 0}\, \sum_i f_X(x_i)\,\Delta x \\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1fe5bd93d1572d59fe1e630310fca4a9942bbde9613c50a5806f7668278c2ba9.png" src="../../_images/1fe5bd93d1572d59fe1e630310fca4a9942bbde9613c50a5806f7668278c2ba9.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -726,6 +731,12 @@ F_X(x) &amp;= \lim_{\Delta x\rightarrow 0}\, \sum_i f_X(x_i)\,\Delta x \\
 <span class="n">ay</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x158e497d0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/d49e33f571f983f26e596319acaeca6ca0cfa6e95c9900f2a7464f4244eba8bf.png" src="../../_images/d49e33f571f983f26e596319acaeca6ca0cfa6e95c9900f2a7464f4244eba8bf.png" />
 </div>
 </div>
 </section>
@@ -753,6 +764,9 @@ F_X(x) &amp;= \lim_{\Delta x\rightarrow 0}\, \sum_i f_X(x_i)\,\Delta x \\
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7ea6a3b16dd214895b2b2c4e35efabb83b4d616a7025beafae6cfb9f47d69de8.png" src="../../_images/7ea6a3b16dd214895b2b2c4e35efabb83b4d616a7025beafae6cfb9f47d69de8.png" />
 </div>
 </div>
 </section>
@@ -871,6 +885,9 @@ f(x\mid y) = \frac{f(y\mid x)\,f(x)}{f(y)} = \frac{f(y\mid x)\,f(x)}{\int dx\, f
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6df27beaf7f1659412699f14848cd09b5dc39f805cbb55c366c7a9eb2077df61.png" src="../../_images/6df27beaf7f1659412699f14848cd09b5dc39f805cbb55c366c7a9eb2077df61.png" />
+</div>
 </div>
 <p>We say that random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>independent</strong> if
 $<span class="math notranslate nohighlight">\(
@@ -940,6 +957,14 @@ P(\Theta_M \mid D,M) &amp;= \frac{P(D,\Theta_M\mid M)}{P(D\mid M)} &amp; \text{R
 &amp;= \frac{P(D\mid\Theta_M,M)\, P(\Theta_M,M)}{P(D,M)} &amp; \text{simplify}
 \end{aligned}
 \end{split}\]</div>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-orange-acknowledgments-span">
+<h2><span style="color:Orange">Acknowledgments</span><a class="headerlink" href="#span-style-color-orange-acknowledgments-span" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Initial version: Mark Neubauer</p></li>
+</ul>
+<p>© Copyright 2023</p>
 </section>
 </section>
 
@@ -1020,6 +1045,7 @@ P(\Theta_M \mid D,M) &amp;= \frac{P(D,\Theta_M\mid M)}{P(D\mid M)} &amp; \text{R
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-sampling-a-probability-density-span"><span style="color:Orange">Sampling a Probability Density</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-joint-marginal-and-conditional-probability-density-span"><span style="color:Orange">Joint, Marginal and Conditional Probability Density</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-practical-probability-calculus-span"><span style="color:Orange">Practical Probability Calculus</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgments-span"><span style="color:Orange">Acknowledgments</span></a></li>
 </ul>
   </nav></div>
 

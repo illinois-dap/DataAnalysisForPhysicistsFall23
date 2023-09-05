@@ -172,13 +172,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><span style="color:Orange">Bayes’ Rule</span></a></li>
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="Visualization.html">Visualizing Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_02.html">Homework 02: Probability Theory</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_03.html"><span style="color: blue;"><b>Important Probability Distributions</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProbabilityDistributions.html">Probability Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityDistributions.html">Important Probability Distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_03.html">Assignment 03: Important Probability Distributions</a></li>
 </ul>
 </li>
@@ -452,6 +453,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:Orange">Bayes’ Rule</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-example-1-span"><span style="color:Orange">Example #1</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-example-2-span"><span style="color:Orange">Example #2</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgments-span"><span style="color:Orange">Acknowledgments</span></a></li>
 </ul>
 
             </nav>
@@ -509,6 +511,11 @@ P(A\mid B) \equiv \frac{P(A\cap B)}{\Sigma_{i}P(B|A_i)P(A_i)}} \;.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="span-style-color-orange-example-2-span">
@@ -532,6 +539,102 @@ P(A\mid B) \equiv \frac{P(A\cap B)}{\Sigma_{i}P(B|A_i)P(A_i)}} \;.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Collecting uproot
+  Obtaining dependency information for uproot from https://files.pythonhosted.org/packages/29/ec/8f48b8460213cec363445f028b0d10f6ea23cfe44b29c7b8a7aa0522307b/uproot-5.0.11-py3-none-any.whl.metadata
+  Downloading uproot-5.0.11-py3-none-any.whl.metadata (28 kB)
+Collecting awkward&gt;=2.0.0 (from uproot)
+  Obtaining dependency information for awkward&gt;=2.0.0 from https://files.pythonhosted.org/packages/bc/71/7f1b915a12b8d2d4cb5a3842f27e6779aacb0ad77cd368f5ed1160e6dfef/awkward-2.4.1-py3-none-any.whl.metadata
+  Downloading awkward-2.4.1-py3-none-any.whl.metadata (6.9 kB)
+Requirement already satisfied: numpy in /usr/local/lib/python3.11/site-packages (from uproot) (1.23.5)
+Requirement already satisfied: packaging in /usr/local/lib/python3.11/site-packages (from uproot) (23.0)
+Collecting awkward-cpp==23 (from awkward&gt;=2.0.0-&gt;uproot)
+  Obtaining dependency information for awkward-cpp==23 from https://files.pythonhosted.org/packages/8e/73/3a91947c133059dfd152d1d4616671f6af7f919d3d825726e2f1297cc6d9/awkward_cpp-23-cp311-cp311-macosx_10_9_x86_64.whl.metadata
+  Downloading awkward_cpp-23-cp311-cp311-macosx_10_9_x86_64.whl.metadata (2.2 kB)
+Collecting importlib-metadata&gt;=4.13.0 (from awkward&gt;=2.0.0-&gt;uproot)
+  Obtaining dependency information for importlib-metadata&gt;=4.13.0 from https://files.pythonhosted.org/packages/cc/37/db7ba97e676af155f5fcb1a35466f446eadc9104e25b83366e8088c9c926/importlib_metadata-6.8.0-py3-none-any.whl.metadata
+  Downloading importlib_metadata-6.8.0-py3-none-any.whl.metadata (5.1 kB)
+Collecting zipp&gt;=0.5 (from importlib-metadata&gt;=4.13.0-&gt;awkward&gt;=2.0.0-&gt;uproot)
+  Obtaining dependency information for zipp&gt;=0.5 from https://files.pythonhosted.org/packages/8c/08/d3006317aefe25ea79d3b76c9650afabaf6d63d1c8443b236e7405447503/zipp-3.16.2-py3-none-any.whl.metadata
+  Downloading zipp-3.16.2-py3-none-any.whl.metadata (3.7 kB)
+Downloading uproot-5.0.11-py3-none-any.whl (334 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">334.2/334.2 kB</span> <span class=" -Color -Color-Red">5.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>a <span class=" -Color -Color-Cyan">0:00:01</span>
+?25hDownloading awkward-2.4.1-py3-none-any.whl (702 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">703.0/703.0 kB</span> <span class=" -Color -Color-Red">17.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>00:01
+?25hDownloading awkward_cpp-23-cp311-cp311-macosx_10_9_x86_64.whl (943 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">943.2/943.2 kB</span> <span class=" -Color -Color-Red">43.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading importlib_metadata-6.8.0-py3-none-any.whl (22 kB)
+Downloading zipp-3.16.2-py3-none-any.whl (7.2 kB)
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Installing collected packages: zipp, awkward-cpp, importlib-metadata, awkward, uproot
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Successfully installed awkward-2.4.1 awkward-cpp-23 importlib-metadata-6.8.0 uproot-5.0.11 zipp-3.16.2
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Collecting mplhep
+  Obtaining dependency information for mplhep from https://files.pythonhosted.org/packages/35/7f/708110490a7c1dd64dce256a1b1386217e0637de69d0b711237692b1cd46/mplhep-0.3.28-py3-none-any.whl.metadata
+  Downloading mplhep-0.3.28-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: matplotlib&gt;=3.4 in /usr/local/lib/python3.11/site-packages (from mplhep) (3.7.0)
+Collecting mplhep-data (from mplhep)
+  Downloading mplhep_data-0.0.3-py3-none-any.whl (5.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5.8/5.8 MB</span> <span class=" -Color -Color-Red">24.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>00:0100:01
+?25hRequirement already satisfied: numpy&gt;=1.16.0 in /usr/local/lib/python3.11/site-packages (from mplhep) (1.23.5)
+Requirement already satisfied: packaging in /usr/local/lib/python3.11/site-packages (from mplhep) (23.0)
+Collecting uhi&gt;=0.2.0 (from mplhep)
+  Downloading uhi-0.3.3-py3-none-any.whl (11 kB)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (1.0.7)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (4.38.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (1.4.4)
+Requirement already satisfied: pillow&gt;=6.2.0 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (9.4.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (3.0.9)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.4-&gt;mplhep) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.4-&gt;mplhep) (1.16.0)
+Downloading mplhep-0.3.28-py3-none-any.whl (36 kB)
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Installing collected packages: uhi, mplhep-data, mplhep
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Successfully installed mplhep-0.3.28 mplhep-data-0.0.3 uhi-0.3.3
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Collecting hist
+  Obtaining dependency information for hist from https://files.pythonhosted.org/packages/3a/8a/0ac9bff883dd88f04a16b25ff09653123cf0877f47d42d5021f2b53015a1/hist-2.7.1-py3-none-any.whl.metadata
+  Downloading hist-2.7.1-py3-none-any.whl.metadata (17 kB)
+Collecting boost-histogram~=1.3.1 (from hist)
+  Downloading boost_histogram-1.3.2-cp311-cp311-macosx_10_9_x86_64.whl (1.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.5/1.5 MB</span> <span class=" -Color -Color-Red">12.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>a <span class=" -Color -Color-Cyan">0:00:01</span>
+?25hCollecting histoprint&gt;=2.2.0 (from hist)
+  Downloading histoprint-2.4.0-py3-none-any.whl (16 kB)
+Requirement already satisfied: numpy&gt;=1.14.5 in /usr/local/lib/python3.11/site-packages (from hist) (1.23.5)
+Requirement already satisfied: click&gt;=7.0.0 in /usr/local/lib/python3.11/site-packages (from histoprint&gt;=2.2.0-&gt;hist) (8.1.3)
+Requirement already satisfied: uhi&gt;=0.2.1 in /usr/local/lib/python3.11/site-packages (from histoprint&gt;=2.2.0-&gt;hist) (0.3.3)
+Downloading hist-2.7.1-py3-none-any.whl (40 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">40.1/40.1 kB</span> <span class=" -Color -Color-Red">4.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Installing collected packages: boost-histogram, histoprint, hist
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Successfully installed boost-histogram-1.3.2 hist-2.7.1 histoprint-2.4.0
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -551,6 +654,20 @@ P(A\mid B) \equiv \frac{P(A\cap B)}{\Sigma_{i}P(B|A_i)P(A_i)}} \;.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-09-05 00:42:43--  https://courses.physics.illinois.edu/phys398dap/fa2023/data/com_5020_minpt_30_merged.root
+Resolving courses.physics.illinois.edu (courses.physics.illinois.edu)... 130.126.151.14
+Connecting to courses.physics.illinois.edu (courses.physics.illinois.edu)|130.126.151.14|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9741 (9.5K) [application/octet-stream]
+Saving to: ‘./tmp_data/com_5020_minpt_30_merged.root’
+
+     0K .........                                             100%  202M=0s
+
+2023-09-05 00:42:43 (202 MB/s) - ‘./tmp_data/com_5020_minpt_30_merged.root’ saved [9741/9741]
+</pre></div>
+</div>
+</div>
 </div>
 <p>The ROOT file contains two histograms.  “hpt” is a 1D histogram of the inclusive (no conditions) jet momentum spectrum.  “hpt1pt2” contains a 2D histogram of the highest two momentum jets in an event, if the highest momentum jet has a momentum of more than 120 GeV and there is a second jet with more than 50 GeV.</p>
 <div class="cell docutils container">
@@ -565,6 +682,9 @@ P(A\mid B) \equiv \frac{P(A\cap B)}{\Sigma_{i}P(B|A_i)P(A_i)}} \;.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/35fa85af8af0f4a56ad700f679a14ca11b4a95a32860c9c26ac897cf552119d5.png" src="../../_images/35fa85af8af0f4a56ad700f679a14ca11b4a95a32860c9c26ac897cf552119d5.png" />
+</div>
 </div>
 <p>This is not great, but I was unable to figure out how to change the axis labels(!).  Below we will take a projection of the 2D histogram and compare it to the non-conditional histogram “hpt”.  They look pretty different.</p>
 <div class="cell docutils container">
@@ -576,7 +696,21 @@ P(A\mid B) \equiv \frac{P(A\cap B)}{\Sigma_{i}P(B|A_i)P(A_i)}} \;.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[StairsArtists(stairs=&lt;matplotlib.patches.StepPatch object at 0x156c86190&gt;, errorbar=&lt;ErrorbarContainer object of 3 artists&gt;, legend_artist=&lt;ErrorbarContainer object of 3 artists&gt;)]
+</pre></div>
 </div>
+<img alt="../../_images/26c69fe3e34dd02891b8bd14b24a94fed6877e304f0ec7819f2eb6c42a56b2af.png" src="../../_images/26c69fe3e34dd02891b8bd14b24a94fed6877e304f0ec7819f2eb6c42a56b2af.png" />
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="span-style-color-orange-acknowledgments-span">
+<h1><span style="color:Orange">Acknowledgments</span><a class="headerlink" href="#span-style-color-orange-acknowledgments-span" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Initial version: Anne Sickles</p></li>
+</ul>
+<p>© Copyright 2023</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -649,6 +783,7 @@ P(A\mid B) \equiv \frac{P(A\cap B)}{\Sigma_{i}P(B|A_i)P(A_i)}} \;.
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:Orange">Bayes’ Rule</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-example-1-span"><span style="color:Orange">Example #1</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-example-2-span"><span style="color:Orange">Example #2</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgments-span"><span style="color:Orange">Acknowledgments</span></a></li>
 </ul>
 
   </nav></div>
