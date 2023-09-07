@@ -519,11 +519,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Using <code class="docutils literal notranslate"><span class="pre">count_runs</span></code> above, write a method <code class="docutils literal notranslate"><span class="pre">run_prob</span></code> that returns the probability of observing at least one run of length <code class="docutils literal notranslate"><span class="pre">k</span></code> from <code class="docutils literal notranslate"><span class="pre">n</span></code> trials with success probabilty <code class="docutils literal notranslate"><span class="pre">p</span></code> per trial. This probability is estimated from <code class="docutils literal notranslate"><span class="pre">expts</span></code> simulated experinents.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">count_runs</span></code> above, write a method <code class="docutils literal notranslate"><span class="pre">run_prob</span></code> that returns the probability of observing at least one run of length <code class="docutils literal notranslate"><span class="pre">k</span></code> or more from <code class="docutils literal notranslate"><span class="pre">n</span></code> trials with success probabilty <code class="docutils literal notranslate"><span class="pre">p</span></code> per trial. This probability is estimated from <code class="docutils literal notranslate"><span class="pre">expts</span></code> simulated experinents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_prob</span><span class="p">(</span><span class="n">expts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the probability of observing at least one run of length `k` from `n` trials with success probabilty `p` per trial. This probability is estimated from `expts` simulated experinents.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the probability of observing at least one run of length `k` or more from `n` trials with success probabilty `p` per trial. This probability is estimated from `expts` simulated experinents.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -541,7 +541,7 @@ document.write(`
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
-<span class="sd">        Returns the probability of observing at least one run of length `k`</span>
+<span class="sd">        Returns the probability of observing at least one run of length `k` or more</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Initialize random generator. Use this generator in your code below</span>
