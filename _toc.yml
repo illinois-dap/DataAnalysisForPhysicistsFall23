@@ -29,7 +29,7 @@ chapters:
   sections:
   - url: https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing
     title: Slides
-  - file: _sources/lectures/TheoryOfEstimators
+  - file: _sources/lectures/Statistics
   - file: _sources/homework/Homework_04
 - file: _sources/Week_05 # Correlation and Covariance
   sections:
