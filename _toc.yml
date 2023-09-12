@@ -36,7 +36,6 @@ chapters:
   - url: https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/Density
-  - file: _sources/lectures/Statistics
   - file: _sources/homework/Homework_05
 - file: _sources/Week_06 # Sources of Uncertainty
   sections:
