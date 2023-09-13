@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Kernel Density Estimation &#8212; PHYS 398 DAP</title>
+    <title>Correlation vs. Independence &#8212; PHYS 398 DAP</title>
   
   
   
@@ -61,11 +61,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/Density';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/Statistics2';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Assignment 05: Correlation and Covariance" href="../homework/Homework_05.html" />
-    <link rel="prev" title="Estimating Probability Density from Data" href="../Week_05.html" />
+    <link rel="next" title="Assignment 04: Theory of Estimators" href="../homework/Homework_04.html" />
+    <link rel="prev" title="Statistics" href="Statistics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,20 +183,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_03.html">Homework 03: Important Probability Distributions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Statistics.html">Statistics</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="Statistics2.html"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_04.html">Assignment 04: Theory of Estimators</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Kernel Density Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Density.html">Kernel Density Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../homework/Homework_05.html">Assignment 05: Correlation and Covariance</a></li>
 </ul>
 </li>
@@ -314,7 +316,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/illinois-dap/DataAnalysisForPhysicists/blob/main/_sources/lectures/Density.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/illinois-dap/DataAnalysisForPhysicists/blob/main/_sources/lectures/Statistics2.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -360,7 +362,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/_sources/lectures/Density.ipynb" target="_blank"
+      <li><a href="../../_sources/_sources/lectures/Statistics2.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -442,7 +444,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Kernel Density Estimation</h1>
+    <h1><span style="color:LightGreen">Correlation vs. Independence</span></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -452,9 +454,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -465,31 +468,125 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="kernel-density-estimation">
-<h1>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Permalink to this heading">#</a></h1>
+  <section id="span-style-color-lightgreen-correlation-vs-independence-span">
+<h1><span style="color:LightGreen">Correlation vs. Independence</span><a class="headerlink" href="#span-style-color-lightgreen-correlation-vs-independence-span" title="Permalink to this heading">#</a></h1>
+<p>Last time we discussed the correlation and covariance between two variables:
+The <strong>correlation between x and y</strong> is defined as:
+$<span class="math notranslate nohighlight">\( \Large
+\text{Corr}_{xy} \equiv \langle\left( x - \overline{x}\right) \left( y - \overline{y}\right)\rangle \; .
+\)</span>$</p>
+<p>A useful combination of the correlation and variances is the <strong>correlation coefficient</strong>,</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\rho_{xy} \equiv \frac{\text{Corr}_{x,y}}{\sigma_x \sigma_y} \; ,
+\]</div>
+<p>It is tempting to think that if two variables are uncorrelated, they are independent.  However that is not the case.</p>
+<p>Let’s take the simple case two random variables X and Y where
+<span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = x^2\)</span>.  Clearly these two variables are not independent.  If you know any value of x, you can determine y and vise versa.  Let’s use the machinary from last week to calculate the correlation coefficient with x sampled from a Guassian centered at <span class="math notranslate nohighlight">\(x=0\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">moment</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">gauss</span>
+
+
+<span class="n">ntries</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">100</span><span class="p">:</span>
+    <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_sq</span><span class="p">,</span><span class="n">value</span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>Overview</p>
+<p>The plot looks sensible, but the correlation coefficent is approximately zero.  Running more events isn’t going to give us the strong correlation we might expect.  We can clearly see that given a value of X, Y is uniquely determined.</p>
+<p>Let’s take a look at this mathematically for our case of <span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = x^2\)</span> with x being symmetric around the origin.  In that case:
+$<span class="math notranslate nohighlight">\(
+\bar{X} = 0 \\
+\bar{Y} = \langle x^2 \rangle
+\)</span><span class="math notranslate nohighlight">\(
+plugging in what we know from last time:
+\)</span><span class="math notranslate nohighlight">\(
+\bar{Y} = \sigma^2_x
+\)</span><span class="math notranslate nohighlight">\(
+so the correlation between X and Y is:
+\)</span><span class="math notranslate nohighlight">\(\text{Corr}_{xy} = \langle\left( x\right) \left( x^2 - \overline{x^2}\right)\rangle \\
+= \langle (x\left( x^2 - \sigma^2\right)\rangle \\
+=\langle x^3 - x^2\langle x\rangle \rangle = 0.
+\)</span>$</p>
+<p>This works because the function is symmetric about <span class="math notranslate nohighlight">\(x=0\)</span>.  Let’s look at the same Gaussian centered at the origin, but only with the requirement that <span class="math notranslate nohighlight">\(x&gt;0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">0</span><span class="p">:</span>
+    <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_sq</span><span class="p">,</span><span class="n">value</span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have seen that if two variables are uncorrelated they are not necessarily independent.  However, if two variables are <em>independent</em> then they are uncorrelated.  This means you can’t necessarily directly take the correlation between two variables as telling you how much extra information is being provided by the second quantity.</p>
+<p>If we just had the datasets themselves and didn’t know the <span class="math notranslate nohighlight">\(Y = x^2\)</span> relationship set out above, we might calculate the correlation coefficient and think that the two variables are independent.  The plots however make clear that if you know <span class="math notranslate nohighlight">\(x\)</span> you directly know <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\rho_{xy}\)</span> is known as the Pearson correlation coeffient and is sensitive to the degree of linear correlation.  There are other measures of the correlation (e.g. Spearman’s rho).  The Pearson correlation coeffiecent is very common.  Here is a paper from ATLAS where the observable is <span class="math notranslate nohighlight">\(\rho\)</span> between the magnitude of the correlations between particles and the average momentum of the particles produced in the collision of two nuclei: <a class="reference external" href="https://arxiv.org/pdf/2205.00039.pdf">https://arxiv.org/pdf/2205.00039.pdf</a>.</p>
 </section>
-<hr class="docutils" />
-<section id="acknowledgements">
-<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Initial version: Mark Neubauer</p></li>
-</ul>
-<p>© Copyright 2023</p>
-</section>
+<section id="span-style-color-lightgreen-uncertainties-on-the-mean-span">
+<h1><span style="color:LightGreen">Uncertainties on the Mean</span><a class="headerlink" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span" title="Permalink to this heading">#</a></h1>
+<p>Given a dataset of a finite size, there are uncertainties on any of the associated moments.  We’ll discuss the special case of counting experiments using the Poisson distribution.</p>
+<p>Last week we discussed:</p>
+<div class="math notranslate nohighlight">
+\[\Large P(k; \lambda) = \frac{e^{-\lambda} \lambda^k}{k!}\]</div>
+<p>The Poisson distribution is a useful model for describing the statistics of event-counting rates in (uncorrelated) counting measurements (which are ubiquitous in astronomy and particle physics).</p>
+<p>It’s useful to note that the Poisson distribution is defined for integer values of <span class="math notranslate nohighlight">\(k\)</span>, but <span class="math notranslate nohighlight">\(\lambda\)</span> of course doesn’t need to be an integer.</p>
+<p><span class="math notranslate nohighlight">\(\lambda\)</span> is the probability times the number of trials (<span class="math notranslate nohighlight">\(\lambda = np\)</span>) so it
+is the expectation value for the mean,
+but what about the variance (recall <span class="math notranslate nohighlight">\(\sigma_x^2 \equiv \langle\left( x - \overline{x} \right)^2\rangle\)</span> and the standard deviation is <span class="math notranslate nohighlight">\(\sigma_x\)</span>)?  It requires a bit of  work to show, but for a Poisson distribution
+<span class="math notranslate nohighlight">\(\sigma^2 = \lambda\)</span>
+so the standard deviation is <span class="math notranslate nohighlight">\(\sqrt{\lambda}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="s2">&quot; &amp; variance: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This means that the relative uncertainty on the mean of a counting experiment is <span class="math notranslate nohighlight">\(1/\sqrt{\lambda}\)</span>. That means
+that for a counting experiment the uncertainty on the mean
+becomes smaller with <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>.  This is really fundamental to much of experimental physics.<br />
+If you want 10% precision you need:
+$<span class="math notranslate nohighlight">\(1/\sqrt{N} = 0.1\\
+N=100\)</span><span class="math notranslate nohighlight">\(
+if you want 1% precision you need:
+\)</span><span class="math notranslate nohighlight">\(1/\sqrt{N} = 0.01\\
+N=10000\)</span>$</p>
+<p>Precision improves quickly at first as you add data, but then much more slowly.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -524,20 +621,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Week_05.html"
+       href="Statistics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></p>
+        <p class="prev-next-title">Statistics</p>
       </div>
     </a>
     <a class="right-next"
-       href="../homework/Homework_05.html"
+       href="../homework/Homework_04.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assignment 05: Correlation and Covariance</p>
+        <p class="prev-next-title">Assignment 04: Theory of Estimators</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -559,9 +656,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
 </ul>
+
   </nav></div>
 
 </div></div>
