@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/Density';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Assignment 05: Correlation and Covariance" href="../homework/Homework_05.html" />
+    <link rel="next" title="Homework 05: Kernel Density Estimation" href="../homework/Homework_05.html" />
     <link rel="prev" title="Estimating Probability Density from Data" href="../Week_05.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Estimating Probability Density from Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_05.html">Assignment 05: Correlation and Covariance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_05.html">Homework 05: Kernel Density Estimation</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -468,7 +468,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-from-histograms-to-kernel-density-estimates-span"><span style="color:Orange">From Histograms to Kernel Density Estimates</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-multidimensional-kde-span"><span style="color:Orange">Multidimensional KDE</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-gaussian-mixture-models-span"><span style="color:Orange">Gaussian Mixture Models</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-extreme-deconvolution-span"><span style="color:Orange">Extreme Deconvolution</span></a></li>
 </ul>
             </nav>
         </div>
@@ -781,7 +780,7 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </div>
 </div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">score_samples()</span></code> returns <span class="math notranslate nohighlight">\(\log P(x)\)</span>, which provides better dynamic range in a fixed-size floating point number, so should be wrapped in <code class="docutils literal notranslate"><span class="pre">np.exp()</span></code> to recover <span class="math notranslate nohighlight">\(P(x)\)</span>.</p>
+<p>Remember that <code class="docutils literal notranslate"><span class="pre">score_samples()</span></code> returns <span class="math notranslate nohighlight">\(\log P(x)\)</span>, which provides better dynamic range in a fixed-size floating point number, so should be wrapped in <code class="docutils literal notranslate"><span class="pre">np.exp()</span></code> to recover <span class="math notranslate nohighlight">\(P(x)\)</span>.</p>
 <p>Alternatively, you can generate random samples from the estimated <span class="math notranslate nohighlight">\(P(x)\)</span> using, e.g.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -844,7 +843,7 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
 (K - 1) + K D + K \frac{D(D+1)}{2} \; .
 \]</div>
 <p>For example, <code class="docutils literal notranslate"><span class="pre">blobs_data</span></code> has <span class="math notranslate nohighlight">\(D=3\)</span> and <span class="math notranslate nohighlight">\(K=3\)</span> leading to 29 parameters. Note that the number of parameters does not depend on the number of samples <span class="math notranslate nohighlight">\(N\)</span>, but our ability to accurately estimate all of these parameters certainly will.</p>
-<p>GMM is another example of a machine-learning algorithm that can be efficiently solved with the Expectation-Maximization (EM) technique.  The <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html">sklearn implementation</a> uses the familiar calling pattern with the number of desired components <span class="math notranslate nohighlight">\(K\)</span> as its main hyperparameter:</p>
+<p>GMM is an example of a machine-learning algorithm that can be efficiently solved with the Expectation-Maximization (EM) technique.  The <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html">sklearn implementation</a> uses the familiar calling pattern with the number of desired components <span class="math notranslate nohighlight">\(K\)</span> as its main hyperparameter:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span> <span class="o">=</span> <span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">blobs_data</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -899,25 +898,6 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">weights_</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">means_</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">covariances_</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.501 0.25  0.249]
-[[ 3.928  5.98   4.992]
- [11.918  1.013 13.981]
- [ 7.916  5.033 10.016]]
-[[[ 1.028e+00  4.800e-02 -2.700e-02]
-  [ 4.800e-02  2.805e+00 -2.600e-02]
-  [-2.700e-02 -2.600e-02  9.880e-01]]
-
- [[ 9.260e-01  9.000e-02 -2.000e-03]
-  [ 9.000e-02  3.758e+00  9.890e-01]
-  [-2.000e-03  9.890e-01  1.072e+00]]
-
- [[ 3.871e+00 -1.511e+00 -2.020e-01]
-  [-1.511e+00  1.027e+00 -4.000e-03]
-  [-2.020e-01 -4.000e-03  1.992e+00]]]
 </pre></div>
 </div>
 </div>
@@ -1111,64 +1091,6 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
 </div>
 </div>
 </div>
-<p>GMM is closely related to two other algorithms we have already encountered, KMeans and FactorAnalysis:</p>
-<ul class="simple">
-<li><p>All three use the versatile Expectation-Maximization (EM) method to achieve robust convergence.</p></li>
-<li><p>KMeans is a special case of GMM where each component’s <span class="math notranslate nohighlight">\(C\)</span> is reduced to a single parameter <span class="math notranslate nohighlight">\(\sigma\)</span>, via <span class="math notranslate nohighlight">\(C = \sigma^2 I\)</span>, and cluster membership weights are binary (0 or 1) rather than continuous (0-1).</p></li>
-<li><p>GMM implementations typically use KMeans to obtain its initial parameter values, before EM iterations.</p></li>
-<li><p>FactorAnalysis is an adaption of GMM with a single component for cases where the number of samples <span class="math notranslate nohighlight">\(N\)</span> is insufficient to estimate the <span class="math notranslate nohighlight">\(D(D+1)/2\)</span> indepdent elements of a full covariance matrix, so instead we assume a simpler (but non-diagonal) covariance with <span class="math notranslate nohighlight">\(N(D + 1)\)</span> independent parameters.</p></li>
-</ul>
-</section>
-<section id="span-style-color-orange-extreme-deconvolution-span">
-<h2><span style="color:Orange">Extreme Deconvolution</span><a class="headerlink" href="#span-style-color-orange-extreme-deconvolution-span" title="Permalink to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://arxiv.org/abs/0905.2979">Extreme Convolution Method</a> seeks infer a complete probability distribution function from noisy, heterogeneous and incomplete observations (data). The algorithm is implemented in the AstroML package (see <a class="reference external" href="http://www.astroml.org/modules/generated/astroML.density_estimation.XDGMM.html">http://www.astroml.org/modules/generated/astroML.density_estimation.XDGMM.html</a>)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">weighted_GMM</span><span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">add_noise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">blobs_data</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">):</span>
-    <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">noisy</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">N</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">noisy</span><span class="o">.</span><span class="n">shape</span>
-    <span class="c1"># Initialize zero errors.</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
-    <span class="c1"># Add some Gaussian noise with a linearly varying RMS, if requested.</span>
-    <span class="k">if</span> <span class="n">add_noise</span><span class="p">:</span>
-        <span class="n">add_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">add_noise</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">add_noise</span><span class="p">)</span> <span class="o">==</span> <span class="n">D</span>
-        <span class="n">diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-        <span class="n">W</span><span class="p">[:,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">diag</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_noise</span> <span class="o">**</span> <span class="mi">2</span>
-        <span class="n">noisy</span> <span class="o">+=</span> <span class="n">gen</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span> <span class="o">*</span> <span class="n">add_noise</span>
-    <span class="c1"># Perform the weighed &quot;extreme deconvolution&quot; fit.</span>
-    <span class="n">fit</span> <span class="o">=</span> <span class="n">astroML</span><span class="o">.</span><span class="n">density_estimation</span><span class="o">.</span><span class="n">XDGMM</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
-    <span class="n">GMM_pairplot</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">V</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>First fit without any errors added to the data. Fix the plot limits for easier comparisons below:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> weighted_GMM(3, limits=[(0,15), (-4,12), (2,18)])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Next, add errors to x0 only, and observe the effect on the scatter of x0 values below. The (x1, x2) projection of the fit is essentially unaffected while the (x0, x1) and (x0, x2) projections demonstrate that the fit is correcting for the added noise, with some expected loss of sensitivity.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> weighted_GMM(3, add_noise=(2, 0, 0), limits=[(0,15), (-4,12), (2,18)])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Finally, add more noise to see how far we can push this approach:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> weighted_GMM(3, add_noise=(2, 2, 2), limits=[(0,15), (-4,12), (2,18)])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note that errors slow down the fit substantially (although not with an obvious pattern). If this is an issue, the <a class="reference external" href="https://github.com/jobovy/extreme-deconvolution">original implementation of extreme deconvolution</a> is faster and more flexible, but also more complex to install.</p>
 </section>
 </section>
 
@@ -1216,7 +1138,7 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assignment 05: Correlation and Covariance</p>
+        <p class="prev-next-title">Homework 05: Kernel Density Estimation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1240,7 +1162,6 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-from-histograms-to-kernel-density-estimates-span"><span style="color:Orange">From Histograms to Kernel Density Estimates</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-multidimensional-kde-span"><span style="color:Orange">Multidimensional KDE</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-gaussian-mixture-models-span"><span style="color:Orange">Gaussian Mixture Models</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-extreme-deconvolution-span"><span style="color:Orange">Extreme Deconvolution</span></a></li>
 </ul>
   </nav></div>
 
@@ -1288,8 +1209,8 @@ By Mark Neubauer
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
   </footer>
