@@ -42,7 +42,7 @@ chapters:
   sections:
   - url: https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing
     title: Slides
-  - file: _sources/lectures/SourcesOfUncertainty
+  - file: _sources/lectures/UncertaintiesandFitting
   - file: _sources/homework/Homework_06
   - file: _sources/projects/Project_01
 - file: _sources/Week_07 # Frequentists and Bayesian Statistics
