@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Time Series &#8212; PHYS 398 DAP</title>
+    <title>Project 02 &#8212; PHYS 398 DAP</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/Week_12';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/Project_02';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Time Series" href="lectures/TimeSeries.html" />
-    <link rel="prev" title="Assignment 11: Fourier Methods" href="homework/Homework_11.html" />
+    <link rel="next" title="Monte Carlo and Sampling Methods" href="Week_13.html" />
+    <link rel="prev" title="Assignment 12: Time Series" href="homework/Homework_12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -249,13 +249,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="homework/Homework_11.html">Assignment 11: Fourier Methods</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><span style="color: blue;"><b>Time Series</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lectures/TimeSeries.html">Time Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homework/Homework_12.html">Assignment 12: Time Series</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Project_02.html"><span style="color: blue;"><b>Project 02</b></span></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span style="color: blue;"><b>Project 02</b></span></a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="Week_13.html"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lectures/MonteCarloSamplingMethods.html">Monte Carlo and Sampling Methods</a></li>
@@ -343,7 +343,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/_sources/Week_12.md" target="_blank"
+      <li><a href="../_sources/_sources/Project_02.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -425,7 +425,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><span style="color: blue;"><b>Time Series</b></span></h1>
+    <h1><span style="color: blue;"><b>Project 02</b></span></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -435,11 +435,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><em>Overview</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals"><em>Goals</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-materials"><em>Lecture Materials</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignment"><em>Homework Assignment</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplemental-readings"><em>Supplemental Readings</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-from-one-of-the-following-projects">Select from one of the following projects:</a></li>
 </ul>
             </nav>
         </div>
@@ -451,39 +447,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="span-style-color-blue-b-time-series-b-span">
-<h1><span style="color: blue;"><b>Time Series</b></span><a class="headerlink" href="#span-style-color-blue-b-time-series-b-span" title="Permalink to this heading">#</a></h1>
-<section id="overview">
-<h2><em>Overview</em><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>You will learn about time series</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="span-style-color-blue-b-project-02-b-span">
+<h1><span style="color: blue;"><b>Project 02</b></span><a class="headerlink" href="#span-style-color-blue-b-project-02-b-span" title="Permalink to this heading">#</a></h1>
+<section id="select-from-one-of-the-following-projects">
+<h2>Select from one of the following projects:<a class="headerlink" href="#select-from-one-of-the-following-projects" title="Permalink to this heading">#</a></h2>
 </section>
-<section id="goals">
-<h2><em>Goals</em><a class="headerlink" href="#goals" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Learn about time series</p></li>
-</ul>
-</section>
-<section id="lecture-materials">
-<h2><em>Lecture Materials</em><a class="headerlink" href="#lecture-materials" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></p></li>
-<li><p><a class="reference internal" href="lectures/TimeSeries.html"><span class="doc">Time Series</span></a></p></li>
-</ul>
-</section>
-<section id="homework-assignment">
-<h2><em>Homework Assignment</em><a class="headerlink" href="#homework-assignment" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="homework/Homework_12.html"><span class="doc">Assignment 12: Time Series</span></a></p></li>
-</ul>
-</section>
-<section id="supplemental-readings">
-<h2><em>Supplemental Readings</em><a class="headerlink" href="#supplemental-readings" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>None</p></li>
-</ul>
-</section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -517,20 +485,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="homework/Homework_11.html"
+       href="homework/Homework_12.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Assignment 11: Fourier Methods</p>
+        <p class="prev-next-title">Assignment 12: Time Series</p>
       </div>
     </a>
     <a class="right-next"
-       href="lectures/TimeSeries.html"
+       href="Week_13.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Time Series</p>
+        <p class="prev-next-title"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -549,11 +517,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><em>Overview</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals"><em>Goals</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-materials"><em>Lecture Materials</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignment"><em>Homework Assignment</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplemental-readings"><em>Supplemental Readings</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-from-one-of-the-following-projects">Select from one of the following projects:</a></li>
 </ul>
   </nav></div>
 
