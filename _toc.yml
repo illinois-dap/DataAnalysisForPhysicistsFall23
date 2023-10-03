@@ -44,13 +44,18 @@ chapters:
     title: Slides
   - file: _sources/lectures/UncertaintiesandFitting
   - file: _sources/homework/Homework_06
-  - file: _sources/projects/Project_01
 - file: _sources/Week_07 # Frequentists and Bayesian Statistics
   sections:
   - url: https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/FrequentistBayesian
   - file: _sources/homework/Homework_07
+- file: _sources/Project_01 # Project 01
+  sections:
+  - file: _sources/projects/Project_01_HiggsTauTau
+  - file: _sources/projects/Project_01_ExoticParticles
+  - file: _sources/projects/Project_01_GalaxyZoo
+  - file: _sources/projects/Project_01_NuclearGeometryQGP
 - file: _sources/Week_08 # Confidence Intervals
   sections:
   - url: https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing
@@ -75,13 +80,13 @@ chapters:
     title: Slides
   - file: _sources/lectures/FourierMethods
   - file: _sources/homework/Homework_11
-  - file: _sources/projects/Project_02
 - file: _sources/Week_12 # Time Series
   sections:
   - url: https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/TimeSeries
   - file: _sources/homework/Homework_12
+- file: _sources/Project_02 # Project 02
 - file: _sources/Week_13 # Montel Carlo Sampling Methods
   sections:
   - url: https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing
