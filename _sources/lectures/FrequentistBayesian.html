@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/FrequentistBayesian';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Assignment 07: Frequentist and Bayesian Methods" href="../homework/Homework_07.html" />
+    <link rel="next" title="Markov Chain Monte Carlo in Practice" href="MCMC.html" />
     <link rel="prev" title="Frequentist and Bayesian Methods" href="../Week_07.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -217,7 +217,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_07.html"><span style="color: blue;"><b>Frequentist and Bayesian Methods</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Frequentist and Bayesian Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_07.html">Assignment 07: Frequentist and Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MCMC.html">Markov Chain Monte Carlo in Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_07.html">Homework 07: Bayesian Statistics and MCMC</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Project_01.html"><span style="color: blue;"><b>Project 01</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -474,7 +475,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-bayesian-inference-span"><span style="color:Orange">Bayesian Inference</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-what-priors-should-i-use-span"><span style="color:Orange">What Priors Should I Use?</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-so-why-isn-t-everyone-a-bayesian-span"><span style="color:Orange">So, Why Isn’t Everyone a Bayesian?</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-graphical-models-span"><span style="color:Orange">Graphical Models</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgments-span"><span style="color:Orange">Acknowledgments</span></a></li>
 </ul>
             </nav>
@@ -955,96 +955,6 @@ P(\theta\mid a, b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\, \theta^{a-1} \left
 prior you will obtain different results and this “lack of objectivity” makes some people uncomfortable. However, we showed how some problems with sufficiant data can be relatively insensitive to choice of prior.</p></li>
 </ol>
 </section>
-<section id="span-style-color-orange-graphical-models-span">
-<h2><span style="color:Orange">Graphical Models</span><a class="headerlink" href="#span-style-color-orange-graphical-models-span" title="Permalink to this heading">#</a></h2>
-<p>We started above with the Bayesian joint probability:</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-P(D, \Theta_M, M)
-\]</div>
-<p>When the individual data features, parameters and hyperparameters are all written out, this often ends up being a very high-dimensional function.</p>
-<p>In the most general case, the joint probability requires a huge volume of data to estimate (recall our earlier discussion of <span class="xref myst">dimensionality reduction</span>). However, many problems can be (approximately) described by a joint probability that is simplified by assuming that some random variables are mutually independent.</p>
-<p>Graphical models are a convenient visualization of the assumed direct dependencies between random variables. For example, suppose we have two parameters <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> and no hyperparameters, then the joint probability <span class="math notranslate nohighlight">\(P(D, \alpha, \beta)\)</span> can be expanded into a product of conditionals different ways using the rules of probability calculus, e.g.</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-P(D, \alpha, \beta) = P(D,\beta\mid \alpha)\, P(\alpha) = P(D\mid \alpha,\beta)\, P(\beta\mid \alpha)\, P(\alpha) \; .
-\]</div>
-<p>or, equally well as,</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-P(D, \alpha, \beta) = P(D,\alpha\mid \beta)\, P(\beta) = P(D\mid \alpha,\beta)\, P(\alpha\mid \beta)\, P(\beta) \; ,
-\]</div>
-<p>The corresponding diagrams are:
-<img alt="Fully connected 1" src="_sources/lectures/img/Bayes/fully_connected_1.png" />
-<img alt="Fully connected 2" src="_sources/lectures/img/Bayes/fully_connected_2.png" /></p>
-<p>The way to read these diagrams is that a node labeled with <span class="math notranslate nohighlight">\(X\)</span> represents a (multiplicative) factor <span class="math notranslate nohighlight">\(P(X\mid\ldots)\)</span> in the joint probability, where <span class="math notranslate nohighlight">\(\ldots\)</span> lists other nodes whose arrows feed into this node (in any order, thanks to probability calculus Rule-1). A shaded node indicates a random variable that is directly observed (i.e., data) while non-shaded nodes represent (unobserved) latent random variables.</p>
-<p>These diagrams both describe a fully general joint probability with two parameters. The rules for building a fully general joint probability with any number of parameters are:</p>
-<ul class="simple">
-<li><p>Pick an (arbitrary) ordering of the parameters.</p></li>
-<li><p>The first parameter’s node has arrows pointing to all other nodes (including the data).</p></li>
-<li><p>The n-th parameter’s node has arrows pointing to all later parameter nodes and the data.</p></li>
-</ul>
-<p>With <span class="math notranslate nohighlight">\(n\)</span> parameters, there are then <span class="math notranslate nohighlight">\(n!\)</span> possible diagrams and the number of potential dependencies grows rapidly with <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>To mitigate this factorial growth, we seek pairs of random variables that should not depend on each other. For example, in the two parameter case:
-<img alt="Partial 1" src="_sources/lectures/img/Bayes/partial_1.png" />
-<img alt="Partial 2" src="_sources/lectures/img/Bayes/partial_2.png" /></p>
-<p>Notice how each diagram tells a different story. For example, the first diagram tells us that the data can be predicted knowing only <span class="math notranslate nohighlight">\(\beta\)</span>, but that our prior knowledge of <span class="math notranslate nohighlight">\(\beta\)</span> depends on <span class="math notranslate nohighlight">\(\alpha\)</span>. In effect, then, simplifying a joint probability involves drawing a diagram that tells a suitable story for your data and models.</p>
-<p>We started above with the Bayesian joint probability:</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-P(D, \Theta_M, M)
-\]</div>
-<p>When the individual data features, parameters and hyperparameters are all written out, this often ends up being a very high-dimensional function.</p>
-<p>In the most general case, the joint probability requires a huge volume of data to estimate (recall our earlier discussion of <span class="xref myst">dimensionality reduction</span>). However, many problems can be (approximately) described by a joint probability that is simplified by assuming that some random variables are mutually independent.</p>
-<p>Graphical models are a convenient visualization of the assumed direct dependencies between random variables. For example, suppose we have two parameters <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> and no hyperparameters, then the joint probability <span class="math notranslate nohighlight">\(P(D, \alpha, \beta)\)</span> can be expanded into a product of conditionals different ways using the rules of probability calculus, e.g.</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-P(D, \alpha, \beta) = P(D,\beta\mid \alpha)\, P(\alpha) = P(D\mid \alpha,\beta)\, P(\beta\mid \alpha)\, P(\alpha) \; .
-\]</div>
-<p>or, equally well as,</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-P(D, \alpha, \beta) = P(D,\alpha\mid \beta)\, P(\beta) = P(D\mid \alpha,\beta)\, P(\alpha\mid \beta)\, P(\beta) \; ,
-\]</div>
-<p>The corresponding diagrams are:</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-fully_connected_1.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-fully_connected_1.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-fully_connected_1.png" style="width: 400px;" /></a></img><br></p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-fully_connected_2.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-fully_connected_2.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-fully_connected_2.png" style="width: 400px;" /></a></img><br></p>
-<p>The way to read these diagrams is that a node labeled with <span class="math notranslate nohighlight">\(X\)</span> represents a (multiplicative) factor <span class="math notranslate nohighlight">\(P(X\mid\ldots)\)</span> in the joint probability, where <span class="math notranslate nohighlight">\(\ldots\)</span> lists other nodes whose arrows feed into this node (in any order, thanks to probability calculus Rule-1). A shaded node indicates a random variable that is directly observed (i.e., data) while non-shaded nodes represent (unobserved) latent random variables.</p>
-<p>These diagrams both describe a fully general joint probability with two parameters. The rules for building a fully general joint probability with any number of parameters are:</p>
-<ul class="simple">
-<li><p>Pick an (arbitrary) ordering of the parameters.</p></li>
-<li><p>The first parameter’s node has arrows pointing to all other nodes (including the data).</p></li>
-<li><p>The n-th parameter’s node has arrows pointing to all later parameter nodes and the data.</p></li>
-</ul>
-<p>With <span class="math notranslate nohighlight">\(n\)</span> parameters, there are then <span class="math notranslate nohighlight">\(n!\)</span> possible diagrams and the number of potential dependencies grows rapidly with <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>To mitigate this factorial growth, we seek pairs of random variables that should not depend on each other. For example, in the two parameter case:</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-partial_1.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-partial_1.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-partial_1.png" style="width: 400px;" /></a></img><br></p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-partial_2.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-partial_2.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-partial_2.png" style="width: 400px;" /></a></img><br></p>
-<p>Notice how each diagram tells a different story. For example, the first diagram tells us that the data can be predicted knowing only <span class="math notranslate nohighlight">\(\beta\)</span>, but that our prior knowledge of <span class="math notranslate nohighlight">\(\beta\)</span> depends on <span class="math notranslate nohighlight">\(\alpha\)</span>. In effect, then, simplifying a joint probability involves drawing a diagram that tells a suitable story for your data and models.</p>
-<p><em><strong><span style="color:violet">EXERCISE</span></strong></em>: Consider observing someone throwing a ball and measuring how far away it lands to infer the strength of gravity:</p>
-<ul class="simple">
-<li><p>Our data is the measured range <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
-<li><p>Our parameters are the ball’s initial speed <span class="math notranslate nohighlight">\(v\)</span> and angle <span class="math notranslate nohighlight">\(\phi\)</span>, and the strength of gravity <span class="math notranslate nohighlight">\(g\)</span>.</p></li>
-<li><p>Our hyperparameters are the ball’s diameter <span class="math notranslate nohighlight">\(d\)</span> and the wind speed <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
-</ul>
-<p>Draw one example of a fully general diagram of this inference’s joint probability <span class="math notranslate nohighlight">\(P(r, v, \phi, g, d, w)\)</span>.</p>
-<p>Suppose the thrower always throws as hard as they can, then adjusts the angle according to the wind. Draw a diagram to represent the direct dependencies in this simpler joint probability.</p>
-<p>Write down the posterior we are interested in for this inference problem.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-projectile_fully_connected.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-projectile_fully_connected.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-projectile_fully_connected.png" style="width: 400px;" /></a></img><br></p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-projectile_story.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-projectile_story.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/Bayes-projectile_story.png" style="width: 400px;" /></a></img><br></p>
-<p>The posterior we are most likely interested in for this inference is
-$<span class="math notranslate nohighlight">\(
-P(g\mid r) \; ,
-\)</span><span class="math notranslate nohighlight">\(
-but a more explicit posterior would be:
-\)</span><span class="math notranslate nohighlight">\(
-P(g\mid r, v, \phi, d, w) \; .
-\)</span><span class="math notranslate nohighlight">\(
-The difference between is these is that we marginalized over the &quot;nuisance&quot; parameters \)</span>v, \phi, d, w$ in the first case.</p>
-<hr class="docutils" />
-<p>The arrows in these diagrams define the direction of conditional dependencies. They often mirror a causal influence in the underlying physical system, but this is not necessary. Probabilistic diagrams with directed edges are known as <em><strong><span style="color:violet">Bayesian networks</span></strong></em> or <em><strong><span style="color:violet">Belief Networks</span></strong></em>.</p>
-<p>It is also possible to draw diagrams where nodes are connected symmetrically, without a specified direction. These are known as <strong>Markov random fields</strong> or <strong>Markov networks</strong> and appropriate when dependencies flow in both directions or in an unknown direction.  You can read more about these <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_random_field">here</a>.</p>
-</section>
 <hr class="docutils" />
 <section id="span-style-color-orange-acknowledgments-span">
 <h2><span style="color:Orange">Acknowledgments</span><a class="headerlink" href="#span-style-color-orange-acknowledgments-span" title="Permalink to this heading">#</a></h2>
@@ -1095,11 +1005,11 @@ The difference between is these is that we marginalized over the &quot;nuisance&
       </div>
     </a>
     <a class="right-next"
-       href="../homework/Homework_07.html"
+       href="MCMC.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assignment 07: Frequentist and Bayesian Methods</p>
+        <p class="prev-next-title">Markov Chain Monte Carlo in Practice</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1124,7 +1034,6 @@ The difference between is these is that we marginalized over the &quot;nuisance&
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-bayesian-inference-span"><span style="color:Orange">Bayesian Inference</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-what-priors-should-i-use-span"><span style="color:Orange">What Priors Should I Use?</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-so-why-isn-t-everyone-a-bayesian-span"><span style="color:Orange">So, Why Isn’t Everyone a Bayesian?</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-graphical-models-span"><span style="color:Orange">Graphical Models</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgments-span"><span style="color:Orange">Acknowledgments</span></a></li>
 </ul>
   </nav></div>
