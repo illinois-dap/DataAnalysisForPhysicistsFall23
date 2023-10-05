@@ -49,6 +49,7 @@ chapters:
   - url: https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/FrequentistBayesian
+  - file: _sources/lectures/MCMC
   - file: _sources/homework/Homework_07
 - file: _sources/Project_01 # Project 01
   sections:
