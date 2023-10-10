@@ -7,5 +7,3 @@ The course page is based on [Jupyterbook](https://jupyterbook.org) and can be fo
 It can be built locally from this repository with:
 
 `jupyter-book build --config _config.yml --toc _toc.yml ./`
-
-

@@ -57,16 +57,18 @@ chapters:
   - file: _sources/projects/Project_01_ExoticParticles
   - file: _sources/projects/Project_01_GalaxyZoo
   - file: _sources/projects/Project_01_NuclearGeometryQGP
-- file: _sources/Week_08 # Confidence Intervals
+- file: _sources/Week_08 # Stochastic Processes, Markov Chains & Variational Inference
   sections:
   - url: https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing
     title: Slides
-  - file: _sources/lectures/ConfidenceIntervals
+  - file: _sources/lectures/Markov
+  - file: _sources/lectures/Variational
   - file: _sources/homework/Homework_08
-- file: _sources/Week_09 # Hypothesis Testing
+- file: _sources/Week_09 # Confidence Intervals and Hypothesis Testing
   sections:
   - url: https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing
     title: Slides
+  - file: _sources/lectures/ConfidenceIntervals
   - file: _sources/lectures/HypothesisTesting
   - file: _sources/homework/Homework_09
 - file: _sources/Week_10 # Responses, Convolution and Unfolding
