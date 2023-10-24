@@ -490,10 +490,16 @@ from pyunfold.callbacks import Logger
 </div>
 </div>
 </div>
-<p>Your measurement isn’t perfect.  You can think about it this way:
+<p>Your measurement isn’t perfect.  For example:</p>
+<ul class="simple">
+<li><p>there is a finite resolution to the detector.  Often this will take the place of a Gaussian (or Gaussian-like) smearing around the true value.</p></li>
+<li><p>your measurement could be systematically off in scale (e.g. your ruler is 0.5cm too long)</p></li>
+<li><p>you can have an inefficiency in your detector either from the finite apature or some random loss.</p></li>
+</ul>
+<p>Mathetmatically, you can think about it this way:
 $<span class="math notranslate nohighlight">\(\vec{M} = \bf{R} \vec{T}\)</span><span class="math notranslate nohighlight">\(
-You measure something with some precision which is described by a response matrix \)</span>\bf{R}<span class="math notranslate nohighlight">\( which operates on the truth, \)</span>\vec{T}<span class="math notranslate nohighlight">\(.  You are interested in knowing \)</span>\bf{T}<span class="math notranslate nohighlight">\(.  The process of getting to \)</span>\bf{T}<span class="math notranslate nohighlight">\( from \)</span>\vec{M}$ is <em>unfolding</em>.</p>
-<p>Do you know <span class="math notranslate nohighlight">\(\bf{R}\)</span>?  Yes, you can likely know <span class="math notranslate nohighlight">\(\bf{R}\)</span> because it’s based on a Monte Carlo simulation of your detector.  The uncertainty on <span class="math notranslate nohighlight">\(\bf{R}\)</span> is of course important to know and we’ll discuss that below…</p>
+Your measurement \)</span>\vec{M}<span class="math notranslate nohighlight">\( with has precision which is described by a *response matrix* \)</span>\bf{R}<span class="math notranslate nohighlight">\( which operates on the truth, \)</span>\vec{T}<span class="math notranslate nohighlight">\(.  You are interested in knowing \)</span>\bf{T}<span class="math notranslate nohighlight">\(.  The process of getting to \)</span>\bf{T}<span class="math notranslate nohighlight">\( from \)</span>\vec{M}$ is <em>unfolding</em>.</p>
+<p>Do you know <span class="math notranslate nohighlight">\(\bf{R}\)</span>?  Yes, you can likely know <span class="math notranslate nohighlight">\(\bf{R}\)</span> because it’s based on knowledge of your detector and measurement process.  Often this means that there is a detailed Monte Carlo simulation of your detector and measurement process.</p>
 <p>The most obvious thing to do is to invert <span class="math notranslate nohighlight">\(\bf{R}\)</span> to get:
 $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\bf{R} \vec{T}\)</span><span class="math notranslate nohighlight">\(
 \)</span><span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} =  \vec{T}\)</span>$ Let’s try that.</p>
@@ -523,7 +529,7 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\b
 </div>
 </div>
 </div>
-<p>Now let’s mess up the truth.  This is what we think our detector actually measures given these truth samples.</p>
+<p>Now let’s mess up the truth.  Instead of a detailed Monte Carlo in this case we will just add noise via a shift in the mean with a Gaussian smearing.  This is what we think our detector actually measures given these truth samples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noise_width</span> <span class="o">=</span> <span class="mf">0.5</span>
