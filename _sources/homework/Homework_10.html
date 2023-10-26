@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Assignment 10: Response, Convolution and Unfolding &#8212; PHYS 398 DAP</title>
+    <title>Unfolding &#8212; PHYS 398 DAP</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -146,13 +146,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PHYS 398 DAP - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PHYS 398 DAP - Home"/>`);</script>
   
   
 </a></div>
@@ -244,7 +245,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/ResponseConvolutionUnfolding.html">Unfolding</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Assignment 10: Response, Convolution and Unfolding</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Unfolding</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -447,9 +448,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -460,19 +459,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assignment 10: Response, Convolution and Unfolding</h1>
+    <h1>Unfolding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -482,22 +473,26 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="assignment-10-response-convolution-and-unfolding">
-<h1>Assignment 10: Response, Convolution and Unfolding<a class="headerlink" href="#assignment-10-response-convolution-and-unfolding" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="problem-1">
-<h2>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this heading">#</a></h2>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="unfolding">
+<h1>Unfolding<a class="headerlink" href="#unfolding" title="Permalink to this heading">#</a></h1>
+<p>Here we will setup and test an unfolding problem.  You my use pyunfold (as in the lecture) or another piece of unfolding software you find for this exercise.  You <em>may not</em> just do an efficiency correction or matrix inversion.  Make sure to submit the <em>executed</em> version of your notebook.  Make sure to label all plots clearly.</p>
+<p>The samples you will use to unfold are below.  They are from the pythia MC which generates random proton-proton collisions.  The units are in GeV (billion electron volts).  The two columns in dataset 1 are the truth momentum and the reconstructed momentum.  In dataset 2 there is only the reconstructed momentum.</p>
+<p>These are <a class="reference external" href="https://en.wikipedia.org/wiki/Jet_(particle_physics)">jets</a> and the reconstructed momentum has been smeared in a realistic way compared to the truth momentum.</p>
+<p>Generate the response matrix with:</p>
+<p>(dataset 1) <a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_response.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_response.csv</a></p>
+<p>and use this as the ‘data’ to unfold:</p>
+<p>(dataset 2) <a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_data.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_data.csv</a></p>
+<p>Note that the spectra fall steeply with increasing momentum, you might find it better to use logarithmically spaced bins in the histogram.  You can do that straightforwardly by setting up the problem in terms of log(momentum).  In any case, just be very clear about what you have done.</p>
+<p><em>Part 1:</em></p>
+<p>Write a paragraph summarizing what you’ve done.  (This is the first part of the homework but do it last.  This is for me to understand what you’ve done as I read through your work.)</p>
+<p><em>Part 2</em>:</p>
+<p>Plot the truth and reconstructed quantities on the same plot; then take a ratio of those two histograms.  Comment on what you see.</p>
+<p>Generate a response matrix using the simulations provided.  Plot the response matrix both before and after the normlization of the matrix.</p>
+<p>Everything in this part is using (dataset 1).</p>
+<p><em>Part 3:</em></p>
+<p>Unfold the measured distribution with the response matrix (the <em>technical closure</em>).  Justify the convergence criteria used in the unfolding.  Either get convergence within the uncertainties on the sample statistics or explain what you tried to get the convergence to improve (showing plots with multiple convergence criteria would be very illustrative…).</p>
+<p>Everything in this part is using (dataset 1).</p>
+<p><em>Part 4</em>: Use the setup from Part 4 to unfold the reconstructed sample (dataset 2).  Is this unfolding adequate?  Why or why not?</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -555,20 +550,6 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -611,8 +592,8 @@ By Mark Neubauer
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>
