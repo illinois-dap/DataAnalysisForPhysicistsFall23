@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Assignment 11: Fourier Methods &#8212; PHYS 398 DAP</title>
+    <title>&lt;no title&gt; &#8212; PHYS 398 DAP</title>
   
   
   
@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/homework/Homework_11';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -167,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
@@ -248,10 +250,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Homework_10.html">Unfolding</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/FourierMethods.html">Fourier Methods</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Assignment 11: Fourier Methods</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -461,7 +462,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assignment 11: Fourier Methods</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -470,9 +471,9 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
+
             </nav>
         </div>
     </div>
@@ -483,23 +484,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="assignment-11-fourier-methods">
-<h1>Assignment 11: Fourier Methods<a class="headerlink" href="#assignment-11-fourier-methods" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="problem-1">
-<h2>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this heading">#</a></h2>
-</section>
-</section>
+  <p>In class we discussed fitting correlation functions to calculate Fourier coefficients.  Here we’re going to use additional techniques to calculate Fourier coefficients from data.</p>
+<p>There are two data sets:</p>
+<p><a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set1.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set1.csv</a></p>
+<p>and</p>
+<p><a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set2.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set2.csv</a></p>
+<p>Each data set contains two columns; the first is the event number and the second is an angle <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>One common technique is calculating the average value of the correlator
+<span class="math notranslate nohighlight">\( v_n\{2\}^2 = \langle \langle \cos n (\phi_i - \phi_j) \rangle \rangle\)</span> for all pairs where <span class="math notranslate nohighlight">\(i \neq j \)</span>.  The inner set of <span class="math notranslate nohighlight">\(\langle \rangle\)</span> indicates an average over all distinct pairs in the event and the outer set of <span class="math notranslate nohighlight">\(\langle \rangle\)</span> indicates an average over all events.</p>
+<p>(remember: all combinations of angles should only occur for particles <em>within the same event</em>).</p>
+<p>Part 1: Calculate <span class="math notranslate nohighlight">\(\langle v_2^2 \rangle\)</span> of the dataset provided using the fit method from class.  Include a plot and make sure to include the uncertainty in your estimation.</p>
+<p>Part 2:  Using the dataset provided calculate the value of $<span class="math notranslate nohighlight">\(v_n\{2\}^2 = \langle \langle \cos n (\phi_i - \phi_j) \rangle \rangle\)</span><span class="math notranslate nohighlight">\(  Get an uncertainty on the \)</span>v_n{2}^2<span class="math notranslate nohighlight">\( value using the scipy.bootstrap function (make sure to use the confidence_level=0.68 option to get a *1 \)</span>\sigma<span class="math notranslate nohighlight">\(* uncertainty).  Is the value of \)</span>v_n{2}<span class="math notranslate nohighlight">\( you calculated here  the same as the \)</span>\sqrt{\langle v_2^2} \rangle$ from Part 1?  Explain what you see.</p>
+<p>Part 3: One issue with using two particle correlations is that there are many things that can create correlations between pairs of particles (e.g. the particles could come from the decay of another particle, a glitch in the detector could cause a particle to be measured twice, …).  One way people minimize these effects is (you guessed it), measuring more than two particles.</p>
+<p>The simplest extension is the four-particle correlator: <span class="math notranslate nohighlight">\(\langle \langle \cos n (\phi_i + \phi_j - \phi_k - \phi_l) \rangle \rangle\)</span>.  This measures genuine four-particle correlations, plus sets of four where two particles are correlated and the other two are not.  In order to measure <span class="math notranslate nohighlight">\(v_2\)</span> we need to subtract out those two-particle correlations we’re not interested in:
+$<span class="math notranslate nohighlight">\(v_2^4\{4\} = 2 \times \left(\langle \langle \cos n (\phi_i - \phi_j) \rangle\rangle\right)^2 - \langle \langle \cos n (\phi_i + \phi_j - \phi_k - \phi_l) \rangle \rangle\)</span><span class="math notranslate nohighlight">\( (here \)</span>i \neq j \neq k \neq l$).</p>
+<p>Calculate <span class="math notranslate nohighlight">\(v_2\{4\}\)</span> and the uncertainty and compare the value to what you got for <span class="math notranslate nohighlight">\(v_2\{2\}\)</span> in Part 2. (for the uncertainties, I recommend you do the bootstrap on the rhs of the equation before taking the 1/4 power.  If you have some negative numbers for the difference, you’ll get some problems taking the 1/4 power.)</p>
+<p>Part 4: Compare the two datasets to each other for each observable you calculated here.  Can you conclude anything about the two datasets?</p>
+<p>Part 5:  The four-particle correlations took longer to compute than the two-particle correlations.  How much of an effect was it?  Would you rather increase the precision of the measurement by adding events to the sample or by increasing the number of particles in each event? (There is actually a faster way that doesn’t involve these loops; if you’re interested, take a look at <a class="reference external" href="https://inspirehep.net/literature/871528">this</a>.</p>
 
     <script type="text/x-thebe-config">
     {
@@ -563,9 +564,9 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
+
   </nav></div>
 
 </div></div>
