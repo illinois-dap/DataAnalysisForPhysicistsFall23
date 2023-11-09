@@ -484,8 +484,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-what-statistical-questions-can-you-ask-of-a-time-series-span"><span style="color:Orange">What statistical questions can you ask of a time-series?</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-fourier-series-and-fourier-transform-span"><span style="color:Orange">Fourier Series and Fourier Transform</span></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-fourier-series-span"><span style="color:LightBlue">Fourier Series</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-the-square-wave-above-the-limits-are-only-t-4-to-t-4-because-f-x-0-for-the-rest-of-the-wavelength">For the square wave above, the limits are only <span class="math notranslate nohighlight">\(-T/4\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> because <span class="math notranslate nohighlight">\(f(x)=0\)</span> for the rest of the wavelength.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#because-cos-nx-is-even-we-can-reduce-the-limits-to-0-to-t-4-and-multiply-by-2">Because <span class="math notranslate nohighlight">\(\cos(nx)\)</span> is even, we can reduce the limits to <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> and multiply by <span class="math notranslate nohighlight">\(2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-fourier-transform-span"><span style="color:LightBlue">Fourier Transform</span></a></li>
 </ul>
 </li>
@@ -496,6 +494,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-cross-correlation-span"><span style="color:LightBlue">Cross Correlation</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-autoregressive-processes-span"><span style="color:LightBlue">Autoregressive Processes</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-moving-average-processes-span"><span style="color:LightBlue">Moving Average Processes</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arma-model-span"><span style="color:LightBlue">ARMA model</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arima-model-span"><span style="color:LightBlue">ARIMA model</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
@@ -559,6 +559,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-11-09 00:43:56--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/AirPassengers.csv
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.108.133, 185.199.109.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1746 (1.7K) [text/plain]
+Saving to: ‘./tmp_data/AirPassengers.csv’
+     0K .                                                     100% 18.9M=0s
+2023-11-09 00:43:57 (18.9 MB/s) - ‘./tmp_data/AirPassengers.csv’ saved [1746/1746]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="span-style-color-orange-load-data-span">
@@ -586,19 +598,83 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 <p>Virtually all statistical methods assume uniform sampling.</p>
 <section id="span-style-color-orange-why-should-you-care-span">
 <h2><span style="color:Orange">Why should you care?</span><a class="headerlink" href="#span-style-color-orange-why-should-you-care-span" title="Permalink to this heading">#</a></h2>
-<p>Because everything in the cosmos is dynamic and changing (Figure credit: Francisco Forster (ALeRCE broker team):</p>
+<p>Because everything in the cosmos is dynamic and changing [Figure credit: Francisco Forster (ALeRCE broker team)]:</p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-transient_sky.jpg"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-transient_sky.jpg" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-transient_sky.jpg" style="width: 1000px;" /></a></img><br></p>
 <p><em><strong><span style="color:Violet">EXCERCISE</span></strong></em>: What statistical questions can you ask of the following time-series? What jumps out at you? Speculate as to why. How might you model this?</p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-cow.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-cow.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-cow.png" style="width: 1000px;" /></a></img><br></p>
 <p>What you are doing is a combination of <span style="color:Violet">trend detection</span>, <span style="color:Violet">forecasting</span>, and <span style="color:Violet">period finding</span></p>
 <p><em><strong><span style="color:Violet">EXCERCISE</span></strong></em>: What statistical questions can you ask of the following time-series? When did the earthquake begin and end? When did the main shocks of the Boxing Day Tsunami happen? How far apart are they?</p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-tsunami.jpg"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-tsunami.jpg" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-tsunami.jpg" style="width: 1000px;" /></a></img><br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">iframe_url</span> <span class="o">=</span> <span class="s2">&quot;https://upload.wikimedia.org/wikipedia/commons/4/4c/2004_Indonesia_Tsunami_edit.gif&quot;</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">iframe_url</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">275</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="1000"
+            height="275"
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4c/2004_Indonesia_Tsunami_edit.gif"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 <p>What you are doing is a combination of <span style="color:Violet">event finding</span> and <span style="color:Violet">change point detection</span>.</p>
 <p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Filtering a TimeSeries to detect gravitational waves</p>
 <p>For this example, we will make use of the <a class="reference external" href="https://gwpy.github.io/docs/1.0.0/index.html">gwpy</a> package:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>gwpy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Requirement already satisfied: gwpy in /usr/local/lib/python3.11/site-packages (3.0.7)
+Requirement already satisfied: astropy&gt;=4.3.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (5.3.2)
+Requirement already satisfied: dqsegdb2 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.2.1)
+Requirement already satisfied: gwdatafind&gt;=1.1.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.1.3)
+Requirement already satisfied: gwosc&gt;=0.5.3 in /usr/local/lib/python3.11/site-packages (from gwpy) (0.7.1)
+Requirement already satisfied: h5py&gt;=3.0.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (3.10.0)
+Requirement already satisfied: ligo-segments&gt;=1.0.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.4.0)
+Requirement already satisfied: ligotimegps&gt;=1.2.1 in /usr/local/lib/python3.11/site-packages (from gwpy) (2.0.1)
+Requirement already satisfied: matplotlib&gt;=3.3.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (3.7.0)
+Requirement already satisfied: numpy&gt;=1.19 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.23.5)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python3.11/site-packages (from gwpy) (2.8.2)
+Requirement already satisfied: requests in /usr/local/lib/python3.11/site-packages (from gwpy) (2.31.0)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.11.2)
+Requirement already satisfied: tqdm&gt;=4.10.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (4.66.1)
+Requirement already satisfied: pyerfa&gt;=2.0 in /usr/local/lib/python3.11/site-packages (from astropy&gt;=4.3.0-&gt;gwpy) (2.0.0.3)
+Requirement already satisfied: PyYAML&gt;=3.13 in /usr/local/lib/python3.11/site-packages (from astropy&gt;=4.3.0-&gt;gwpy) (6.0)
+Requirement already satisfied: packaging&gt;=19.0 in /usr/local/lib/python3.11/site-packages (from astropy&gt;=4.3.0-&gt;gwpy) (23.0)
+Requirement already satisfied: igwn-auth-utils&gt;=0.3.1 in /usr/local/lib/python3.11/site-packages (from gwdatafind&gt;=1.1.0-&gt;gwpy) (1.1.0)
+Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (from ligo-segments&gt;=1.0.0-&gt;gwpy) (1.16.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.0.7)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (4.38.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.4.4)
+Requirement already satisfied: pillow&gt;=6.2.0 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (9.4.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (3.0.9)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (3.0.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (1.26.14)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (2022.12.7)
+Requirement already satisfied: cryptography&gt;=2.3 in /usr/local/lib/python3.11/site-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (41.0.5)
+Requirement already satisfied: safe-netrc&gt;=1.0.0 in /usr/local/lib/python3.11/site-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.0.1)
+Requirement already satisfied: scitokens&gt;=1.7.0 in /usr/local/lib/python3.11/site-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.8.1)
+Requirement already satisfied: cffi&gt;=1.12 in /usr/local/lib/python3.11/site-packages (from cryptography&gt;=2.3-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.16.0)
+Requirement already satisfied: PyJWT&gt;=1.6.1 in /usr/local/lib/python3.11/site-packages (from scitokens&gt;=1.7.0-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.8.0)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packages (from cffi&gt;=1.12-&gt;cryptography&gt;=2.3-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.21)
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+
 </pre></div>
 </div>
 </div>
@@ -614,7 +690,7 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 </div>
-<p>Next we can design a zero-pole-gain filter to remove the extranious noise.</p>
+<p>Next we can design a zero-pole-gain (ZPK) filter to remove the extranious noise.</p>
 <p>First we import the <code class="docutils literal notranslate"><span class="pre">gwpy.signal.filter_design</span></code> module and create a bandpass() filter to remove both low and high frequency content</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -633,7 +709,7 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 </div>
-<p>and concatenate each of our filters together to create a single zero-pole-gain (ZPK) model:</p>
+<p>and concatenate each of our filters together to create a single ZPK model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zpk</span> <span class="o">=</span> <span class="n">filter_design</span><span class="o">.</span><span class="n">concatenate_zpks</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="o">*</span><span class="n">notches</span><span class="p">)</span>
@@ -676,6 +752,13 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/gwpy/plot/plot.py:287: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  super().show(warn=warn)
+</pre></div>
+</div>
+<img alt="../../_images/0099515a20a64250463d9caf45dc7acf03ebfa0956dc44ba67253b3e55de81d3.png" src="../../_images/0099515a20a64250463d9caf45dc7acf03ebfa0956dc44ba67253b3e55de81d3.png" />
+</div>
 </div>
 <p>We see now a spike around 16 seconds into the data, so let’s zoom into that time (and prettify):</p>
 <div class="cell docutils container">
@@ -690,6 +773,9 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9529029b723842e504d244f0035b5952d791b90d5fdda6cb19f5686211cba064.png" src="../../_images/9529029b723842e504d244f0035b5952d791b90d5fdda6cb19f5686211cba064.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -699,7 +785,7 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 </div>
-<p>The article announcing the detector told us that the signals were separated by 6.9 ms between detectors, and that the relative orientation of those detectors means that we need to invert the data from one before comparing them, so we apply those corrections:</p>
+<p>The article announcing the detection told us that the signals were separated by 6.9 ms between detectors, and that the relative orientation of those detectors means that we need to invert the data from one before comparing them, so we apply those corrections:</p>
 <p>Congratulations, you have succesfully filtered LIGO data to uncover the first ever directly-detected gravitational wave signal, GW150914! But wait, what about LIGO-Livingston? We can easily add that to our figure by following the same procedure.</p>
 <p>First, we load the new data</p>
 <div class="cell docutils container">
@@ -727,6 +813,9 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/85c00deaea9bfc74dc79e99b263c347126d7edf6cf48ad761b9c7a41775d893c.png" src="../../_images/85c00deaea9bfc74dc79e99b263c347126d7edf6cf48ad761b9c7a41775d893c.png" />
+</div>
 </div>
 <p>The above filtering is (almost) the same as what was applied to LIGO data to produce Figure 1 in <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.116.061102">Abbott et al. (2016)</a> (the joint LSC-Virgo publication announcing this detection).</p>
 </section>
@@ -748,7 +837,7 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 <h3><span style="color:LightBlue">Fourier Series</span><a class="headerlink" href="#span-style-color-lightblue-fourier-series-span" title="Permalink to this heading">#</a></h3>
 <p>We can approximate a periodic function of period P to arbitrary accuracy by adding sine and cosine terms. This process is known as a Fourier Series, computed as</p>
 <div class="math notranslate nohighlight">
-\[
+\[ \Large
 f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx)
 \]</div>
 <p>Let’s look at the square wave centered at <span class="math notranslate nohighlight">\(x=0\)</span></p>
@@ -783,6 +872,8 @@ f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6759fdaa31fffcd2bb3cadde0107786e8e7f421f2c5a627cff0b9e22e9ae30c7.svg" src="../../_images/6759fdaa31fffcd2bb3cadde0107786e8e7f421f2c5a627cff0b9e22e9ae30c7.svg" /></div>
 </div>
 <p>We now show how to calculate the <span class="math notranslate nohighlight">\(a_n\)</span>. Let’s change our Fourier Series Equation</p>
 <div class="math notranslate nohighlight">
@@ -800,16 +891,12 @@ f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(n \omega_0 x) + b_n \sin(n \
 \[ \Large
 a_n = \frac{2}{T}\int_{-T/2}^{T/2} f(x)\cos(n \omega_0 x)dx
 \]</div>
-</section>
-<section id="for-the-square-wave-above-the-limits-are-only-t-4-to-t-4-because-f-x-0-for-the-rest-of-the-wavelength">
-<h3>For the square wave above, the limits are only <span class="math notranslate nohighlight">\(-T/4\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> because <span class="math notranslate nohighlight">\(f(x)=0\)</span> for the rest of the wavelength.<a class="headerlink" href="#for-the-square-wave-above-the-limits-are-only-t-4-to-t-4-because-f-x-0-for-the-rest-of-the-wavelength" title="Permalink to this heading">#</a></h3>
+<p>For the square wave above, the limits are only <span class="math notranslate nohighlight">\(-T/4\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> because <span class="math notranslate nohighlight">\(f(x)=0\)</span> for the rest of the wavelength.</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 a_n = \frac{2}{T} \int_{-T/4}^{T/4}\cos(n \omega_0 x)dx
 \]</div>
-</section>
-<section id="because-cos-nx-is-even-we-can-reduce-the-limits-to-0-to-t-4-and-multiply-by-2">
-<h3>Because <span class="math notranslate nohighlight">\(\cos(nx)\)</span> is even, we can reduce the limits to <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> and multiply by <span class="math notranslate nohighlight">\(2\)</span><a class="headerlink" href="#because-cos-nx-is-even-we-can-reduce-the-limits-to-0-to-t-4-and-multiply-by-2" title="Permalink to this heading">#</a></h3>
+<p>Because <span class="math notranslate nohighlight">\(\cos(nx)\)</span> is even, we can reduce the limits to <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> and multiply by <span class="math notranslate nohighlight">\(2\)</span></p>
 <div class="math notranslate nohighlight">
 \[ \Large
 a_n = \frac{4}{T} \int_{0}^{T/4}\cos(n \omega_0 x)dx
@@ -841,13 +928,15 @@ a_n =\frac{2}{n\pi}\sin \left(n \omega_0 \frac{\pi}{2} \right)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/968cb8e9b625be64012ea56208b0378e2c6062b5ee8d0f15ab3054cfc8df3b00.svg" src="../../_images/968cb8e9b625be64012ea56208b0378e2c6062b5ee8d0f15ab3054cfc8df3b00.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-fourier-transform-span">
 <h3><span style="color:LightBlue">Fourier Transform</span><a class="headerlink" href="#span-style-color-lightblue-fourier-transform-span" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Fourier Transform is a generalized version of the Fourier Series</p></li>
-<li><p>It applies to both period and non periodic functions</p>
+<li><p>It applies to both periodic and non periodic functions</p>
 <ul class="simple">
 <li><p>For periodic functions, the spectrum is discrete</p></li>
 <li><p>For non-period functions, the spectrum is continuous</p></li>
@@ -878,11 +967,11 @@ F(k) = \int_{-\infty}^{\infty}f(x) \exp(-ikx)dx
 <p><span style="color:Violet">Inverse Fourier Transform</span></p>
 <p>To go back to <span class="math notranslate nohighlight">\(f(x)\)</span>, the formula is</p>
 <div class="math notranslate nohighlight">
-\[
+\[ \Large
 f(x) = \mathcal{FT}^{-1}\{F(k)\}
 \]</div>
 <div class="math notranslate nohighlight">
-\[
+\[ \Large
 f(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty}F(k) \exp(ikx)dx
 \]</div>
 <p>Since <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(k\)</span> are inversely proportional, the “size” of <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(F(k)\)</span> are inversely proportional.
@@ -961,6 +1050,8 @@ F(k) = B \text{sinc}(kB/2)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5634b203bf115e3b18ed2ed9a0307bfb91228b1016d78f3c992d23d600bed47c.svg" src="../../_images/5634b203bf115e3b18ed2ed9a0307bfb91228b1016d78f3c992d23d600bed47c.svg" /></div>
 </div>
 </section>
 </section>
@@ -1025,6 +1116,8 @@ f_{Nyq} = 2\cdot f_{natural} \rightarrow f_s \geq f_{Nyq}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d19e871f5766e70d24aa77c0c027b92210daef8e14544b0e9eeed65c45dc4015.svg" src="../../_images/d19e871f5766e70d24aa77c0c027b92210daef8e14544b0e9eeed65c45dc4015.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-orange-auto-correlation-span">
@@ -1040,7 +1133,7 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 <p>The figures below show a plot of a series of 100 random numbers drawn from a sine function. In the sampling, sine function nature of the data is obscured. The sine function revealed in a correlogram produced by autocorrelation function.</p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-Acf_sinx.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-Acf_sinx.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/TimeSeries-Acf_sinx.png" style="width: 600px;" /></a></img><br></p>
 <p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Seasonality of air passenger data?</p>
-<p>This dataset provides monthly totals of a US airline passengers from 1949 to 1960. This dataset is taken from an inbuilt dataset of R called AirPassengers.</p>
+<p>This dataset provides monthly totals of a US airline passengers from 1949 to 1960. This dataset is taken from an inbuilt dataset called <code class="docutils literal notranslate"><span class="pre">AirPassengers</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of Passengers&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -1054,6 +1147,8 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/adfc2fa241ca694ee94c9942a162da2d774515c4e4301acad5211cd32b8b6908.svg" src="../../_images/adfc2fa241ca694ee94c9942a162da2d774515c4e4301acad5211cd32b8b6908.svg" /></div>
 </div>
 <p>Since all the values are positive, we can show this on both sides of the Y axis to emphasize the growth.</p>
 <div class="cell docutils container">
@@ -1071,8 +1166,10 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/13014e449be079aa2bbd15c8c0da8651210b5869567b923f03cfccbd9ff62180.svg" src="../../_images/13014e449be079aa2bbd15c8c0da8651210b5869567b923f03cfccbd9ff62180.svg" /></div>
 </div>
-<p>It can be seen that its a monthly time series and follows a certain repetitive pattern every year. So, we can plot each year as a separate line in the same plot. This let us compare the year wise patterns side-by-side.</p>
+<p>It can be seen that its a monthly time series and follows a certain repetitive pattern every year. So, we could plot each year as a separate line in the same plot, which would let us compare the year wise patterns side-by-side.</p>
 <p>The common way to test for seasonality of a time series is to plot the series and check for repeatable patterns in fixed time intervals. So, the types of seasonality is determined by the clock or the calendar.</p>
 <ol class="arabic simple">
 <li><p>Hour of day</p></li>
@@ -1093,6 +1190,8 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0fbf3991604f796d6012effc8aa975a3f601eab9b6ef2a4bb1045c0a5d609cb0.svg" src="../../_images/0fbf3991604f796d6012effc8aa975a3f601eab9b6ef2a4bb1045c0a5d609cb0.svg" /></div>
 </div>
 <section id="span-style-color-lightblue-autocorrelation-and-partial-autocorrelation-functions-span">
 <h3><span style="color:LightBlue">Autocorrelation and Partial Autocorrelation Functions</span><a class="headerlink" href="#span-style-color-lightblue-autocorrelation-and-partial-autocorrelation-functions-span" title="Permalink to this heading">#</a></h3>
@@ -1103,6 +1202,25 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statsmodels
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Requirement already satisfied: statsmodels in /usr/local/lib/python3.11/site-packages (0.14.0)
+Requirement already satisfied: numpy&gt;=1.18 in /usr/local/lib/python3.11/site-packages (from statsmodels) (1.23.5)
+Requirement already satisfied: scipy!=1.9.2,&gt;=1.4 in /usr/local/lib/python3.11/site-packages (from statsmodels) (1.11.2)
+Requirement already satisfied: pandas&gt;=1.0 in /usr/local/lib/python3.11/site-packages (from statsmodels) (2.0.3)
+Requirement already satisfied: patsy&gt;=0.5.2 in /usr/local/lib/python3.11/site-packages (from statsmodels) (0.5.3)
+Requirement already satisfied: packaging&gt;=21.3 in /usr/local/lib/python3.11/site-packages (from statsmodels) (23.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.0-&gt;statsmodels) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.0-&gt;statsmodels) (2023.3)
+Requirement already satisfied: tzdata&gt;=2022.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.0-&gt;statsmodels) (2023.3)
+Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (from patsy&gt;=0.5.2-&gt;statsmodels) (1.16.0)
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+
 </pre></div>
 </div>
 </div>
@@ -1119,7 +1237,12 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/73c0b32fd98c9946c90bdf591efcd77b08d08236db0d2a6fe1172f09f5729019.svg" src="../../_images/73c0b32fd98c9946c90bdf591efcd77b08d08236db0d2a6fe1172f09f5729019.svg" /><img alt="../../_images/c7ea665ccd5d9867d72507e81db8e76bb85517247174f9b29052c48be4916b55.svg" src="../../_images/c7ea665ccd5d9867d72507e81db8e76bb85517247174f9b29052c48be4916b55.svg" /></div>
 </div>
+<p>The <span class="math notranslate nohighlight">\(y\)</span>-axis in the ACF plot is the amount of correlation at each lag <span class="math notranslate nohighlight">\(k\)</span>. The shaded red region is a confidence interval - if the height of the bars is outside this region, it means the correlation is statistically significant. When a clear trend exists in a time series, the autocorrelation tends to be high at small lags like 1 or 2. When seasonality exists, the autocorrelation goes up periodically at larger lags.</p>
+<p>The only difference autocorrelation and partial autocorrelation is that the latter method tries to account for the effect that intervening lags have. For example, at lag 3, partial autocorrelation removes the effect lags 1 and 2 have on computing the correlation.</p>
+<p>While autocorrelation is useful for analyzing a time series’s properties and choosing what type of model to use, partial autocorrelation tells what order of autoregressive model to fit. This topic will be discussed in-depth when we talk about forecasting</p>
 </section>
 <section id="span-style-color-lightblue-lag-plots-span">
 <h3><span style="color:LightBlue">Lag Plots</span><a class="headerlink" href="#span-style-color-lightblue-lag-plots-span" title="Permalink to this heading">#</a></h3>
@@ -1140,6 +1263,8 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f371eda50bee049afb6d83746b324cee34736cf638ddaa0a3599463d744aaccf.svg" src="../../_images/f371eda50bee049afb6d83746b324cee34736cf638ddaa0a3599463d744aaccf.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-cross-correlation-span">
@@ -1154,6 +1279,17 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="1000"
+            height="275"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/71/Cross_correlation_animation.gif"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-autoregressive-processes-span">
@@ -1196,12 +1332,531 @@ Y_t = \epsilon_t + b_1 ~\epsilon_{t-1}
 $<span class="math notranslate nohighlight">\( \Large
 Y_t = a_1 ~Y_{t-1} + a_2 ~Y_{t-2} + \epsilon_t
 \)</span>$</p>
-<p>You can combine AR and MA processes. These are creatively called ARMA processes</p>
+</section>
+<section id="span-style-color-lightblue-arma-model-span">
+<h3><span style="color:LightBlue">ARMA model</span><a class="headerlink" href="#span-style-color-lightblue-arma-model-span" title="Permalink to this heading">#</a></h3>
+<p>Though both AR and MA models are reasonable and popular choices, the most common time series forecasting method is the <span style="color:Violet">autoregressive moving average</span> <a class="reference external" href="https://en.wikipedia.org/wiki/Autoregressive_moving-average_model">ARMA</a> method which combines both the AR and MA linear models. These are creatively called ARMA processes.</p>
+<p>It can thus be written as:
+$<span class="math notranslate nohighlight">\( \Large
+Y_t = \epsilon_i + \sum_{j=1}^p a_j \epsilon_{i-j} + \sum_{j=1}^q b_j ~Y_{t-j}
+\)</span>$</p>
 <p>E.g. ARMA(2,1) model, which combines AR(2) and MA(1):</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 Y_t = a_1 ~Y_{t-1} + a_2 ~Y_{t-2} + \epsilon_t + b_1 \epsilon_{t-1}
 \]</div>
+</section>
+<section id="span-style-color-lightblue-arima-model-span">
+<h3><span style="color:LightBlue">ARIMA model</span><a class="headerlink" href="#span-style-color-lightblue-arima-model-span" title="Permalink to this heading">#</a></h3>
+<p>The ARMA model doesn’t have a mechanism to adjust for trend or seasonality in the data.
+A slight adjustment to the model that accounts for the trend is to adjust the moving average of the errors <span class="math notranslate nohighlight">\(\epsilon_j\)</span>.
+This is called the <span style="color:Violet">autoregressive integrating moving average</span> model or <a class="reference external" href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">ARIMA</a>.
+It can be written as:
+$<span class="math notranslate nohighlight">\( \Large
+Y_t = \epsilon_i + \sum_{j=1}^{p-d} a_j \epsilon_{i-j} + \sum_{j=1}^q b_j ~Y_{t-j}
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>d$ is an adjustment for the trend.</p>
+<p><em><strong><span style="color:violet">EXAMPLE</span></strong></em>: Forcasting Bitcoin Pricing</p>
+<p><span style="color:violet">Time series forecasting</span> is the task of predicting future values based on historical data. Examples across industries include forecasting of weather, sales numbers and stock prices. More recently, it has been applied to predicting price trends for cryptocurrencies such as Bitcoin and Ethereum. The prevalence of time series forecasting applications exist in many different fields, including scientific research, so we provide a specific example here.</p>
+<p>An extension of ARMA is the Autoregressive Integrated Moving Average (ARIMA) model, which doesn’t assume stationarity but does still assume that the data exhibits little to no seasonality. Fortunately, the seasonal ARIMA (SARIMA) variant is a statistical model that can work with non-stationary data and capture some seasonality. We will limit the scope of our example to the ARMA and ARIMA forcasting models.</p>
+<p>Python provides many easy-to-use libraries and tools for performing time series forecasting in Python. Specifically, the stats library in Python has tools for building ARMA models, ARIMA models and SARIMA models with just a few lines of code. Since all of these models are available in a single library, you can easily run many Python forecasting experiments using different models in the same script or notebook when conducting time series forecasting in Python.</p>
+<p><em><strong>Reading and Displaying BTC Time Series Data</strong></em></p>
+<p>We will start by reading in the historical prices for BTC using the Pandas data reader. Let’s install it using a simple pip command in terminal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas-datareader
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Requirement already satisfied: pandas-datareader in /usr/local/lib/python3.11/site-packages (0.10.0)
+Requirement already satisfied: lxml in /usr/local/lib/python3.11/site-packages (from pandas-datareader) (4.9.3)
+Requirement already satisfied: pandas&gt;=0.23 in /usr/local/lib/python3.11/site-packages (from pandas-datareader) (2.0.3)
+Requirement already satisfied: requests&gt;=2.19.0 in /usr/local/lib/python3.11/site-packages (from pandas-datareader) (2.31.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (2023.3)
+Requirement already satisfied: tzdata&gt;=2022.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (2023.3)
+Requirement already satisfied: numpy&gt;=1.21.0 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (1.23.5)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (3.0.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (1.26.14)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (2022.12.7)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=0.23-&gt;pandas-datareader) (1.16.0)
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>yfinance
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+Requirement already satisfied: yfinance in /usr/local/lib/python3.11/site-packages (0.2.31)
+Requirement already satisfied: pandas&gt;=1.3.0 in /usr/local/lib/python3.11/site-packages (from yfinance) (2.0.3)
+Requirement already satisfied: numpy&gt;=1.16.5 in /usr/local/lib/python3.11/site-packages (from yfinance) (1.23.5)
+Requirement already satisfied: requests&gt;=2.31 in /usr/local/lib/python3.11/site-packages (from yfinance) (2.31.0)
+Requirement already satisfied: multitasking&gt;=0.0.7 in /usr/local/lib/python3.11/site-packages (from yfinance) (0.0.11)
+Requirement already satisfied: lxml&gt;=4.9.1 in /usr/local/lib/python3.11/site-packages (from yfinance) (4.9.3)
+Requirement already satisfied: appdirs&gt;=1.4.4 in /usr/local/lib/python3.11/site-packages (from yfinance) (1.4.4)
+Requirement already satisfied: pytz&gt;=2022.5 in /usr/local/lib/python3.11/site-packages (from yfinance) (2023.3)
+Requirement already satisfied: frozendict&gt;=2.3.4 in /usr/local/lib/python3.11/site-packages (from yfinance) (2.3.8)
+Requirement already satisfied: peewee&gt;=3.16.2 in /usr/local/lib/python3.11/site-packages (from yfinance) (3.17.0)
+Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /usr/local/lib/python3.11/site-packages (from yfinance) (4.12.2)
+Requirement already satisfied: html5lib&gt;=1.1 in /usr/local/lib/python3.11/site-packages (from yfinance) (1.1)
+Requirement already satisfied: soupsieve&gt;1.2 in /usr/local/lib/python3.11/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.5)
+Requirement already satisfied: six&gt;=1.9 in /usr/local/lib/python3.11/site-packages (from html5lib&gt;=1.1-&gt;yfinance) (1.16.0)
+Requirement already satisfied: webencodings in /usr/local/lib/python3.11/site-packages (from html5lib&gt;=1.1-&gt;yfinance) (0.5.1)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.8.2)
+Requirement already satisfied: tzdata&gt;=2022.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.0.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (1.26.14)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2022.12.7)
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s open up a Python script and import the data-reader from the Pandas library:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas_datareader.data</span> <span class="k">as</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s relax the display limits on columns and rows for the Panda library:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now import the date-time library, which will allow us to define start and end dates for our data pull:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have everything we need to pull Bitcoin price time series data, let’s collect data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">from</span> <span class="nn">pandas_datareader</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">pdr</span>
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yfin</span>
+<span class="n">yfin</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span>
+
+<span class="n">btc</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2018-01-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2020-12-02&quot;</span><span class="p">)[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%%**********************]  1 of 1 completed
+Date
+2018-01-01    13657.200195
+2018-01-02    14982.099609
+2018-01-03    15201.000000
+2018-01-04    15599.200195
+2018-01-05    17429.500000
+Name: Close, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s write our closing price BTC data to a csv file. This way, we can avoid having to repeatedly pull data using the Pandas data reader.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;tmp_data/btc.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s read in our csv file and display the first five rows:</p>
+<p>In order to use the models provided by the stats library, we need to set the date column to be a data frame index. We also should format that date using the to_datetime method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;tmp_data/btc.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Date         Close
+0  2018-01-01  13657.200195
+1  2018-01-02  14982.099609
+2  2018-01-03  15201.000000
+3  2018-01-04  15599.200195
+4  2018-01-05  17429.500000
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to use the models provided by the stats library, we need to set the date column to be a data frame index. We also should format that date using the to_datetime method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s label the y-axis and x-axis using Matplotlib. We will also rotate the dates on the x-axis so that they’re easier to read:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">btc</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/83ffb90e05967e6cb6b5f32aee70a26a540800ee629a80813160f2176b53ad04.svg" src="../../_images/83ffb90e05967e6cb6b5f32aee70a26a540800ee629a80813160f2176b53ad04.svg" /></div>
+</div>
+<p>Now we can proceed to building our first time series model, the Autoregressive Moving Average.</p>
+<p><em><strong>Splitting Data for Training and Testing</strong></em></p>
+<p>An important part of model building is splitting our data for training and testing, which ensures that you build a model that can generalize outside of the training data and that the performance and outputs are statistically meaningful.</p>
+<p>We will split our data such that everything before November 2020 will serve as training data, with everything after 2020 becoming the testing data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">btc</span><span class="p">[</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2020-11-01&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">btc</span><span class="p">[</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2020-11-01&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Train/Test split for BTC Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d63908cdab0c262d7bb159811a95a09bd9cf7ab0e40ef9167cf55e5466cde164.svg" src="../../_images/d63908cdab0c262d7bb159811a95a09bd9cf7ab0e40ef9167cf55e5466cde164.svg" /></div>
+</div>
+<p><em><strong>Autoregressive Moving Average (ARMA)</strong></em></p>
+<p>The term “autoregressive” in ARMA means that the model uses past values to predict future ones. Specifically, predicted values are a weighted linear combination of past values. This type of regression method is similar to linear regression, with the difference being that the feature inputs here are historical values.</p>
+<p>Moving average refers to the predictions being represented by a weighted, linear combination of white noise terms, where white noise is a random signal. The idea here is that ARMA uses a combination of past values and white noise in order to predict future values. Autoregression models market participant behavior like buying and selling BTC. The white noise models shock events like wars, recessions and political events.</p>
+<p>We can define an ARMA model using the SARIMAX package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.statespace.sarimax</span> <span class="kn">import</span> <span class="n">SARIMAX</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s define our input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then let’s define our model. To define an ARMA model with the SARIMAX class, we pass in the order parameters of (1, 0 ,1). Alpha corresponds to the significance level of our predictions. Typically, we choose an alpha = 0.05. Here, the ARIMA algorithm calculates upper and lower bounds around the prediction such that there is a 5 percent chance that the real value will be outside of the upper and lower bounds. This means that there is a 95 percent confidence that the real value will be between the upper and lower bounds of our predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARMAmodel</span> <span class="o">=</span> <span class="n">SARIMAX</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then fit our model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARMAmodel</span> <span class="o">=</span> <span class="n">ARMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            3     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  7.25852D+00    |proj g|=  7.50049D-03
+
+At iterate    5    f=  7.25849D+00    |proj g|=  2.46665D-03
+
+At iterate   10    f=  7.25818D+00    |proj g|=  1.56768D-02
+
+At iterate   15    f=  7.25789D+00    |proj g|=  2.90419D-05
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    3     15     18      1     0     0   2.904D-05   7.258D+00
+  F =   7.2578878306587340     
+
+CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH             
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> This problem is unconstrained.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generate our predictions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
+<span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And plot the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Train/Test split for BTC Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07b1ef1fdac03005b6db835c083dd2d52ead90f72f9109451d1bc51bea394298.svg" src="../../_images/07b1ef1fdac03005b6db835c083dd2d52ead90f72f9109451d1bc51bea394298.svg" /></div>
+</div>
+<p>We can also evaluate the performance using the root mean-squared error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE: &quot;</span><span class="p">,</span><span class="n">rmse</span><span class="p">)</span>
+
+<span class="n">y_pred_out_ARMA</span> <span class="o">=</span> <span class="n">y_pred_out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE:  3562.1357348230517
+</pre></div>
+</div>
+</div>
+</div>
+<p>The RMSE is pretty high, which we could have guessed upon inspecting the plot. Unfortunately, the model predicts a decrease in price when the price actually increases. Again, ARMA is limited in that it fails for non-stationary time series and does not capture seasonality. Let’s see if we can improve performance with an ARIMA model.</p>
+<p><em><strong>Autoregressive Integrated Moving Average (ARIMA)</strong></em></p>
+<p>Let’s import the ARIMA package from the stats library:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>An ARIMA task has three parameters. The first parameter corresponds to the lagging (past values), the second corresponds to differencing (this is what makes non-stationary data stationary), and the last parameter corresponds to the white noise (for modeling shock events).</p>
+<p>Let’s define an ARIMA model with order parameters (2,2,2):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
+<span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
+
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE: &quot;</span><span class="p">,</span><span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE:  3423.0657143773633
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out_ARMA</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARIMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Train/Test split for BTC Data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Train/Test split for BTC Data&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/9f2d3542e22fb27e454415fca0ef25f585419c767ea2b9c5a89ff593b0fe8b96.svg" src="../../_images/9f2d3542e22fb27e454415fca0ef25f585419c767ea2b9c5a89ff593b0fe8b96.svg" /></div>
+</div>
+<p>We see that the ARIMA predictions (in yellow) fall on top of the ARMA predictions. Let’s try increasing the differencing parameter to ARIMA (2,3,2):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
+<span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
+
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE: &quot;</span><span class="p">,</span><span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/statespace/sarimax.py:978: UserWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
+  warn(&#39;Non-invertible starting MA parameters found.&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE:  3224.970643199179
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/statsmodels/base/model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out_ARMA</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARIMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Train/Test split for BTC Data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Train/Test split for BTC Data&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/ffa1ddce6e0a0bf96d42c1dab0dbc7e0bcd3fbc90aa91b6b91ae6457339d821f.svg" src="../../_images/ffa1ddce6e0a0bf96d42c1dab0dbc7e0bcd3fbc90aa91b6b91ae6457339d821f.svg" /></div>
+</div>
+<p>We see this helps capture the increasing price direction. Let’s try playing with the parameters even further with ARIMA(5,4,2):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
+<span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
+
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE: &quot;</span><span class="p">,</span><span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+  self._init_dates(dates, freq)
+/usr/local/lib/python3.11/site-packages/statsmodels/tsa/statespace/sarimax.py:978: UserWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
+  warn(&#39;Non-invertible starting MA parameters found.&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE:  1409.74704737552
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out_ARMA</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARIMA Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Train/Test split for BTC Data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Train/Test split for BTC Data&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/751b13f794a0b41dd32fdd581e2efc8f4962192cadd792727ef8bd84cf5a442a.svg" src="../../_images/751b13f794a0b41dd32fdd581e2efc8f4962192cadd792727ef8bd84cf5a442a.svg" /></div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
@@ -1288,8 +1943,6 @@ Y_t = a_1 ~Y_{t-1} + a_2 ~Y_{t-2} + \epsilon_t + b_1 \epsilon_{t-1}
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-what-statistical-questions-can-you-ask-of-a-time-series-span"><span style="color:Orange">What statistical questions can you ask of a time-series?</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-fourier-series-and-fourier-transform-span"><span style="color:Orange">Fourier Series and Fourier Transform</span></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-fourier-series-span"><span style="color:LightBlue">Fourier Series</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-the-square-wave-above-the-limits-are-only-t-4-to-t-4-because-f-x-0-for-the-rest-of-the-wavelength">For the square wave above, the limits are only <span class="math notranslate nohighlight">\(-T/4\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> because <span class="math notranslate nohighlight">\(f(x)=0\)</span> for the rest of the wavelength.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#because-cos-nx-is-even-we-can-reduce-the-limits-to-0-to-t-4-and-multiply-by-2">Because <span class="math notranslate nohighlight">\(\cos(nx)\)</span> is even, we can reduce the limits to <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(T/4\)</span> and multiply by <span class="math notranslate nohighlight">\(2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-fourier-transform-span"><span style="color:LightBlue">Fourier Transform</span></a></li>
 </ul>
 </li>
@@ -1300,6 +1953,8 @@ Y_t = a_1 ~Y_{t-1} + a_2 ~Y_{t-2} + \epsilon_t + b_1 \epsilon_{t-1}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-cross-correlation-span"><span style="color:LightBlue">Cross Correlation</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-autoregressive-processes-span"><span style="color:LightBlue">Autoregressive Processes</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-moving-average-processes-span"><span style="color:LightBlue">Moving Average Processes</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arma-model-span"><span style="color:LightBlue">ARMA model</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arima-model-span"><span style="color:LightBlue">ARIMA model</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
