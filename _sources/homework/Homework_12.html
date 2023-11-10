@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Assignment 12: Time Series &#8212; PHYS 398 DAP</title>
+    <title>Assignment 12: Time Series Analysis of Projectile Data &#8212; PHYS 398 DAP</title>
   
   
   
@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/homework/Homework_12';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -257,7 +259,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/TimeSeries.html">Time Series Analysis</a></li>
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Assignment 12: Time Series</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Assignment 12: Time Series Analysis of Projectile Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Project_02.html"><span style="color: blue;"><b>Project 02</b></span></a></li>
@@ -461,7 +463,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assignment 12: Time Series</h1>
+    <h1>Assignment 12: Time Series Analysis of Projectile Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -471,7 +473,43 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-projectile-data-used-in-this-homework-span"><span style="color:LightGreen">Projectile data used in this homework</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-general-concepts-for-time-series-span"><span style="color:LightGreen">General concepts for time series</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-basic-concepts"><span style="color:LightBlue">Basic concepts</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-seasonality-of-data-span"><span style="color:LightBlue">Seasonality of data</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-1-span"><span style="color:Orange">Problem 1</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-automatically-determining-seasonality-span"><span style="color:LightBlue">Automatically determining seasonality</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-smoothing-span"><span style="color:LightGreen">Smoothing</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-moving-average-span"><span style="color:LightBlue">Moving average</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-exponential-smoothing-span"><span style="color:LightBlue">Exponential smoothing</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-stationarity"><span style="color:LightGreen">Stationarity</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-constant-mean-span"><span style="color:LightBlue">Constant mean</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-constant-variance-span"><span style="color:LightBlue">Constant variance</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-2-span"><span style="color:Orange">Problem 2</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-time-invariance"><span style="color:LightBlue">Time-invariance</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-why-stationarity-is-good-and-how-to-get-it"><span style="color:LightBlue">Why stationarity is good and how to get it</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-forecasting-span"><span style="color:LightGreen">Forecasting</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-autoregression-span"><span style="color:LightBlue">Autoregression</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-3-span"><span style="color:Orange">Problem 3</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-autoregression-span"><span style="color:LightGreen">Autoregression</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arma-span"><span style="color:LightBlue">ARMA</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arima-span"><span style="color:LightBlue">ARIMA</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-4-span"><span style="color:Orange">Problem 4</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix">Appendix</a></li>
 </ul>
             </nav>
         </div>
@@ -483,8 +521,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="assignment-12-time-series">
-<h1>Assignment 12: Time Series<a class="headerlink" href="#assignment-12-time-series" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-12-time-series-analysis-of-projectile-data">
+<h1>Assignment 12: Time Series Analysis of Projectile Data<a class="headerlink" href="#assignment-12-time-series-analysis-of-projectile-data" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -492,12 +530,629 @@ document.write(`
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.ar_model</span> <span class="kn">import</span> <span class="n">AutoReg</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="problem-1">
-<h2>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this heading">#</a></h2>
+<section id="span-style-color-lightgreen-projectile-data-used-in-this-homework-span">
+<h2><span style="color:LightGreen">Projectile data used in this homework</span><a class="headerlink" href="#span-style-color-lightgreen-projectile-data-used-in-this-homework-span" title="Permalink to this heading">#</a></h2>
+<p>Simulations of the motion of several trapezoid shaped projectiles after having been catapulted from the ground were performed using this <a class="reference external" href="https://github.com/GDS-Education-Community-of-Practice/DSECOP/blob/main/Time_Series_Analysis_and_Forecasting/01_Simulating_Projectile_Motion_with_Drag.ipynb">notebook</a> from the APS Group on Data Science. This is an imagined scenario but takes the simple Newtonian motion of an idealized projectile and considers a more realistic scenario of varied drag.</p>
+<p>This data includes a varied drag coefficient and projectile area for four sides of the object.</p>
+<p>A large number of these runs was simulated and saved in the file <code class="docutils literal notranslate"><span class="pre">launches.csv</span></code>. We begin by loading this file of simulated launches.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load our launch data</span>
+<span class="n">data_location</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/GDS-Education-Community-of-Practice/DSECOP/connor_module/Time_Series_Analysis_and_Forecasting/launches.csv&quot;</span>
+<span class="n">all_launches</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Split into individual launches</span>
+<span class="n">split_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">all_launches</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">all_launches</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># Find where time decreases (signifies different launch)</span>
+<span class="n">split_indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">split_indices</span> <span class="o">+</span> <span class="p">[</span><span class="n">all_launches</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">launches</span> <span class="o">=</span> <span class="p">[</span><span class="n">all_launches</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the sake of simplicity in our time series analysis, we can consider averaging all of the runs to examine the general behavior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Group by the time stamps and average</span>
+<span class="n">all_launches</span> <span class="o">=</span> <span class="n">all_launches</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">all_launches</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">all_launches</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, notice that there are some strange dips in the drag coefficient and area in later times.
+If we look closely at all of the launch data, we can note that some time series are longer than others, thus the averages in later times include 0s for some series.</p>
+<p>Let’s cut out series at the minimum end time for all the launches to try to resolve this issue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># End time for all launches</span>
+<span class="n">end_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">launch</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">launch</span> <span class="ow">in</span> <span class="n">launches</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">end_times</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Ending time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of launches&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Shortest end time</span>
+<span class="n">shortest_end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">end_times</span><span class="p">)</span>
+
+<span class="c1"># Cut our launches</span>
+<span class="n">our_launches</span> <span class="o">=</span> <span class="n">all_launches</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">shortest_end</span><span class="p">]</span>
+
+<span class="n">our_launches</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have a much more consistent approximation of drag and area.</p>
+</section>
+<section id="span-style-color-lightgreen-general-concepts-for-time-series-span">
+<h2><span style="color:LightGreen">General concepts for time series</span><a class="headerlink" href="#span-style-color-lightgreen-general-concepts-for-time-series-span" title="Permalink to this heading">#</a></h2>
+<p>Time series analysis is just the analysis of data that has been collected over a range of time.
+However, due to its importance in fields such as weather, stock markets, geophysics, signal processing, and econometrics, it has developed a unique terminology and specific methods tailored to time dependent data.</p>
+<section id="span-style-color-lightblue-basic-concepts">
+<h3><span style="color:LightBlue">Basic concepts<a class="headerlink" href="#span-style-color-lightblue-basic-concepts" title="Permalink to this heading">#</a></h3>
+<p>Some of the basic ideas that are of interest in time series data are the following:</p>
+<ul class="simple">
+<li><p><em><strong><span style="color:Violet">Trends</span></strong></em>: Is there a general direction of the data?</p></li>
+<li><p><em><strong><span style="color:Violet">Seasonality</span>:</strong></em> Is there a trend that repeats itself on a fixed schedule?</p></li>
+<li><p><em><strong><span style="color:Violet">Cyclical component</span>:</strong></em> Is there a trend that repeats itself outside of a fixed schedule?</p></li>
+<li><p><em><strong><span style="color:Violet">Irregular variation</span></strong></em>: Are there unpredictable and erratic variations in the data?</p></li>
+<li><p><em><strong><span style="color:Violet">Autocorrelation</span></strong></em>: Are observations at a point in time usually similar to observations at a previous point of time (e.g. an observation at time <span class="math notranslate nohighlight">\(t\)</span> is always similar to an observation at <span class="math notranslate nohighlight">\(t-1\)</span>)? This is true if the data has an element of seasonality, but can also be true without seasonality.</p></li>
+</ul>
+<p>Several of these can be illustrated <a class="reference external" href="https://www.section.io/engineering-education/introduction-to-time-series/img.jpg">here</a> as is shown below <img alt="" src="https://www.section.io/engineering-education/introduction-to-time-series/img.jpg" /></p>
+</section>
+<section id="span-style-color-lightblue-seasonality-of-data-span">
+<h3><span style="color:LightBlue">Seasonality of data</span><a class="headerlink" href="#span-style-color-lightblue-seasonality-of-data-span" title="Permalink to this heading">#</a></h3>
+<p>With the above vocabulary in mind, it is common to consider an <strong>ETS decomposition</strong> of the data which is to separate the error, trend, and seasonality of the data.
+There are two common formats for this separation:</p>
+<ol class="arabic simple">
+<li><p><em><strong><span style="color:Violet">Multiplicative</span></strong></em>: data = error <span class="math notranslate nohighlight">\(\times\)</span> trend <span class="math notranslate nohighlight">\(\times\)</span> seasonality</p></li>
+<li><p><em><strong><span style="color:Violet">Additive</span></strong></em>: data = error <span class="math notranslate nohighlight">\(+\)</span> trend <span class="math notranslate nohighlight">\(+\)</span> seasonality</p></li>
+</ol>
+<p>The python packages <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code> contains many time series analysis tools, including some for this decomposition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_launch</span> <span class="o">=</span> <span class="n">launches</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span>
+
+<span class="c1"># Separate error trend and seasonality in additive</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Distance (m)&#39;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span><span class="n">period</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Additive&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, this decomposition was done for the distance data, which has a very obvious trend (distance increases with time).
+The seasonality of the data is almost none existant (see the scale on the y-axis and just look at the data).
+As a result, there may not be much of a use for this decomposition for this variable.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">resid</span></code> plot represents the “residual error,” or the error component of the decomposition meaning how much of the data is not accounted for after removing the trend and seasonal components.
+Though the size of this error is not particularly important for our current case, we don’t want it to have any noticeable pattern, as this would indicate that it is not erratic and unpredictable error but a missing trend or season.</p>
+<p>However, it may be better to consider a variable such as the drag coefficient (which we know has a set rotation and thus some seasonality).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separate error trend and seasonality in additive form</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span><span class="n">period</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Additive&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we arent capturing well the seasonality, so we should adjust the <code class="docutils literal notranslate"><span class="pre">period</span></code> parameter (which represents the hypothesized length of the season in time points).</p>
+</section>
+</section>
+<section id="span-style-color-orange-problem-1-span">
+<h2><span style="color:Orange">Problem 1</span><a class="headerlink" href="#span-style-color-orange-problem-1-span" title="Permalink to this heading">#</a></h2>
+<p>Adjust the <code class="docutils literal notranslate"><span class="pre">period</span></code> parameter of the additive decomposition to capture the seasonality (i.e. the trend line is more flat and the seasonality curve looks like the peaks and valleys of the data) and remake the last plot above with this update.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the season cannot be longer than the data itself. You should also note the scale on the y-axes of the plots (for example, if the trend still looks somewhat periodic but the y-axis is limited to a very small range, that periodicity is not actually very present).
+We also expect a small value for the residual and it shouldn’t have any notable patterns.</p>
+<p>Now that we have captured the seasonality, the trend actually seems somewhat nonexistant - the drag coefficient isn’t increasing or decreasing over time.
+This is what we expect as we know that the object is rotating at a constant rate.</p>
+<p>Let’s consider the multiplicative decomposition as a comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separate error trend and seasonality in multiplicative decomposition</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;multiplicative&#39;</span><span class="p">,</span><span class="n">period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Multiplicative&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that both decompositions are similar.
+The main difference between them is the <code class="docutils literal notranslate"><span class="pre">resid</span></code> plot.
+Let’s stick with the additive decomposition because the residual is significantly smaller.</p>
+<section id="span-style-color-lightblue-automatically-determining-seasonality-span">
+<h3><span style="color:LightBlue">Automatically determining seasonality</span><a class="headerlink" href="#span-style-color-lightblue-automatically-determining-seasonality-span" title="Permalink to this heading">#</a></h3>
+<p>Now, although we just changed the <code class="docutils literal notranslate"><span class="pre">period</span></code> above until we found a good match, we could instead use a test for the seasonality of the data.
+To do so, consider the “autocorrelation” or the relation of values at a certain point in time with values at fixed amounts of time before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use pandas autocorrelation plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">autocorrelation_plot</span><span class="p">(</span><span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Drag coefficient&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this plot, it shows the relationship between observations at a given point in time with those a certain amount of time before (lag).
+So, this plot tells us that the values seem to be positively correlated (similar) with those at specific points before (namely, 10, 20, 30, … time points before).
+This matches our results and makes sense in relation to the rotation of our object, which changes sides every 5 time points, thus arriving back at a side every 20!
+The only reason this isn’t perfectly apparent in the seasonality of the data is because of the added noise.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-lightgreen-smoothing-span">
+<h2><span style="color:LightGreen">Smoothing</span><a class="headerlink" href="#span-style-color-lightgreen-smoothing-span" title="Permalink to this heading">#</a></h2>
+<p>Even after decomposing our data to see trends and seasonality, there is still some erratic error in the variables.
+“Smoothing” out this erratic behavior in the data is a key strategy in time series analysis.</p>
+<section id="span-style-color-lightblue-moving-average-span">
+<h3><span style="color:LightBlue">Moving average</span><a class="headerlink" href="#span-style-color-lightblue-moving-average-span" title="Permalink to this heading">#</a></h3>
+<p>The most common approach to this is the “moving average” which considers the next observation as the mean of the previous <span class="math notranslate nohighlight">\(k\)</span> points:
+$<span class="math notranslate nohighlight">\( \Large
+y_{i} = \frac{1}{k}\sum_{j=1}^k y_{i-j}
+\)</span><span class="math notranslate nohighlight">\(
+The `pandas` library has a convenient function `rolling` which can select a rolling window of \)</span>k$ that we can then average.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of previous points to use in averaging</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Moving average&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Drag coefficient&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because the moving average is using <span class="math notranslate nohighlight">\(k\)</span> points <em>BEFORE</em> the point, we can see that it has shifted the peaks of our data slightly over in time.
+Using only previous points can be necessary if we are looking to predict future values (which we will discuss in the next notebook), but as we are just analyzing previously collected data, we can add the <code class="docutils literal notranslate"><span class="pre">center=True</span></code> parameter to the rolling window collection to consider <span class="math notranslate nohighlight">\(k\)</span> points <em>AROUND</em> the point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Moving average&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Drag coefficient&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This smoothing looks fairly reasonable.
+But notice that each large peak in the data is followed by a smaller peak, which is entirely smoothed out by the moving average.
+Maybe we could use a smoothing that can better keep these smaller features without sacrificing too much smoothing.</p>
+</section>
+<section id="span-style-color-lightblue-exponential-smoothing-span">
+<h3><span style="color:LightBlue">Exponential smoothing</span><a class="headerlink" href="#span-style-color-lightblue-exponential-smoothing-span" title="Permalink to this heading">#</a></h3>
+<p>In the moving average smoothing, it is interesting that it takes an equally weighted average of all <span class="math notranslate nohighlight">\(k\)</span> points previous.
+It would maybe be more reasonable to consider that more recent occurences were more influential and should have more “weight” or consideration in choosing the next point.
+This is the idea of “exponential smoothing.”</p>
+<p>For this, we weight the points by how recent they occurred:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\hat{y}_i = \alpha ~y_i + (1-\alpha)~\hat{y}_{i-1}
+\]</div>
+<p>The smaller the value of <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span>, the more previous points are included, i.e. the smoother the data.</p>
+<p>Again, the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package has a function <code class="docutils literal notranslate"><span class="pre">ewm</span></code> that can provide exponentially weighted observations from our series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exponentially weight our data</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">.4</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compared to the moving average, this method seems to keep some of the smaller features.
+Notably, the smaller peak has survived the smoothing!</p>
+</section>
+</section>
+<section id="span-style-color-lightgreen-stationarity">
+<h2><span style="color:LightGreen">Stationarity<a class="headerlink" href="#span-style-color-lightgreen-stationarity" title="Permalink to this heading">#</a></h2>
+<p>The property of “stationarity” is very important in time series analysis and modeling.
+A “stationary” series is one in which the mean and variance are constant and the series is time-invariant.
+Let’s go through each of these points individually.</p>
+<section id="span-style-color-lightblue-constant-mean-span">
+<h3><span style="color:LightBlue">Constant mean</span><a class="headerlink" href="#span-style-color-lightblue-constant-mean-span" title="Permalink to this heading">#</a></h3>
+<p>If the mean of the series is constant, it does not have a general trend.
+Let’s compare this in our series by looking at the mean of the distance over time and the drag coefficient.
+To do so, assume we have <span class="math notranslate nohighlight">\(N\)</span> points in time.
+We look at the mean of our series <span class="math notranslate nohighlight">\(u\)</span> through time by considering the sample means:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\hat{u}_k = \frac{1}{k}\sum_{i=1}^k u
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(1 \leq k \leq N\)</span>.
+So, we are really looking at the average of all the subseries of length <span class="math notranslate nohighlight">\(k\)</span> starting from the first point for our series of length <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate the subseries length k</span>
+<span class="n">averages</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_launch</span><span class="p">)):</span>
+    <span class="c1"># Average all points up to time point k</span>
+    <span class="n">averages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_launch</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># Plot the average over time for distance and drag coefficient</span>
+<span class="n">distance_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">average</span><span class="p">[</span><span class="s1">&#39;Distance (m)&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">average</span> <span class="ow">in</span> <span class="n">averages</span><span class="p">]</span>
+<span class="n">drag_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">average</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">average</span> <span class="ow">in</span> <span class="n">averages</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_launch</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">distance_means</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">distance_means</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Distance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_launch</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">drag_means</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">drag_means</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Drag coefficient&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average of $k$ series (normalized)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In comparing these two plots, it is apparent that the drag coefficient is much more stationary than the distance.
+This is very intuitive as the distance is an increasing quantity (the projectile just keeps going further) while the drag coefficient is periodic around some specific values.</p>
+<p>Note that the avaerages were “normalized” (divided by the maximum average) in order to make them comparable in size to each other.</p>
+</section>
+<section id="span-style-color-lightblue-constant-variance-span">
+<h3><span style="color:LightBlue">Constant variance</span><a class="headerlink" href="#span-style-color-lightblue-constant-variance-span" title="Permalink to this heading">#</a></h3>
+<p>If the variance of the series is constant, the size of the seasonal peaks are constant through time.
+Let’s compare this in our series by looking at the variance of the height and the area over time.
+This would be to consider the sample variance <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\sigma_k = \frac{1}{k}\sum_{i=2}^k (u - \hat{u}_k)
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(2 \leq k \leq N\)</span>.</p>
+</section>
+</section>
+<section id="span-style-color-orange-problem-2-span">
+<h2><span style="color:Orange">Problem 2</span><a class="headerlink" href="#span-style-color-orange-problem-2-span" title="Permalink to this heading">#</a></h2>
+<p>Repeat the procedure used to compare the mean through time (last plot above) but use instead a calculation of the variance at each point and all previous points through time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Discuss whether the results demonstrate stationarity of the data for the test launch (answer in the cell below).</p>
+<p>Although the stationarity is not as clear in the variance (note for example that it takes some time for the area variance to level off), they both have some element of stationarity to them.
+Of course the variance at the beginning is small for both because there are few sample points, but as time goes on, the seasonal peaks for both are quite stable.
+The height is not actually seasonal, but according to the data, it increases and then returns to zero, so it could have a period the same length as the trajectory.</p>
+<section id="span-style-color-lightblue-time-invariance">
+<h3><span style="color:LightBlue">Time-invariance<a class="headerlink" href="#span-style-color-lightblue-time-invariance" title="Permalink to this heading">#</a></h3>
+<p>If the series is time-invariant, the seasonality of the series follows the same period through time.
+This is not easily observable in our data, but would be easily so if, for example, our object increased or decreased its rotation throughout its trajectory (a very reasonable assumption).</p>
+<p>Even so, let’s compare again the period of seasonality over time for our distance and for our drag coefficient over time.</p>
+<p>To do so, we will calculate the period of seasonality for the length <span class="math notranslate nohighlight">\(k\)</span> subseries using the autocorrelation as was shown in <span class="xref myst">the section on automatically finding seasonality</span>.
+With this, we can determine the lag with the maximum autocorrelation and assume that is our period for the length <span class="math notranslate nohighlight">\(k\)</span> subseries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate the subseries length k</span>
+<span class="n">distance_periods</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">drag_periods</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_launch</span><span class="p">)):</span>
+    <span class="c1"># Find period for subseries time point k</span>
+    <span class="n">dist_autocorr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">autocorrelation_plot</span><span class="p">(</span><span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Distance (m)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">distance_periods</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist_autocorr</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">drag_autocorr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">autocorrelation_plot</span><span class="p">(</span><span class="n">test_launch</span><span class="p">[</span><span class="s1">&#39;Drag coefficient&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">drag_periods</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">drag_autocorr</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plot the periods over time for distance and drag coefficient</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_launch</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">distance_periods</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Distance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_launch</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">drag_periods</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Drag coefficient&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Period of $k$ series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is apparent that neither the distance or drag coefficient data is time invariant.
+Both have the strongest autocorrelation with lag 1, which basically indicates no periodicity.
+There are moments when the drag coefficient shows its periodicity, but that is not constantly visible for subseries of different lengths.</p>
+<p>This is not too big of a problem, but is insightful.</p>
+</section>
+<section id="span-style-color-lightblue-why-stationarity-is-good-and-how-to-get-it">
+<h3><span style="color:LightBlue">Why stationarity is good and how to get it<a class="headerlink" href="#span-style-color-lightblue-why-stationarity-is-good-and-how-to-get-it" title="Permalink to this heading">#</a></h3>
+<p>The key advantage to having a stationary system is that it allows for better forecasting of future events.
+If the mean and variance are constant through time and the series is time-invariant, it basically means that the series is very consitent, making for easy prediction of the future.</p>
+<p>As we’ve seen above, many series do not satisify this property.
+However, it is common to manipulate the series to try to introduce some level of stationarity.</p>
+<p>One simple way to try to enforce stationarity is to subtract a previous lag point that equals the seasonal period from each data point.
+Let’s consider our distance variable, which follows a very consistent trend upward.
+If we take each point and subtract the previous point, we are now only looking at the amount of movement between each time point, which should be much more constant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subtract the previous point from each point in our distance</span>
+<span class="n">stationary_distance</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">stationary_distance</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the series is now centered around 0 and has peaks and valleys of roughly the same height and period through time!
+Great!</p>
+<p>Let’s try with a variable that has much more seasonality such as the area of our object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subtract the previous point from each point in our distance</span>
+<span class="n">stationary_area</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Projectile area (m^2)&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Projectile area (m^2)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">stationary_area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, it seems that there are still some notable patterns for peaks throughout the series, i.e. still some seasonality in the data (notice there is a peak about every 2 seconds).
+Remember from earlier that the period of the area and drag data is about 20 time steps.
+Let’s take the difference of our data with the point 20 time steps before to match our seasonality and see if that helps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subtract the previous point from each point in our distance</span>
+<span class="n">stationary_area</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Projectile area (m^2)&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Projectile area (m^2)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">stationary_area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This now looks much more stationary (no longer has any seasonality patterns or trends).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-lightgreen-forecasting-span">
+<h2><span style="color:LightGreen">Forecasting</span><a class="headerlink" href="#span-style-color-lightgreen-forecasting-span" title="Permalink to this heading">#</a></h2>
+<p>A major topic in time series analysis is forecasting future data.
+For example, if we work for a store that wants to make sure they are well stocked to meet demand for certain products, being able to predict how much of each product is needed in the future is very helpful.
+In the context of physical systems, predicting future states of a system is the gold standard of good modeling and demonstrates that the most important phenomena have been captured.</p>
+<section id="span-style-color-lightblue-autoregression-span">
+<h3><span style="color:LightBlue">Autoregression</span><a class="headerlink" href="#span-style-color-lightblue-autoregression-span" title="Permalink to this heading">#</a></h3>
+<p>The general idea for time series forecasting is to try to take previous time points and somehow combine them to calculate future points.
+Mathematically, this could be written simply as:
+$<span class="math notranslate nohighlight">\( \Large
+u(t_{i}) = f(u(t_{i-1}),u(t_{i-2}),...)
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>u(t_i)<span class="math notranslate nohighlight">\( is our data at some time \)</span>t_i<span class="math notranslate nohighlight">\( and \)</span>f$ is some function that combines all the previous data points.</p>
+<p>If we were given stationary data (or almost stationary), it might be a reasonable assumption to just average the previous points since the average won’t change over time.
+However, the function <span class="math notranslate nohighlight">\(f\)</span> is most commonly considered to be linear:
+$<span class="math notranslate nohighlight">\( \Large
+u(t_i) = f = \sum_{j=1}^i b_j u(t_{j})
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>b_j$ are “weights” for the data points.
+This is intuitive to imagine.
+Consider forecasting sales of a product in September.
+Wouldn’t the sales in August likely be more important than those in January?
+With this in mind, we can give more “weight” to the August point than the January one.</p>
+<p>This assumption gives rise to the first forecasting model we’ll consider called an “autoregressive” or AR model.
+It is written as
+$<span class="math notranslate nohighlight">\( \Large
+u(t_i) = f_{\text{AR}} = \epsilon_i + \sum_{j=1}^p b_j u(t_{i-j})
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\epsilon_i<span class="math notranslate nohighlight">\( is some error term and \)</span>p<span class="math notranslate nohighlight">\( determines how far back in time you want to consider.
+Notice that the only variable to choose here is the lag \)</span>p$.</p>
+<p>We can try this simple model using the Python <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code> time series analysis package.
+For example, let’s predict the second quarter of the distance variable in our test launch.
+We choose the <code class="docutils literal notranslate"><span class="pre">lags</span></code> parameter as the number of points <span class="math notranslate nohighlight">\(p\)</span> we would like to consider.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the model</span>
+<span class="n">half_distance</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">33</span><span class="p">]</span>
+<span class="n">half_height</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">33</span><span class="p">]</span>
+<span class="n">ar</span> <span class="o">=</span> <span class="n">AutoReg</span><span class="p">(</span><span class="n">half_distance</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Find the coefficients b_j</span>
+<span class="n">ar_fitted</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Predict the next steps</span>
+<span class="n">predicted_distance</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">ar_fitted</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">half_distance</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">half_distance</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data_distance</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">33</span><span class="p">:]</span>
+<span class="n">data_height</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">33</span><span class="p">:]</span>
+
+<span class="c1"># Plot the true distance and the predicted</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">half_distance</span><span class="p">,</span> <span class="n">half_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_distance</span><span class="p">,</span> <span class="n">data_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">predicted_distance</span><span class="p">,</span> <span class="n">data_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this, we inputted the first half of the distance data to find the linear weights or parameters <span class="math notranslate nohighlight">\(b_j\)</span>.
+The prediction seems to give a reasonable trend, but drops more quickly than the actual data.</p>
+<p>However, it was fortunate in this case that we were able to capture the downward trend at all.
+Its possible that if we had used less data, the trend may have been even worse.</p>
+</section>
+</section>
+<section id="span-style-color-orange-problem-3-span">
+<h2><span style="color:Orange">Problem 3</span><a class="headerlink" href="#span-style-color-orange-problem-3-span" title="Permalink to this heading">#</a></h2>
+<p>Repeat the previous fitting and predicting using the <code class="docutils literal notranslate"><span class="pre">AutoReg</span></code> class (last plot above) using only the first quarter of the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style="color:Violet">Q</span>: Does it capture the downward trend of the data?</span> (answer in the cell below)</p>
+<p>Note that the trend is captured even worse. At a certain point, the forecast completely freezes (the distance doesn’t increase).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stationary_distance</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+<span class="n">quarter_distance</span> <span class="o">=</span> <span class="n">stationary_distance</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">quarter_height</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">ar</span> <span class="o">=</span> <span class="n">AutoReg</span><span class="p">(</span><span class="n">quarter_distance</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">ar_fitted</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">predicted_distance</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">ar_fitted</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">quarter_distance</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">quarter_distance</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data_distance</span> <span class="o">=</span> <span class="n">stationary_distance</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">16</span><span class="p">:]</span>
+<span class="n">data_height</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">16</span><span class="p">:]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">quarter_distance</span><span class="p">,</span> <span class="n">quarter_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_distance</span><span class="p">,</span> <span class="n">data_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">predicted_distance</span><span class="p">,</span> <span class="n">data_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-lightgreen-autoregression-span">
+<h2><span style="color:LightGreen">Autoregression</span><a class="headerlink" href="#span-style-color-lightgreen-autoregression-span" title="Permalink to this heading">#</a></h2>
+<p>Another popular approach that takes a different perspective (based on stationarity) is to assume that future points will be the average with some added error.
+This is called the “moving-average” or MA model (not to be confused with our earlier exploration of moving averages).
+In this case, the error is considered to be a sum of previous errors so:
+$<span class="math notranslate nohighlight">\( \Large
+u(t_i) = f_{\text{MA}} = \hat{u} + \epsilon_i + \sum_{j=1}^q a_j \epsilon_{i-j}
+\)</span>$</p>
+<section id="span-style-color-lightblue-arma-span">
+<h3><span style="color:LightBlue">ARMA</span><a class="headerlink" href="#span-style-color-lightblue-arma-span" title="Permalink to this heading">#</a></h3>
+<p>Though both AR and MA models are reasonable and popular choices, the most common time series forecasting method is the ARMA method which combines both the AR and MA linear models.
+It can thus be written as:
+$<span class="math notranslate nohighlight">\( \Large
+u(t_i) = \epsilon_i + \sum_{j=1}^p a_j \epsilon_{i-j} + \sum_{j=1}^q b_j u(t_{i-j})
+\)</span>$</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code> package in Python has a convenient class for forecasting with an ARMA model via the <code class="docutils literal notranslate"><span class="pre">ARIMA</span></code> class.
+ARIMA is a slight modification on ARMA that will be discussed momentarily.
+First, below is an example implementing forecasting using ARMA.
+The parameters are <code class="docutils literal notranslate"><span class="pre">ARIMA(p,d,q)</span></code> where <code class="docutils literal notranslate"><span class="pre">p</span></code> is the lag number for errors <span class="math notranslate nohighlight">\(\epsilon_j\)</span> and <code class="docutils literal notranslate"><span class="pre">q</span></code> is the lag number for values <span class="math notranslate nohighlight">\(u(t_j)\)</span>.</p>
+<p>The ARMA model usually assumes stationarity in the data.
+For this reason, we input our data after differencing to make it more stationary.
+As a result, the predictions are the differences between the steps.
+These need to be added up to predict the future state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make our distance variable stationary before fitting the ARMA model</span>
+<span class="n">quarter_distance</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">quarter_height</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">stationary_distance</span> <span class="o">=</span> <span class="n">quarter_distance</span> <span class="o">-</span> <span class="n">quarter_distance</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+
+<span class="c1"># Fit the ARMA model</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">arma</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">stationary_distance</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">q</span><span class="p">))</span>
+<span class="n">arma_fitted</span> <span class="o">=</span> <span class="n">arma</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Forecast future steps</span>
+<span class="n">predicted_distance</span> <span class="o">=</span> <span class="n">arma_fitted</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Take the cummulative sum of the predictions (differences) and add to the last training value</span>
+<span class="n">predicted_distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">predicted_distance</span><span class="p">)</span> <span class="o">+</span> <span class="n">quarter_distance</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>\
+
+<span class="n">data_distance</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">16</span><span class="p">:]</span>
+<span class="n">data_height</span> <span class="o">=</span> <span class="n">test_launch</span><span class="p">[</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">16</span><span class="p">:]</span>
+
+<span class="c1"># Plot the predictions as compared to the true values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">quarter_distance</span><span class="p">,</span> <span class="n">quarter_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_distance</span><span class="p">,</span> <span class="n">data_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">predicted_distance</span><span class="p">,</span> <span class="n">data_height</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Height (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The predicted data seems to follow the path of a projectile with no drag. However, it no longer freezes like we saw with the AR model!</p>
+</section>
+<section id="span-style-color-lightblue-arima-span">
+<h3><span style="color:LightBlue">ARIMA</span><a class="headerlink" href="#span-style-color-lightblue-arima-span" title="Permalink to this heading">#</a></h3>
+<p>The ARMA model doesn’t have a mechanism to adjust for trend or seasonality in the data.
+A slight adjustment to the model that accounts for the trend is to adjust the moving average of the errors <span class="math notranslate nohighlight">\(\epsilon_j\)</span>.
+This is called the autoregressive integrating moving average model or ARIMA.
+It can be written as:
+$<span class="math notranslate nohighlight">\(
+u(t_i) = \epsilon_i + \sum_{j=1}^{p-d} a_j \epsilon_{i-j} + \sum_{j=1}^q b_j u(t_{i-j})
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>d$ is an adjustment for the trend.</p>
+</section>
+</section>
+<section id="span-style-color-orange-problem-4-span">
+<h2><span style="color:Orange">Problem 4</span><a class="headerlink" href="#span-style-color-orange-problem-4-span" title="Permalink to this heading">#</a></h2>
+<p>Adjust the ARMA model example with alternate values of <code class="docutils literal notranslate"><span class="pre">d</span></code> to account for the increasing trend of our distance data and remake the last plot above using your chosen value of <code class="docutils literal notranslate"><span class="pre">d</span></code> that illustrates the desired effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style="color:Violet">Q</span>: Could you find a value that matches the future data better? (answer in the cell below)</p>
+<hr class="docutils" />
+<p>With trend included, the forecasting is much more accurate!</p>
+</section>
+<section id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
+<p><strong>Resources:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/code/prashant111/complete-guide-on-time-series-analysis-in-python">https://www.kaggle.com/code/prashant111/complete-guide-on-time-series-analysis-in-python</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/open-machine-learning-course/open-machine-learning-course-topic-9-time-series-analysis-in-python-a270cb05e0b3">https://medium.com/open-machine-learning-course/open-machine-learning-course-topic-9-time-series-analysis-in-python-a270cb05e0b3</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/the-complete-guide-to-time-series-analysis-and-forecasting-70d476bfe775">https://towardsdatascience.com/the-complete-guide-to-time-series-analysis-and-forecasting-70d476bfe775</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -564,7 +1219,43 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-projectile-data-used-in-this-homework-span"><span style="color:LightGreen">Projectile data used in this homework</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-general-concepts-for-time-series-span"><span style="color:LightGreen">General concepts for time series</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-basic-concepts"><span style="color:LightBlue">Basic concepts</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-seasonality-of-data-span"><span style="color:LightBlue">Seasonality of data</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-1-span"><span style="color:Orange">Problem 1</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-automatically-determining-seasonality-span"><span style="color:LightBlue">Automatically determining seasonality</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-smoothing-span"><span style="color:LightGreen">Smoothing</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-moving-average-span"><span style="color:LightBlue">Moving average</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-exponential-smoothing-span"><span style="color:LightBlue">Exponential smoothing</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-stationarity"><span style="color:LightGreen">Stationarity</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-constant-mean-span"><span style="color:LightBlue">Constant mean</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-constant-variance-span"><span style="color:LightBlue">Constant variance</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-2-span"><span style="color:Orange">Problem 2</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-time-invariance"><span style="color:LightBlue">Time-invariance</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-why-stationarity-is-good-and-how-to-get-it"><span style="color:LightBlue">Why stationarity is good and how to get it</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-forecasting-span"><span style="color:LightGreen">Forecasting</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-autoregression-span"><span style="color:LightBlue">Autoregression</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-3-span"><span style="color:Orange">Problem 3</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-autoregression-span"><span style="color:LightGreen">Autoregression</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arma-span"><span style="color:LightBlue">ARMA</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-arima-span"><span style="color:LightBlue">ARIMA</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-4-span"><span style="color:Orange">Problem 4</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix">Appendix</a></li>
 </ul>
   </nav></div>
 
