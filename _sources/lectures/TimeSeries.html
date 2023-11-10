@@ -525,6 +525,8 @@ document.write(`
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -561,14 +563,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-11-09 00:43:56--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/AirPassengers.csv
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.108.133, 185.199.109.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1746 (1.7K) [text/plain]
-Saving to: ‘./tmp_data/AirPassengers.csv’
-     0K .                                                     100% 18.9M=0s
-2023-11-09 00:43:57 (18.9 MB/s) - ‘./tmp_data/AirPassengers.csv’ saved [1746/1746]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File ‘./tmp_data/AirPassengers.csv’ already there; not retrieving.
 </pre></div>
 </div>
 </div>
@@ -754,10 +749,6 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/site-packages/gwpy/plot/plot.py:287: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-  super().show(warn=warn)
-</pre></div>
-</div>
 <img alt="../../_images/0099515a20a64250463d9caf45dc7acf03ebfa0956dc44ba67253b3e55de81d3.png" src="../../_images/0099515a20a64250463d9caf45dc7acf03ebfa0956dc44ba67253b3e55de81d3.png" />
 </div>
 </div>
@@ -874,7 +865,7 @@ f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6759fdaa31fffcd2bb3cadde0107786e8e7f421f2c5a627cff0b9e22e9ae30c7.svg" src="../../_images/6759fdaa31fffcd2bb3cadde0107786e8e7f421f2c5a627cff0b9e22e9ae30c7.svg" /></div>
+<img alt="../../_images/dff7e0f1a86b046cce602124551709198ec1f42b01ace476b3b9a1c1d9c09393.svg" src="../../_images/dff7e0f1a86b046cce602124551709198ec1f42b01ace476b3b9a1c1d9c09393.svg" /></div>
 </div>
 <p>We now show how to calculate the <span class="math notranslate nohighlight">\(a_n\)</span>. Let’s change our Fourier Series Equation</p>
 <div class="math notranslate nohighlight">
@@ -930,7 +921,7 @@ a_n =\frac{2}{n\pi}\sin \left(n \omega_0 \frac{\pi}{2} \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/968cb8e9b625be64012ea56208b0378e2c6062b5ee8d0f15ab3054cfc8df3b00.svg" src="../../_images/968cb8e9b625be64012ea56208b0378e2c6062b5ee8d0f15ab3054cfc8df3b00.svg" /></div>
+<img alt="../../_images/c1862bf3e90caa49ab9355b7e461efe78cebf85c66053334db31a117851c36e9.svg" src="../../_images/c1862bf3e90caa49ab9355b7e461efe78cebf85c66053334db31a117851c36e9.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-fourier-transform-span">
@@ -1052,7 +1043,7 @@ F(k) = B \text{sinc}(kB/2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5634b203bf115e3b18ed2ed9a0307bfb91228b1016d78f3c992d23d600bed47c.svg" src="../../_images/5634b203bf115e3b18ed2ed9a0307bfb91228b1016d78f3c992d23d600bed47c.svg" /></div>
+<img alt="../../_images/10f1e86c7b8621bf3e9edb1205998a22e9e3106c0c041f0c052c3821a659df0b.svg" src="../../_images/10f1e86c7b8621bf3e9edb1205998a22e9e3106c0c041f0c052c3821a659df0b.svg" /></div>
 </div>
 </section>
 </section>
@@ -1118,7 +1109,7 @@ f_{Nyq} = 2\cdot f_{natural} \rightarrow f_s \geq f_{Nyq}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d19e871f5766e70d24aa77c0c027b92210daef8e14544b0e9eeed65c45dc4015.svg" src="../../_images/d19e871f5766e70d24aa77c0c027b92210daef8e14544b0e9eeed65c45dc4015.svg" /></div>
+<img alt="../../_images/3945cd9f93ae648bd5f8350bbe308e10a00657ff5a03ec0bcca3662cc3849ae0.svg" src="../../_images/3945cd9f93ae648bd5f8350bbe308e10a00657ff5a03ec0bcca3662cc3849ae0.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-orange-auto-correlation-span">
@@ -1149,7 +1140,7 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/adfc2fa241ca694ee94c9942a162da2d774515c4e4301acad5211cd32b8b6908.svg" src="../../_images/adfc2fa241ca694ee94c9942a162da2d774515c4e4301acad5211cd32b8b6908.svg" /></div>
+<img alt="../../_images/ee81279a148f5eb7d92c680eb7ba0f77c9f56158bf366f1c5cac066554a19bf6.svg" src="../../_images/ee81279a148f5eb7d92c680eb7ba0f77c9f56158bf366f1c5cac066554a19bf6.svg" /></div>
 </div>
 <p>Since all the values are positive, we can show this on both sides of the Y axis to emphasize the growth.</p>
 <div class="cell docutils container">
@@ -1168,7 +1159,7 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/13014e449be079aa2bbd15c8c0da8651210b5869567b923f03cfccbd9ff62180.svg" src="../../_images/13014e449be079aa2bbd15c8c0da8651210b5869567b923f03cfccbd9ff62180.svg" /></div>
+<img alt="../../_images/6e041d96ad4dfb8ed6925ad7290be24776861ca8afa11fb1e9f0c7267bbf95ee.svg" src="../../_images/6e041d96ad4dfb8ed6925ad7290be24776861ca8afa11fb1e9f0c7267bbf95ee.svg" /></div>
 </div>
 <p>It can be seen that its a monthly time series and follows a certain repetitive pattern every year. So, we could plot each year as a separate line in the same plot, which would let us compare the year wise patterns side-by-side.</p>
 <p>The common way to test for seasonality of a time series is to plot the series and check for repeatable patterns in fixed time intervals. So, the types of seasonality is determined by the clock or the calendar.</p>
@@ -1192,7 +1183,7 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0fbf3991604f796d6012effc8aa975a3f601eab9b6ef2a4bb1045c0a5d609cb0.svg" src="../../_images/0fbf3991604f796d6012effc8aa975a3f601eab9b6ef2a4bb1045c0a5d609cb0.svg" /></div>
+<img alt="../../_images/a3e3eb9cae4b069cbf510d268b3bfa8440af3fefa2a000d5c48170c25add7cbe.svg" src="../../_images/a3e3eb9cae4b069cbf510d268b3bfa8440af3fefa2a000d5c48170c25add7cbe.svg" /></div>
 </div>
 <section id="span-style-color-lightblue-autocorrelation-and-partial-autocorrelation-functions-span">
 <h3><span style="color:LightBlue">Autocorrelation and Partial Autocorrelation Functions</span><a class="headerlink" href="#span-style-color-lightblue-autocorrelation-and-partial-autocorrelation-functions-span" title="Permalink to this heading">#</a></h3>
@@ -1239,7 +1230,7 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/73c0b32fd98c9946c90bdf591efcd77b08d08236db0d2a6fe1172f09f5729019.svg" src="../../_images/73c0b32fd98c9946c90bdf591efcd77b08d08236db0d2a6fe1172f09f5729019.svg" /><img alt="../../_images/c7ea665ccd5d9867d72507e81db8e76bb85517247174f9b29052c48be4916b55.svg" src="../../_images/c7ea665ccd5d9867d72507e81db8e76bb85517247174f9b29052c48be4916b55.svg" /></div>
+<img alt="../../_images/314158be1a992272f073259a144f5a6f238fd21a6e1e805de76f3ff49f59ec75.svg" src="../../_images/314158be1a992272f073259a144f5a6f238fd21a6e1e805de76f3ff49f59ec75.svg" /><img alt="../../_images/f2b28058fada8284f5fe9dd3df9aa44a8386f8f6f5e29378b3b8e4f075f11ab0.svg" src="../../_images/f2b28058fada8284f5fe9dd3df9aa44a8386f8f6f5e29378b3b8e4f075f11ab0.svg" /></div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(y\)</span>-axis in the ACF plot is the amount of correlation at each lag <span class="math notranslate nohighlight">\(k\)</span>. The shaded red region is a confidence interval - if the height of the bars is outside this region, it means the correlation is statistically significant. When a clear trend exists in a time series, the autocorrelation tends to be high at small lags like 1 or 2. When seasonality exists, the autocorrelation goes up periodically at larger lags.</p>
 <p>The only difference autocorrelation and partial autocorrelation is the way that the method accounts for the effect that intervening lags have. For example, at lag 3, partial autocorrelation removes the effect lags 1 and 2 have on computing the correlation.</p>
@@ -1265,7 +1256,7 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f371eda50bee049afb6d83746b324cee34736cf638ddaa0a3599463d744aaccf.svg" src="../../_images/f371eda50bee049afb6d83746b324cee34736cf638ddaa0a3599463d744aaccf.svg" /></div>
+<img alt="../../_images/fb82815467c57805b3747846fe9fe2660629521f402fd59367e6f30d5eb4a936.svg" src="../../_images/fb82815467c57805b3747846fe9fe2660629521f402fd59367e6f30d5eb4a936.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-cross-correlation-span">
@@ -1531,7 +1522,7 @@ Name: Close, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/83ffb90e05967e6cb6b5f32aee70a26a540800ee629a80813160f2176b53ad04.svg" src="../../_images/83ffb90e05967e6cb6b5f32aee70a26a540800ee629a80813160f2176b53ad04.svg" /></div>
+<img alt="../../_images/4a61ab0e389058312997cfb08ae3139de3aa8f0e9ab1e869622a279cb18ebe30.svg" src="../../_images/4a61ab0e389058312997cfb08ae3139de3aa8f0e9ab1e869622a279cb18ebe30.svg" /></div>
 </div>
 <p>Now we can proceed to building our first time series model, the Autoregressive Moving Average.</p>
 <p><em><strong>Splitting Data for Training and Testing</strong></em></p>
@@ -1554,7 +1545,7 @@ Name: Close, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d63908cdab0c262d7bb159811a95a09bd9cf7ab0e40ef9167cf55e5466cde164.svg" src="../../_images/d63908cdab0c262d7bb159811a95a09bd9cf7ab0e40ef9167cf55e5466cde164.svg" /></div>
+<img alt="../../_images/58c7b0757d3e43c7c9eb1510c1677df28dfb5a53f134cc6e999cf50d5c5fe267.svg" src="../../_images/58c7b0757d3e43c7c9eb1510c1677df28dfb5a53f134cc6e999cf50d5c5fe267.svg" /></div>
 </div>
 <p><em><strong>Autoregressive Moving Average (ARMA)</strong></em></p>
 <p>The term “autoregressive” in ARMA means that the model uses past values to predict future ones. Specifically, predicted values are a weighted linear combination of past values. This type of regression method is similar to linear regression, with the difference being that the feature inputs here are historical values.</p>
@@ -1668,7 +1659,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/07b1ef1fdac03005b6db835c083dd2d52ead90f72f9109451d1bc51bea394298.svg" src="../../_images/07b1ef1fdac03005b6db835c083dd2d52ead90f72f9109451d1bc51bea394298.svg" /></div>
+<img alt="../../_images/e686c004a56c4832f615ca6b274594ca1cc774e2cdf4696a44d913b24d9a1cf1.svg" src="../../_images/e686c004a56c4832f615ca6b274594ca1cc774e2cdf4696a44d913b24d9a1cf1.svg" /></div>
 </div>
 <p>We can also evaluate the performance using the root mean-squared error:</p>
 <div class="cell docutils container">
@@ -1748,7 +1739,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Train/Test split for BTC Data&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/9f2d3542e22fb27e454415fca0ef25f585419c767ea2b9c5a89ff593b0fe8b96.svg" src="../../_images/9f2d3542e22fb27e454415fca0ef25f585419c767ea2b9c5a89ff593b0fe8b96.svg" /></div>
+<img alt="../../_images/59127dfdb79158f1a1a8b7f2003d73a937b67d66576435845b2461f315e380ea.svg" src="../../_images/59127dfdb79158f1a1a8b7f2003d73a937b67d66576435845b2461f315e380ea.svg" /></div>
 </div>
 <p>We see that the ARIMA predictions (in yellow) fall on top of the ARMA predictions. Let’s try increasing the differencing parameter to ARIMA (2,3,2):</p>
 <div class="cell docutils container">
@@ -1774,8 +1765,6 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
   self._init_dates(dates, freq)
 /usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
   self._init_dates(dates, freq)
-/usr/local/lib/python3.11/site-packages/statsmodels/tsa/statespace/sarimax.py:978: UserWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
-  warn(&#39;Non-invertible starting MA parameters found.&#39;
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE:  3224.970643199179
@@ -1805,7 +1794,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Train/Test split for BTC Data&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/ffa1ddce6e0a0bf96d42c1dab0dbc7e0bcd3fbc90aa91b6b91ae6457339d821f.svg" src="../../_images/ffa1ddce6e0a0bf96d42c1dab0dbc7e0bcd3fbc90aa91b6b91ae6457339d821f.svg" /></div>
+<img alt="../../_images/ccef9e4325b584419b8519e91a5ab2206304306f4434b5ef07822d7ccb140770.svg" src="../../_images/ccef9e4325b584419b8519e91a5ab2206304306f4434b5ef07822d7ccb140770.svg" /></div>
 </div>
 <p>We see this helps capture the increasing price direction. Let’s try playing with the parameters even further with ARIMA(6,5,2):</p>
 <div class="cell docutils container">
@@ -1831,8 +1820,6 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
   self._init_dates(dates, freq)
 /usr/local/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
   self._init_dates(dates, freq)
-/usr/local/lib/python3.11/site-packages/statsmodels/tsa/statespace/sarimax.py:978: UserWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
-  warn(&#39;Non-invertible starting MA parameters found.&#39;
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE:  1409.74704737552
@@ -1858,7 +1845,57 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Train/Test split for BTC Data&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/751b13f794a0b41dd32fdd581e2efc8f4962192cadd792727ef8bd84cf5a442a.svg" src="../../_images/751b13f794a0b41dd32fdd581e2efc8f4962192cadd792727ef8bd84cf5a442a.svg" /></div>
+<img alt="../../_images/fa81c7bb51440931718c0e36691f168ee7d3279ac9ad08ddcc9ca6e2c904f6fd.svg" src="../../_images/fa81c7bb51440931718c0e36691f168ee7d3279ac9ad08ddcc9ca6e2c904f6fd.svg" /></div>
+</div>
+<hr class="docutils" />
+<p>For amusement and illustration of the limitations of time series forecasting, the plot below includes Bitcoin price data including data after the predictions we made previously and up to November 8, 2023</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc_now</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2018-01-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2023-11-08&quot;</span><span class="p">)[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%%**********************]  1 of 1 completed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc_now</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;tmp_data/btc_now.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc_now</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;tmp_data/btc_now.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc_now</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">btc_now</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1">#train_now = btc_now[btc_now.index &lt; pd.to_datetime(&quot;2023-11-09&quot;, format=&#39;%Y-%m-%d&#39;)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">btc_now</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;BTC-USD&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ARIMA Predictions&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BTC Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4d811beadb726d66a13a6202379487b1952f255a594f157dc2e4295ab7767d59.svg" src="../../_images/4d811beadb726d66a13a6202379487b1952f255a594f157dc2e4295ab7767d59.svg" /></div>
 </div>
 </section>
 </section>
