@@ -14,4 +14,4 @@ You will learn about Monte Carlo and sampling methods
 * {doc}`homework/Homework_13`
 
 ## *Supplemental Readings*
-* None
+* [Monte Carlo Integration](https://cs.dartmouth.edu/~wjarosz/publications/dissertation/appendixA.pdf)
