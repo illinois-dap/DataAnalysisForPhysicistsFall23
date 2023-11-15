@@ -498,6 +498,20 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-vegas-method-span"><span style="color:LightBlue">Vegas Method</span></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span"><span style="color:Orange">Markov Chains and MCMC: A Brief Review</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-algorithm-span"><span style="color:LightGreen">Metropolis Algorithm</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-2d-ising-model-span"><span style="color:Orange">2D Ising Model</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span"><span style="color:LightGreen">Ising Hamiltonian for a Ferromagnetic 2D System</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span"><span style="color:LightGreen">Metropolis-Hastings Algorithm Walk-through</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span"><em><strong>Step 0</strong></em>: <span style="color:Tan">Initialize the lattice and the simulation</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-span-style-color-tan-select-an-atom-in-the-system-span"><em><strong>Step 1</strong></em>: <span style="color:Tan">Select an atom in the system</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-5-span-style-color-tan-see-the-code-comments-span"><em><strong>Step 2 - 5</strong></em>: <span style="color:Tan">See the code comments</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 </ul>
             </nav>
@@ -520,7 +534,12 @@ document.write(`
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span> 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span> <span class="c1"># prints a nice loading bar for the notebook</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span> <span class="c1"># prints a nice loading bar for the notebook</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -1195,6 +1214,417 @@ C \int\limits_{-1}^{1} ~dx_0 ~ \int\limits_{0}^{1} ~dx_1 ~ \int\limits_{0}^{1} ~
 </section>
 </section>
 <hr class="docutils" />
+<section id="span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span">
+<h2><span style="color:Orange">Markov Chains and MCMC: A Brief Review</span><a class="headerlink" href="#span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov chain Monte Carlo (MCMC)</a> is a powerful class of methods to sample from probability distributions known only up to an (unknown) normalization constant.</p>
+<p>Recall the utility of such sampling: this is useful when you are either interested in the samples themselves (for example, inferring unknown parameters in Bayesian inference) or you need them to approximate expected values of functions w.r.t. to a probability distribution (for example, calculating thermodynamic quantities from the distribution of microstates in statistical physics). Sometimes, only the mode of a probability distribution is of primary interest. In this case, it’s obtained by numerical optimization so full sampling is not necessary.</p>
+<p>It turns out that sampling from any but the most basic probability distributions is a difficult task. <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">Inverse transform sampling</a> is an elementary method to sample from probability distributions, but requires the cumulative distribution function, which in turn requires knowledge of the, generally unknown, normalization constant. Now in principle, you could just obtain the normalization constant by numerical integration, but this quickly gets infeasible with an increasing number of dimensions. <a class="reference external" href="https://en.wikipedia.org/wiki/Rejection_sampling">Rejection sampling</a> does not require a normalized distribution, but efficiently implementing it requires a good deal of knowledge about the distribution of interest, and it suffers strongly from the curse of dimensionality, meaning that its efficiency decreases rapidly with an increasing number of variables. That’s when you need a smart way to obtain representative samples from your distribution which doesn’t require knowledge of the normalization constant. MCMC algorithms are a class of methods which do exactly that.</p>
+<p>Recall that a Markov chain is a random sequence of states in some state space in which the probability of picking a certain state next depends only on the current state in the chain and not on the previous history: it is memory-less.</p>
+<p>Under certain conditions, a Markov chain has a unique stationary distribution of states to which it will converge after a certain number of states. From that number on, states in the Markov chain will be distributed according to the invariant distribution.
+MCMC algorithms work by constructing a Markov chain with the probability distribution you want to sample from as the stationary distribution.</p>
+<p>In order to sample from a distribution <span class="math notranslate nohighlight">\(f(x)\)</span>, a MCMC algorithm constructs and simulates a Markov chain whose stationary distribution is <span class="math notranslate nohighlight">\(f(x)\)</span>, meaning that, after an initial “burn-in” phase, the states of that Markov chain are distributed according to <span class="math notranslate nohighlight">\(f(x)\)</span>. We thus just have to store the states to obtain samples from <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Sampling weather states</p>
+<p>Now just for fun (and for illustration), let’s quickly whip up a Markov chain which has a unique stationary distribution. Let’s for now consider both a discrete state space and discrete “time”. The key quantity characterizing a Markov chain is the transition operator <span class="math notranslate nohighlight">\(T(x_{i+1}|x_i)\)</span> which gives you the probability of being in state <span class="math notranslate nohighlight">\(x_{i+1}\)</span> at time <span class="math notranslate nohighlight">\(i+1\)</span> given that the chain is in state <span class="math notranslate nohighlight">\(x_i\)</span> at time <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The Markov chain will hop around on a discrete state space which is made up from three weather states:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_space</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;sunny&quot;</span><span class="p">,</span> <span class="s2">&quot;cloudy&quot;</span><span class="p">,</span> <span class="s2">&quot;rainy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a discrete state space, the transition operator is just a matrix.
+Columns and rows correspond, in our case, to sunny, cloudy, and rainy weather.
+We pick more or less sensible values for all transition probabilities:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transition_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The rows indicate the states the chain might currently be in and the columns the states the chains might transition to.
+If we take one “time” step of the Markov chain as one hour, then, if it’s sunny, there’s a 60% chance it stays sunny in the next hour, a 30% chance that in the next hour we will have cloudy weather and only a 10% chance of rain immediately after it had been sunny before.
+This also means that each row has to sum up to one.</p>
+<p>Now that wee have defined all of these transition probabilities we have made a Markov chain such as the one below.</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/MonteCarloSampleMethods-MC_weather.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/MonteCarloSampleMethods-MC_weather.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/MonteCarloSampleMethods-MC_weather.png" style="width: 400px;" /></a></img><br></p>
+<p>Let’s run our Markov chain for a while:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="n">transition_matrix</span><span class="p">[</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+<span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can monitor the convergence of our Markov chain to its stationary distribution by calculating the empirical probability for each of the states as a function of chain length:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">despine</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">spines</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">spines</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_space</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">offsets</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">states</span><span class="p">[:</span><span class="n">offset</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">offset</span> 
+            <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">offsets</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;number of steps&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;empirical probability&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">despine</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Next we provide a brief review on how to use Markov Chain Monte Carlo (MCMC) to compute expectation values, and contrast with Monte Carlo integration. In statistics, we study the properties of random variables <span class="math notranslate nohighlight">\(x\)</span> and their probability distributions <span class="math notranslate nohighlight">\(P(x)\)</span>.  We often care about computing expectation values of functions of the random variable such as
+$<span class="math notranslate nohighlight">\( \Large
+\langle f(x) \rangle = \sum_x f(x) P(x)
+\)</span>$</p>
+<p>In general, the probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span> can be very complicated and difficult to sample efficiently. In this case, we can use Markov chains to represent the probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span>.   It is possible to pick the transition probabilities of the Markov chain so that the chain’s equilibrium probability distribution is the desired probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span>. Once we have a correctly defined Markov chain, we can sample it to obtain a set of sampled states <span class="math notranslate nohighlight">\(x_1,x_2,...,x_T\)</span>.  These sampled states can be used to estimate expectation values in the following way
+$<span class="math notranslate nohighlight">\( \Large
+\langle f(x) \rangle \approx \frac{1}{T_{max}} \sum_{t=1}^{T_{max}} f(x_t)
+\)</span>$</p>
+<p>This should look familiar! However, you should be clear on the distinction between Monte Carlo and Markov chains:</p>
+<ul class="simple">
+<li><p>Monte Carlo methods are ways to evaluate integrals using random numbers.</p></li>
+<li><p>Markov chains are used to sample complicated probability distributions.</p></li>
+</ul>
+<p>When Monte Carlo is used to integrate a probability distribution specified by a Markov chain, then it is called <span style="color:Violet">Markov Chain Monte Carlo</span>.</p>
+<section id="span-style-color-lightgreen-metropolis-algorithm-span">
+<h3><span style="color:LightGreen">Metropolis Algorithm</span><a class="headerlink" href="#span-style-color-lightgreen-metropolis-algorithm-span" title="Permalink to this heading">#</a></h3>
+<p>Markov Chain Monte Carlo methods date back to a <a class="reference external" href="https://pdfs.semanticscholar.org/7b3d/c9438227f747e770a6fb6d7d7c01d98725d6.pdf">seminal paper by Metropolis et al.</a>, who developed the first MCMC algorithm, correspondingly called <a class="reference external" href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm">Metropolis algorithm</a>. It was proposed in 1953 by Edward Teller, Nicholas Metropolis, and others at Los Alamos National Laboratory in New Mexico during the early days of scientific computing. Teller and his physics colleagues were interested in using MCMC to calculate the thermodynamic properties of a weakly interacting classical gas, which was very difficult to calculate analytically. Impressively, more than half a century after its introduction, Metropolis MCMC is still in wide use today in many areas of science, engineering, and statistics.</p>
+<p>The <span style="color:Violet">Metropolis algorithm</span> samples a Markov chain by proposing moves between states, which are then either accepted or rejected according to a specific criterion. These proposed moves are chosen so that the Markov chain’s transition probabilities give the correct equilibrium distribution4. In general, Metropolis Markov chain sampling of a probability distribution <span class="math notranslate nohighlight">\(P(S)\)</span> works as follows:</p>
+<ol class="arabic simple">
+<li><p>Start at a state <span class="math notranslate nohighlight">\(𝑆_t\)</span>.</p></li>
+<li><p>Propose a move to a new state <span class="math notranslate nohighlight">\(S'\)</span> based on the current state <span class="math notranslate nohighlight">\(S_t\)</span>.</p></li>
+<li><p>Choose a uniform random number <span class="math notranslate nohighlight">\(r\)</span> between 0 and 1.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(r&lt;P(S')/P(S_t)\)</span> then accept the proposed move and transition to state <span class="math notranslate nohighlight">\(S'\)</span> so that <span class="math notranslate nohighlight">\(S_{t+1}=S'\)</span>. Otherwise, reject the move and stay at state <span class="math notranslate nohighlight">\(S_t\)</span> so that <span class="math notranslate nohighlight">\(S_{t+1}=S_t\)</span>.</p></li>
+<li><p>Increment <span class="math notranslate nohighlight">\(t\)</span> and repeat.</p></li>
+</ol>
+<p>This Markov chain’s samples <span class="math notranslate nohighlight">\(S_1,...S_{T_{max}}\)</span> are then used to estimate expectation values <span class="math notranslate nohighlight">\(\langle f(S) \rangle\)</span> in the way  discussed in the previous section. We will use this general Metropolis MCMC framework to sample the Boltzmann distribution, an important probability distribution in thermal physics.</p>
+</section>
+</section>
+<section id="span-style-color-orange-2d-ising-model-span">
+<h2><span style="color:Orange">2D Ising Model</span><a class="headerlink" href="#span-style-color-orange-2d-ising-model-span" title="Permalink to this heading">#</a></h2>
+<section id="span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span">
+<h3><span style="color:LightGreen">Ising Hamiltonian for a Ferromagnetic 2D System</span><a class="headerlink" href="#span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span" title="Permalink to this heading">#</a></h3>
+<p><em>Note: For a very good reference on this derivation (and where much of this notation comes from), <a class="reference external" href="https://farside.ph.utexas.edu/teaching/329/lectures/node110.html">see here</a>.  Other good references can be found in the “Additional Readings” section.</em></p>
+<p>Consider a system of ferromagnetic atoms, where each atom initially has spin up (+1) or down (-1).  Ferromagnetic means that the system wants to align all of the spins in the same direction to minimize energy, so that all of the spins should be up or all of the spins should be down.  If the net-magnetization of the system is zero, all of the spins cancel each other out.  If the net-magnetization of the system is greater than zero, then some percentage of the magnetic spins are aligned.</p>
+<p>We want to be able to study the phase transition of the system from disordered (spins randomly oriented) to ordered (spins aligned), and vice versa. In order to do this, let’s arrange the spins onto the grid points of a lattice as shown in the figure below.  Note that the picture shown is for a 2D system, but any useful dimensionality can be done.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code to show an example lattice with non-interacting spins</span>
+<span class="n">spin_up_or_down</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Up&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Down&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure 1. Lattice with non-interacting atoms on grid points&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To determine the energy of the <span class="math notranslate nohighlight">\(i^{th}\)</span> atom in the system above, we start with the energy of the atom in a magnetic field</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\epsilon_i = \mu H \sigma_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the atomic magnetic moment, <span class="math notranslate nohighlight">\(H\)</span> is an applied magnetic field, and the <span class="math notranslate nohighlight">\(\sigma\)</span> operator “measures” the spin of the atom and returns value <span class="math notranslate nohighlight">\(+1\)</span> for spin up or <span class="math notranslate nohighlight">\(-1\)</span> for spin down.</p>
+<p>Next, lets add a nearest-neighbors interaction between the particles, with strength <span class="math notranslate nohighlight">\(J\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code to show add nearest-neighbors interactions to the above figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Up&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Down&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure 2. Adding Nearest Neighbor Interactions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To include the energy from each site interacting with the <span class="math notranslate nohighlight">\(i\)</span>th atom, we can update the above expression:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\epsilon_i = -\frac{1}{2}~J\sum_{j\in[1,4]} \sigma_i \sigma_j + \mu H \sigma_i
+\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p>the <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> factor ensures that we don’t double count the contributions from neighboring atoms.</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span> is the coupling between nearest neighbors (the gray lines in Figure 2)</p></li>
+<li><p>The negative sign “<span class="math notranslate nohighlight">\(-\)</span>” in front of the <span class="math notranslate nohighlight">\(J\)</span> means that this is a ferromagnetic system</p></li>
+<li><p><span class="math notranslate nohighlight">\(j\)</span> means that only four nearest neighbors for each atom in the above Figure will be included in the calculation</p></li>
+</ul>
+<p>It’s important to note here, that the <span class="math notranslate nohighlight">\(\sigma_i\)</span> term can be pulled out of the sum and we can divide by the magnetic moment <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\mu = -\frac{1}{2 \mu}J \sigma_i \sum_{j\in[1,4]} \sigma_j
+\]</div>
+<p>So that the total energy for the <span class="math notranslate nohighlight">\(i^\text{th}\)</span> spin can be written as</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\epsilon_i = \mu \sigma H_{eff}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+H_{eff} = -\frac{1}{2 \mu}J \sum_{j\in[1,4]} \sigma_j + H
+\]</div>
+<p>which means that for atom <span class="math notranslate nohighlight">\(i\)</span>, the only difference in energy for the atom in a spin up state or spin down state is a <span class="math notranslate nohighlight">\(+\)</span> or <span class="math notranslate nohighlight">\(-\)</span> sign:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\Large \epsilon_i\{\sigma_i, \uparrow \} = - \epsilon_i\{\sigma_i, \downarrow \}
+\]</div>
+<p>To get the total energy for the system, we sum over all the measured of the observed energies:</p>
+<p>$<span class="math notranslate nohighlight">\( \Large
+E = \sum_i \epsilon_i
+\)</span>$.</p>
+<p>Using this Hamiltonian, we want to understand the expected spin value given the temperature of the system. The probability <span class="math notranslate nohighlight">\(p\)</span> that a spin has a particular value can be calculated using the <a class="reference external" href="https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Kinetics/03%3A_Rate_Laws/3.01%3A_Gas_Phase_Kinetics/3.1.02%3A_Maxwell-Boltzmann_Distributions">Maxwell-Boltzmann distribution</a></p>
+<div class="math notranslate nohighlight">
+\[ \Large
+p_{i,\pm} = \frac{e^{\mp \epsilon_i/k_BT}}{\sum_i e^{\epsilon_i /k_B T}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is the energy of the atom, and <span class="math notranslate nohighlight">\(k_BT\)</span> is the energy environment (also referred to as a temperature bath) of the atom.  The denominator of the fraction normalizes the probability distribution, so that there is a max probability of 1.</p>
+<p>The average value of the magnetic moment of the atom for a given temperature is</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\langle \mu \rangle = \frac{\mu p_+ + (-\mu)p_-}{p_+ + p_-}
+\]</div>
+<p>After plugging in the expression for the probability and evaluating the <span class="math notranslate nohighlight">\(\sigma_i\)</span> operators appropriately, we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Large
+~~~~~~~~~~\langle \mu \rangle = \mu \frac{e^{- \mu H/k_BT} - e^{+ \mu H /k_BT}}{e^{- \mu H/k_BT} + e^{+ \mu H/k_BT}} \\
+= \mu \tanh(\frac{\mu H}{k_B T})
+\end{split}\]</div>
+<p>This is not an expression we can solve <strong>analytically</strong>, <span style="color:Violet">but it can be solved numerically</span>.</p>
+</section>
+<section id="span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span">
+<h3><span style="color:LightGreen">Metropolis-Hastings Algorithm Walk-through</span><a class="headerlink" href="#span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span" title="Permalink to this heading">#</a></h3>
+<p>This algorithm has multiple variations in addition to “<a class="reference external" href="https://pubs.aip.org/aip/jcp/article-abstract/21/6/1087/202680/Equation-of-State-Calculations-by-Fast-Computing?redirectedFrom=fulltext">Metropolis-Hastings</a>”, such as “<a class="reference external" href="https://machinelearningmastery.com/simulated-annealing-from-scratch-in-python/">Stochastic Simulated Annealing</a>” and “<a class="reference external" href="https://link.springer.com/article/10.1007/s10898-011-9838-3">Sequential Simulated Annealing</a>”.  The “simulated annealing” comes from the idea that the system begins in a random state that is equivalent to the system being at infinitely high temperature. The system is then “submerged” into a bath of temperature <span class="math notranslate nohighlight">\(T\)</span> where <span class="math notranslate nohighlight">\(T\)</span> is a finite temperature that “cools” the system off.</p>
+<hr class="docutils" />
+<ol class="arabic simple" start="0">
+<li><p>Initialize the system with the following variables:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: temperature of the “bath” which will anneal the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: the size of the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(s\)</span>: the state of each particle in the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span>: the coupling between particles in the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span>: the applied magnetic field</p></li>
+</ul>
+</li>
+<li><p>Select an atom in the system</p></li>
+<li><p>Calculate the energy <span class="math notranslate nohighlight">\(e_i\)</span> of that atom</p></li>
+<li><p>Determine if changing the spin of the atom would decrease the energy</p></li>
+<li><p>If it decreases the energy <strong>OR</strong> if the probability of the state in the Boltzmann distribution is greater than a sample from a uniform probability distribution, then change the spin state of the atom.</p></li>
+<li><p>Continue with steps 1-4 until the stopping criteria is met.</p></li>
+<li><p>Return to step 0 and re-initialize the system with different variables as desired.</p></li>
+</ol>
+<hr class="docutils" />
+<p>Let’s go through these steps in code:</p>
+<section id="step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span">
+<h4><em><strong>Step 0</strong></em>: <span style="color:Tan">Initialize the lattice and the simulation</span><a class="headerlink" href="#step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span" title="Permalink to this heading">#</a></h4>
+<p>We want a square, 10x10 lattice (N = 100). By calling the <code class="docutils literal notranslate"><span class="pre">np.random.uniform()</span></code> function, I know I will get an uniform distribution of values between 0 and 1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we want to prepare the system into spin up and spin down</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span><span class="p">[</span><span class="n">lattice</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># any values greater than 0.5, I set equal to 1</span>
+<span class="n">lattice</span><span class="p">[</span><span class="n">lattice</span> <span class="o">!=</span><span class="mi">1</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span> <span class="c1"># anything I don&#39;t change before, I make equal to -1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Last thing for the lattice is to visually check and see if everything turned out okay.  Every value in the lattice should be <span class="math notranslate nohighlight">\(+1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we are going to create a temperature variable. In the equations above, the inverse temperature is represented by <span class="math notranslate nohighlight">\(1/k_B T\)</span>, where <span class="math notranslate nohighlight">\(k_B\)</span> is the Boltzmann constant. If <span class="math notranslate nohighlight">\(T = \inf\)</span>, then the inverse temperature will zero, and if <span class="math notranslate nohighlight">\(T=0\)</span> then the inverse temperature will be <span class="math notranslate nohighlight">\(∞\)</span>.  Accordingly, we can define:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\beta = 1/k_B T
+\]</div>
+<p>where we can artificially restrict <span class="math notranslate nohighlight">\(\beta \ge 0\)</span> to make calculations simple.  We already know what the system is like at infinite temperature because we are starting out in a thermalized state, so this way as <span class="math notranslate nohighlight">\(T → 0\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> will become very large.  For now, let’s start with <span class="math notranslate nohighlight">\(\beta=0\)</span>, just to make sure things are working.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># thermodynamic inverse temperature variable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For right now, let’s set <span class="math notranslate nohighlight">\(H=0\)</span>, <span class="math notranslate nohighlight">\(J=1\)</span>, and <span class="math notranslate nohighlight">\(\mu=1\)</span>.  This means I can omit them from my code, and proceed to step 1 of the algorithm.</p>
+</section>
+<section id="step-1-span-style-color-tan-select-an-atom-in-the-system-span">
+<h4><em><strong>Step 1</strong></em>: <span style="color:Tan">Select an atom in the system</span><a class="headerlink" href="#step-1-span-style-color-tan-select-an-atom-in-the-system-span" title="Permalink to this heading">#</a></h4>
+<p>This is where we need to make another coding decision. If we start with the atom at location (0, 0), then there are no neighbors located at (-1, 0) and (0, -1) because of how <code class="docutils literal notranslate"><span class="pre">numpy</span></code> matrices are indexed. This same thing will happen for all of the other atoms at the edges of my lattice: they are missing neighbors. So for right now, we will start in the <em>second</em> row and <em>second</em> column, then stop at the <em>second-to-last</em> row and <em>second-to-last</em> column. We won’t be able to update the edge atoms with the lower energy configurations, but my code will run for right now.</p>
+</section>
+<section id="step-2-5-span-style-color-tan-see-the-code-comments-span">
+<h4><em><strong>Step 2 - 5</strong></em>: <span style="color:Tan">See the code comments</span><a class="headerlink" href="#step-2-5-span-style-color-tan-see-the-code-comments-span" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --&gt; Step 1: double for-loop</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span> <span class="c1"># the range is from (1,9) instead of (0, 10)</span>
+  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span> <span class="c1"># the range is from (1,9) instead of (0, 10)</span>
+
+        <span class="c1"># --&gt; Step 2: Calculate the energy of the atom</span>
+        <span class="c1"># the sum over the nearest neighbors is completed first to make it easy to check</span>
+        <span class="n">sum_NN</span> <span class="o">=</span> <span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># then the total energy for the atom is calculated</span>
+        <span class="n">E_a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">sum_NN</span>
+
+        <span class="c1"># --&gt; Step 3: Change the spin and re-calculate the energy</span>
+        <span class="c1"># Remember we said above that changing the spin just changes the sign</span>
+        <span class="c1"># of the energy</span>
+        <span class="n">E_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">E_a</span>
+
+        <span class="c1"># --&gt; Step 4: If the energy decreased or the probability sample</span>
+        <span class="c1"># meets the requirement</span>
+        <span class="k">if</span> <span class="n">E_b</span> <span class="o">&lt;</span> <span class="n">E_a</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">E_b</span> <span class="o">-</span> <span class="n">E_a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">():</span>
+            <span class="c1"># Update the actual spin value in the lattice</span>
+            <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="c1"># --&gt; Step 5: The stop condition for this code block is that all of the</span>
+        <span class="c1"># interior atoms have been updated at least once</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we are going to visualize the system again to see if anything changed. Since we set the thermodynamic temperature at <span class="math notranslate nohighlight">\(\beta=0 → T = \infty\)</span>, it should still be in a mixed state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Above, we implemented a Monte Carlo Markov Chain (MCMC) to update the atom’s spin state. The state transition was considered based on sampling from both the Boltzmann distribution and the uniform distribution. The MCMC simulation allowed us to implement the Hamiltonian model for how we think the sytem should behave.</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Temperature Experiment</p>
+<p>So far, so good!</p>
+<p>Let’s make some improvements to the code, and simulate the model for a range of temperatures.</p>
+<p>In the code below, the variable <code class="docutils literal notranslate"><span class="pre">sqrt_N</span></code> = <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>.  Since we have <span class="math notranslate nohighlight">\(N\)</span> atoms in the system, the lattice has dimension <span class="math notranslate nohighlight">\(\sqrt{N} \times \sqrt{N}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making the lattice a little larger</span>
+<span class="n">sqrt_N</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="c1"># Create a new lattice</span>
+<span class="n">init_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">,</span><span class="n">sqrt_N</span><span class="p">))</span>
+
+<span class="c1">#mask lattice</span>
+<span class="n">init_lattice</span><span class="p">[</span><span class="n">init_lattice</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">init_lattice</span><span class="p">[</span><span class="n">init_lattice</span> <span class="o">!=</span><span class="mi">1</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span>
+
+<span class="c1"># A new step here to create non-interacting atoms around the edge by padding</span>
+<span class="c1"># the array edges with zeroes.  This way, we can iterate over all N atoms in the</span>
+<span class="c1"># system without causing an out-of-bounds error</span>
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sqrt_N</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">sqrt_N</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">sqrt_N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">sqrt_N</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">init_lattice</span>
+
+<span class="c1"># Define a range of temperatures to test</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Empty variable to hold the magnetism calculations</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># For each temperature</span>
+<span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">beta</span><span class="p">):</span>
+
+    <span class="c1"># Repeat the MCMC step 100 times to make sure the system is stable</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+
+        <span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">shape</span> <span class="c1"># Figure out the size of the lattice</span>
+
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># keep the neighbors inside the region</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+
+                <span class="c1"># sum over the nearest neighbors</span>
+                <span class="n">sum_NN</span> <span class="o">=</span> <span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+                <span class="c1"># calculate the energy</span>
+                <span class="n">E_a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">sum_NN</span>
+
+                <span class="c1"># re-calculate the energy for a spin state change</span>
+                <span class="n">E_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">E_a</span>
+
+                <span class="c1"># choose whether to keep the new state or not</span>
+                <span class="k">if</span> <span class="n">E_b</span> <span class="o">&lt;</span> <span class="n">E_a</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">E_b</span> <span class="o">-</span> <span class="n">E_a</span><span class="p">)</span><span class="o">*</span><span class="n">temp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()):</span>
+                    <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="c1"># After the system is stable, calculate the net magnetism by summing over</span>
+    <span class="c1"># all of the spin values and averaging them</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">lattice</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt_N</span><span class="o">*</span><span class="n">sqrt_N</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the final lattice to see how the overall spin state has changed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also plot the net-magnetism as a function of temperature, as shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Inverse Temperature $\beta$&quot;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Net Magnetism M&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The plot above shows a noisy transition from 0 net magnetism at <span class="math notranslate nohighlight">\(\beta=0\)</span> (or <span class="math notranslate nohighlight">\(T=\infty\)</span>), to completely magnetized by <span class="math notranslate nohighlight">\(\beta=2\)</span>.  The phase transition resembles the <a class="reference external" href="https://mathworld.wolfram.com/HyperbolicTangent.html"><span class="math notranslate nohighlight">\(tanh\)</span></a> function, but centered around 1.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
 <section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -1291,6 +1721,20 @@ C \int\limits_{-1}^{1} ~dx_0 ~ \int\limits_{0}^{1} ~dx_1 ~ \int\limits_{0}^{1} ~
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-quasi-random-numbers-span"><span style="color:LightBlue">Quasi-random numbers</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-vegas-method-span"><span style="color:LightBlue">Vegas Method</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span"><span style="color:Orange">Markov Chains and MCMC: A Brief Review</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-algorithm-span"><span style="color:LightGreen">Metropolis Algorithm</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-2d-ising-model-span"><span style="color:Orange">2D Ising Model</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span"><span style="color:LightGreen">Ising Hamiltonian for a Ferromagnetic 2D System</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span"><span style="color:LightGreen">Metropolis-Hastings Algorithm Walk-through</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span"><em><strong>Step 0</strong></em>: <span style="color:Tan">Initialize the lattice and the simulation</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-span-style-color-tan-select-an-atom-in-the-system-span"><em><strong>Step 1</strong></em>: <span style="color:Tan">Select an atom in the system</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-5-span-style-color-tan-see-the-code-comments-span"><em><strong>Step 2 - 5</strong></em>: <span style="color:Tan">See the code comments</span></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
