@@ -90,6 +90,8 @@ chapters:
   - file: _sources/lectures/TimeSeries
   - file: _sources/homework/Homework_12
 - file: _sources/Project_02 # Project 02
+  sections:
+    - file: _sources/projects/Project_02_NuclearGeometryQGP
 - file: _sources/Week_13 # Montel Carlo Sampling Methods
   sections:
   - url: https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing
