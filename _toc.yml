@@ -91,6 +91,9 @@ chapters:
   - file: _sources/homework/Homework_12
 - file: _sources/Project_02 # Project 02
   sections:
+    - file: _sources/projects/Project_02_HiggsTauTau
+    - file: _sources/projects/Project_02_ExoticParticles
+    - file: _sources/projects/Project_02_GalaxyZoo
     - file: _sources/projects/Project_02_NuclearGeometryQGP
 - file: _sources/Week_13 # Montel Carlo Sampling Methods
   sections:
