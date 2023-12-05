@@ -103,10 +103,8 @@ chapters:
   - url: https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/BiasBlindAnalysis
-  - file: _sources/homework/Homework_14
-- file: _sources/Week_15 # Machine Learning Methods for Inference
+- file: _sources/Week_15 # Machine Learning Methods
   sections:
   - url: https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/MachineLearningMethodsInference
-  - file: _sources/homework/Homework_15
