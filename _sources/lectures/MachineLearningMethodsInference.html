@@ -818,37 +818,6 @@ One to one output:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1 batch of 2 random samples of size 2</span>
-<span class="n">sample_many</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">sample_one</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample of 2: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_many</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Many to many output: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">many_to_many</span><span class="p">(</span><span class="n">sample_many</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Many to one output: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">many_to_one</span><span class="p">(</span><span class="n">sample_many</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample of 1: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_one</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One to one output: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">one_to_one</span><span class="p">(</span><span class="n">sample_one</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample of 2: 
-[[[0.43758721 0.891773  ]
-  [0.96366276 0.38344152]]]
-Many to many output: 
-[[[0.17862839]
-  [0.54672796]]]
-Many to one output: 
-[[0.2062135]]
-Sample of 1: 
-[[[0.79172504 0.52889492]]]
-One to one output: 
-[[-0.17951374]]
-</pre></div>
-</div>
-</div>
-</div>
 <p>The number passed into the <code class="docutils literal notranslate"><span class="pre">SimpleRNN</span></code> is the number of loops performed.
 In the case described above, we want to take samples at times <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span> and output the value of the function at time <span class="math notranslate nohighlight">\(t_3\)</span>.
 This is a “many-to-one” case.</p>
