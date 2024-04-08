@@ -1,0 +1,1802 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Monte Carlo and Sampling Methods &#8212; PHYS 398 DAP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/MonteCarloSamplingMethods';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assignment 13: Monte Carlo Integration and Sampling Methods" href="../homework/Homework_13.html" />
+    <link rel="prev" title="Monte Carlo and Sampling Methods" href="../Week_13.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PHYS 398 DAP - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PHYS 398 DAP - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    <span style="color:Blue">Data Analysis for Physics</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pandas.html">Handling Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_01.html">Homework 01: Numerical python and data handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_02.html"><span style="color: blue;"><b>Probability Theory</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityTheory.html">Probability Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityTheory2.html"><span style="color:Orange">Bayes’ Rule</span></a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Visualization.html">Visualizing Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_02.html">Homework 02: Probability Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_03.html"><span style="color: blue;"><b>Important Probability Distributions</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityDistributions.html">Important Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_03.html">Homework 03: Important Probability Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Statistics.html">Statistics</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Statistics2.html"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Density.html">Estimating Probability Density from Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_05.html">Homework 05: Kernel Density Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UncertaintiesandFitting.html">Uncertainties and Fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_07.html"><span style="color: blue;"><b>Frequentist and Bayesian Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FrequentistBayesian.html">Frequentist and Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MCMC.html">Markov Chain Monte Carlo in Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_07.html">Homework 07: Bayesian Statistics and MCMC</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_01.html"><span style="color: blue;"><b>Project 01</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_HiggsTauTau.html">Higgs Boson Decaying to Tau Leptons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_ExoticParticles.html">Searching for Exotic Particles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_GalaxyZoo.html">Galaxy Zoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_08.html"><span style="color: blue;"><b>Stochastic Processes, Markov Chains &amp; Variational Inference</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Markov.html">Stochastic Processes and Markov-Chain Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Variational.html">Variational Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_08.html">Homework 08: Markov Chains</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConfidenceIntervals.html">Confidence from Data</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="HypothesisTesting.html">Hypothesis Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResponseConvolutionUnfolding.html">Unfolding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_10.html">Unfolding</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FourierMethods.html">Fourier Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TimeSeries.html">Time Series Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_12.html">Homework 12: Time Series Analysis of Projectile Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_02.html"><span style="color: blue;"><b>Project 02</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_HiggsTauTau.html"><em><strong><span style="color:Yellow">Higgs Boson Decaying to Tau Leptons</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_ExoticParticles.html"><em><strong><span style="color:Yellow">Searching for Exotic Particles</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_GalaxyZoo.html"><em><strong><span style="color:Yellow">Galaxy Zoo</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_13.html"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Monte Carlo and Sampling Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_13.html">Assignment 13: Monte Carlo Integration and Sampling Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_14.html"><span style="color: blue;"><b>Bias and Blind Analysis</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BiasBlindAnalysis.html">Bias and Blind Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_15.html"><span style="color: blue;"><b>Machine Learning Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MachineLearningMethodsInference.html">Deep Learning</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/illinois-dap/DataAnalysisForPhysicists/blob/main/_sources/lectures/MonteCarloSamplingMethods.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/illinois-dap/DataAnalysisForPhysicists" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_sources/lectures/MonteCarloSamplingMethods.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Monte Carlo and Sampling Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-introduction-span"><span style="color:Orange">Introduction</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-monte-carlo-integration-span"><span style="color:Orange">Monte Carlo Integration</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-multidimensional-monte-carlo-integration-and-variance-scaling-span"><span style="color:LightBlue">Multidimensional Monte Carlo integration and variance scaling</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-variance-and-bias-in-monte-carlo-integration-span"><span style="color:LightBlue">Variance and Bias in Monte Carlo integration</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-single-monte-carlo-estimate-span"><span style="color:Tan">Single Monte Carlo estimate</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-using-multiple-independent-sequences-to-monitor-convergence-span"><span style="color:Tan">Using multiple independent sequences to monitor convergence</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-proof-that-monte-carlo-estimator-is-unbiased-span"><span style="color:Tan">Proof that Monte Carlo Estimator is Unbiased</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-change-of-variables-span"><span style="color:LightBlue">Change of Variables</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-a-change-of-variables-lets-us-use-100-of-draws-span"><span style="color:Tan">A change of variables lets us use 100% of draws</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-monte-carlo-swindles-span"><span style="color:LightBlue">Monte Carlo Swindles</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-antithetic-variables-span"><span style="color:Tan">Antithetic variables</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-importance-sampling-span"><span style="color:Tan">Importance Sampling</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-expected-answer-span"><span style="color:Tan">Expected answer</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-using-direct-monte-carlo-integration-span"><span style="color:Tan">Using direct Monte Carlo integration</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-using-importance-sampling-span"><span style="color:Tan">Using importance sampling</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-quasi-random-numbers-span"><span style="color:LightBlue">Quasi-random numbers</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-vegas-method-span"><span style="color:LightBlue">Vegas Method</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span"><span style="color:Orange">Markov Chains and MCMC: A Brief Review</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-algorithm-span"><span style="color:LightGreen">Metropolis Algorithm</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-2d-ising-model-span"><span style="color:Orange">2D Ising Model</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span"><span style="color:LightGreen">Ising Hamiltonian for a Ferromagnetic 2D System</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span"><span style="color:LightGreen">Metropolis-Hastings Algorithm Walk-through</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span"><em><strong>Step 0</strong></em>: <span style="color:Tan">Initialize the lattice and the simulation</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-span-style-color-tan-select-an-atom-in-the-system-span"><em><strong>Step 1</strong></em>: <span style="color:Tan">Select an atom in the system</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-5-span-style-color-tan-see-the-code-comments-span"><em><strong>Step 2 - 5</strong></em>: <span style="color:Tan">See the code comments</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="monte-carlo-and-sampling-methods">
+<h1>Monte Carlo and Sampling Methods<a class="headerlink" href="#monte-carlo-and-sampling-methods" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span> <span class="c1"># prints a nice loading bar for the notebook</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="span-style-color-orange-introduction-span">
+<h2><span style="color:Orange">Introduction</span><a class="headerlink" href="#span-style-color-orange-introduction-span" title="Permalink to this heading">#</a></h2>
+<p>Monte Carlo (MC) integration and other sampling techniques are important tools for computing complex intgerals that arising in many areas of science. In this lecture, we will study Monte Carlo integration methods and re-visit Markov Chain MC with some specific physics examples.</p>
+</section>
+<section id="span-style-color-orange-monte-carlo-integration-span">
+<h2><span style="color:Orange">Monte Carlo Integration</span><a class="headerlink" href="#span-style-color-orange-monte-carlo-integration-span" title="Permalink to this heading">#</a></h2>
+<p>Numerical integration uses the rectangle approximation to find the area under a curve.  The analytical notation we are used to seeing for a definite integral</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+F = \int_a^b f(x) dx
+\]</div>
+<p>can be expressed as a <a class="reference external" href="https://mathworld.wolfram.com/NumericalIntegration.html">numerical approximation that adds up <span class="math notranslate nohighlight">\(n\)</span> rectangles under the curve <span class="math notranslate nohighlight">\(f(x)\)</span></a>.  The more rectangles used to calculate the area, the better the approximation becomes.</p>
+<p>Monte Carlo Integration is a process of solving integrals having numerous values to integrate upon. The Monte Carlo process uses the theory of large numbers and random sampling to approximate values that are very close to the actual solution of the integral.</p>
+<p>Monte Carlo Integration improves above the integration approach by randomly picking which rectangles to add up next and approximating <span class="math notranslate nohighlight">\(F\)</span> as <span class="math notranslate nohighlight">\(\langle F^N \rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Large
+\langle F^N \rangle = ~\frac{1}{N} \sum_{i=1}^{N} \frac{f(X_i)}{p(X_i)} \\
+~~~~~~~~~~~~~~~ = ~\frac{1}{N} \sum_{i=1}^{N} \frac{f(X_i)}{1 / (b-a)} \\
+~~~~~~~~~~~~~~~ = ~\frac{b-a}{N} \sum_{i=1}^{N} f(X_i)
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[ \Large
+\Rightarrow
+~~~\boxed{\langle F^N \rangle = \frac{b-a}{N} \sum_{i=1}^{N} f(X_i)} ~~~~~~~~~~~~~ \text{(Monte Carlo Estimator)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of times a new value <span class="math notranslate nohighlight">\(X_i\)</span> is chosen from a probability distribution for range <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span>.  Therefore,</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+{\text{lim}}_{N→∞} \langle F^N \rangle = F
+\]</div>
+<p>The question becomes, what is the best way to choose <span class="math notranslate nohighlight">\(X_i\)</span> to match the real system?  The goal is to get the best approximation as quickly as possible.</p>
+<hr class="docutils" />
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Lets appoximate the definite integral using the Monte Carlo integration method:
+$<span class="math notranslate nohighlight">\( \Large
+\int \limits_0^\pi \sin x ~dx
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># limits of integration </span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="c1"># gets the value of pi </span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># array of zeros of length N </span>
+<span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> 
+
+<span class="c1"># iterating over each Value of ar and filling </span>
+<span class="c1"># it with a random value between the limits a </span>
+<span class="c1"># and b </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">)):</span> 
+	<span class="n">ar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> 
+
+<span class="c1"># variable to store sum of the functions of </span>
+<span class="c1"># different values of x </span>
+<span class="n">integral</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># function to calculate the sin of a particular </span>
+<span class="c1"># value of x </span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+	<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+
+<span class="c1"># iterates and sums up values of different functions </span>
+<span class="c1"># of x </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">:</span> 
+	<span class="n">integral</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> 
+
+<span class="c1"># we get the answer by the formula derived adobe </span>
+<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="n">integral</span> 
+
+<span class="c1"># prints the solution </span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The value calculated by monte carlo integration is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The value obtained is very close to the actual answer of the integral which is 2.0.</p>
+<p>Now if we want to visualize the integration using a histogram, we can do so by using the matplotlib library. Again we import the modules, define the limits of integration and write the sin function for calculating the sin value for a particular value of x. Next, we take an array that has variables representing every beam of the histogram. Then we iterate through N values and repeat the same process of creating a zeros array, filling it with random x values, creating an integral variable adding up all the function values, and getting the answer N times, each answer representing a beam of the histogram.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># limits of integration </span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="c1"># gets the value of pi </span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># function to calculate the sin of a particular </span>
+<span class="c1"># value of x </span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+	<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+
+<span class="c1"># list to store all the values for plotting </span>
+<span class="n">plt_vals</span> <span class="o">=</span> <span class="p">[]</span> 
+
+<span class="c1"># we iterate through all the values to generate </span>
+<span class="c1"># multiple results and show whose intensity is </span>
+<span class="c1"># the most. </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span> 
+	
+	<span class="c1">#array of zeros of length N </span>
+	<span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> 
+
+	<span class="c1"># iterating over each Value of ar and filling it </span>
+	<span class="c1"># with a random value between the limits a and b </span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">)):</span> 
+		<span class="n">ar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> 
+
+	<span class="c1"># variable to store sum of the functions of different </span>
+	<span class="c1"># values of x </span>
+	<span class="n">integral</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+	<span class="c1"># iterates and sums up values of different functions </span>
+	<span class="c1"># of x </span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">:</span> 
+		<span class="n">integral</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> 
+
+	<span class="c1"># we get the answer by the formula derived adobe </span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="n">integral</span> 
+
+	<span class="c1"># appends the solution to a list for plotting the graph </span>
+	<span class="n">plt_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span> 
+
+<span class="c1"># details of the plot to be generated </span>
+<span class="c1"># sets the title of the plot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distributions of areas calculated&quot;</span><span class="p">)</span> 
+
+<span class="c1"># 3 parameters (array on which histogram needs </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span> <span class="p">(</span><span class="n">plt_vals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> 
+
+<span class="c1"># to be made, bins, separators colour between the </span>
+<span class="c1"># beams) </span>
+<span class="c1"># sets the label of the x-axis of the plot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Areas&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># shows the plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Lets appoximate the definite integral
+$<span class="math notranslate nohighlight">\( \Large
+\int \limits_0^1 x^2 ~dx
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># limits of integration </span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># array of zeros of length N </span>
+<span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> 
+
+<span class="c1"># iterating over each Value of ar and filling </span>
+<span class="c1"># it with a random value between the limits a </span>
+<span class="c1"># and b </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">)):</span> 
+	<span class="n">ar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> 
+
+<span class="c1"># variable to store sum of the functions of </span>
+<span class="c1"># different values of x </span>
+<span class="n">integral</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># function to calculate the sin of a particular </span>
+<span class="c1"># value of x </span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+	<span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># iterates and sums up values of different </span>
+<span class="c1"># functions of x </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">:</span> 
+	<span class="n">integral</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> 
+
+<span class="c1"># we get the answer by the formula derived adobe </span>
+<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="n">integral</span> 
+
+<span class="c1"># prints the solution </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value calculated by monte carlo integration is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then visualize:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># limits of integration </span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># function to calculate x^2 of a particular value </span>
+<span class="c1"># of x </span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+	<span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># list to store all the values for plotting </span>
+<span class="n">plt_vals</span> <span class="o">=</span> <span class="p">[]</span> 
+
+<span class="c1"># we iterate through all the values to generate </span>
+<span class="c1"># multiple results and show whose intensity is </span>
+<span class="c1"># the most. </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span> 
+	
+	<span class="c1"># array of zeros of length N </span>
+	<span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> 
+
+	<span class="c1"># iterating over each Value of ar and filling </span>
+	<span class="c1"># it with a random value between the limits a </span>
+	<span class="c1"># and b </span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">)):</span> 
+		<span class="n">ar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> 
+
+	<span class="c1"># variable to store sum of the functions of </span>
+	<span class="c1"># different values of x </span>
+	<span class="n">integral</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+	<span class="c1"># iterates and sums up values of different functions </span>
+	<span class="c1"># of x </span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">:</span> 
+		<span class="n">integral</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> 
+
+	<span class="c1"># we get the answer by the formula derived adobe </span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="n">integral</span> 
+
+	<span class="c1"># appends the solution to a list for plotting the </span>
+	<span class="c1"># graph </span>
+	<span class="n">plt_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span> 
+
+<span class="c1"># details of the plot to be generated </span>
+<span class="c1"># sets the title of the plot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distributions of areas calculated&quot;</span><span class="p">)</span> 
+
+<span class="c1"># 3 parameters (array on which histogram needs </span>
+<span class="c1"># to be made, bins, separators colour between </span>
+<span class="c1"># the beams) </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span> <span class="p">(</span><span class="n">plt_vals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> 
+
+<span class="c1"># sets the label of the x-axis of the plot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Areas&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># shows the plot </span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="span-style-color-lightblue-multidimensional-monte-carlo-integration-and-variance-scaling-span">
+<h3><span style="color:LightBlue">Multidimensional Monte Carlo integration and variance scaling</span><a class="headerlink" href="#span-style-color-lightblue-multidimensional-monte-carlo-integration-and-variance-scaling-span" title="Permalink to this heading">#</a></h3>
+<p>We can estimate the Monte Carlo variance of the approximation as
+$<span class="math notranslate nohighlight">\( \Large
+v_N = \frac{1}{N^2} \sum_{i=1}^N \Biggl[ (f(x_i) - \bar{f_N})^2 \Biggr]
+\)</span>$</p>
+<p>Also, from the Central Limit Theorem,
+$<span class="math notranslate nohighlight">\( \Large
+\frac{\bar{f_N} - E[f(X)]}{\sqrt{v_N}} \sim \mathcal{N}(0, 1)
+\)</span>$</p>
+<p>The convergence of Monte Carlo integration is <span class="math notranslate nohighlight">\(O(\sqrt{N})\)</span> and independent of the dimensionality. Hence Monte Carlo integration generally beats numerical integration for moderate- and high-dimensional integration since numerical integration (quadrature) converges as <span class="math notranslate nohighlight">\(O(N^d)\)</span>. Even for low dimensional problems, Monte Carlo integration may have an advantage when the volume to be integrated is concentrated in a very small region and we can use information from the distribution to draw samples more often in the region of importance.</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: 3-D Integration</p>
+<p>$$ \Large
+\int\limits_{x_0}^{x_1} ~ \int\limits_{y_0}^{y_1} ~ \int\limits_{z_0}^{z_1} f(x, y, z) dx~dy~dz</p>
+<p>Uniform 3-D random variable:
+$<span class="math notranslate nohighlight">\(\Large
+X_i \sim p(x,y,z) = \frac{1}{x_1 - x_0} ~ \frac{1}{y_1 - y_0} ~ \frac{1}{z_1 - z_0}
+\)</span>$</p>
+<p>Basic 3-D estimator:
+$<span class="math notranslate nohighlight">\( \Large
+F_N = \frac{(x_1 - x_0)(y_1 - y_0)(z_1 - z_0)}{N} ~ \sum\limits_{i=1}^{N} f(X_i)
+\)</span>$</p>
+<p>This generalizes to abitrary N-dimensional PDFs</p>
+</section>
+<section id="span-style-color-lightblue-variance-and-bias-in-monte-carlo-integration-span">
+<h3><span style="color:LightBlue">Variance and Bias in Monte Carlo integration</span><a class="headerlink" href="#span-style-color-lightblue-variance-and-bias-in-monte-carlo-integration-span" title="Permalink to this heading">#</a></h3>
+<p>We are often interested in knowing how many iterations it takes for Monte Carlo integration to “converge” and the accuracy of the calculation. To do this, we would like some estimate of the variance and to ensure it is unbiased. It is useful to inspect such plots. One simple way to get confidence intervals for the plot of Monte Carlo estimate against number of iterations is simply to do many such simulations.</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Using Monte Carlo methods, estimate the integral of the function
+$<span class="math notranslate nohighlight">\( \Large
+f(x) = x \cos 7x + \sin 13x, \ \ \ 0 \le x \le 1
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">71</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="span-style-color-tan-single-monte-carlo-estimate-span">
+<h4><span style="color:Tan">Single Monte Carlo estimate</span><a class="headerlink" href="#span-style-color-tan-single-monte-carlo-estimate-span" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-tan-using-multiple-independent-sequences-to-monitor-convergence-span">
+<h4><span style="color:Tan">Using multiple independent sequences to monitor convergence</span><a class="headerlink" href="#span-style-color-tan-using-multiple-independent-sequences-to-monitor-convergence-span" title="Permalink to this heading">#</a></h4>
+<p>We vary the sample size from 1 to 100 and calculate the value of <span class="math notranslate nohighlight">\(y=\sum x / n\)</span> for 1000 replicates. We then plot the 2.5th and 97.5th percentile of the 1000 values of <span class="math notranslate nohighlight">\(y\)</span> to see how the variation in <span class="math notranslate nohighlight">\(y\)</span> changes with sample size. The blue lines indicate the 2.5th and 97.5th percentiles, and the red line a sample path.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">reps</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">reps</span><span class="p">)))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">upper</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">upper</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">lower</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-tan-proof-that-monte-carlo-estimator-is-unbiased-span">
+<h4><span style="color:Tan">Proof that Monte Carlo Estimator is Unbiased</span><a class="headerlink" href="#span-style-color-tan-proof-that-monte-carlo-estimator-is-unbiased-span" title="Permalink to this heading">#</a></h4>
+<p>It is straightforward to prove that the expectation value of the Monte Carlo estimator is the desired integral (i.e. it is unbiased).</p>
+<p>First recall some properties of the expectation value <span class="math notranslate nohighlight">\(E\)</span>:
+$<span class="math notranslate nohighlight">\( \Large
+E ~ \Biggl[ \sum\limits_i Y_i \Biggr] = \sum\limits_i E\bigl[ Y_i \bigr]   ~~~~~~~~~~~~~~~~~~~~~ E~\Bigl[ aY \Bigr] = a E~\Bigl[ Y \Bigr]
+\)</span>$</p>
+<p>Then
+$$ \Large E~\Bigl[ F_N \Bigr] = E ~ \Biggl[ \frac{1}{N} ~ \sum\limits_{i=1}^N \frac{f(X_i)}{p(X_I)} \Biggr] \</p>
+<div class="highlight-= notranslate"><div class="highlight"><pre><span></span>~~~~~~~~~~~~~~~~~~~~~~~ = \frac{1}{N} ~ \sum\limits_{i=1}^N ~\int\limits_a^b \frac{f(x)}{p(x)} ~p(x) ~dx \\
+~~~~~~~~~~~~~~ = \frac{1}{N} ~ \sum\limits_{i=1}^N ~\int\limits_a^b f(x)  ~dx \\
+~~ = \int\limits_a^b f(x)  ~dx \\
+$$
+
+---
+</pre></div>
+</div>
+</section>
+</section>
+<section id="span-style-color-lightblue-change-of-variables-span">
+<h3><span style="color:LightBlue">Change of Variables</span><a class="headerlink" href="#span-style-color-lightblue-change-of-variables-span" title="Permalink to this heading">#</a></h3>
+<p>The Cauchy distribution is given by
+$<span class="math notranslate nohighlight">\( \Large
+f(x) = \frac{1}{\pi (1 + x^2)}, \ \ -\infty \lt x \lt \infty
+\)</span>$</p>
+<p>Suppose we want to integrate the tail probability <span class="math notranslate nohighlight">\(P(X&gt;3)\)</span> using Monte Carlo. One way to do this is to draw many samples form a Cauchy distribution, and count how many of them are greater than 3, but this is extremely inefficient.</p>
+<p>Only 10% of samples will be used</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_true</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">cauchy</span><span class="p">()</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h_true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">cauchy</span><span class="p">()</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">h_mc</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">h_mc</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_mc</span> <span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="span-style-color-tan-a-change-of-variables-lets-us-use-100-of-draws-span">
+<h4><span style="color:Tan">A change of variables lets us use 100% of draws</span><a class="headerlink" href="#span-style-color-tan-a-change-of-variables-lets-us-use-100-of-draws-span" title="Permalink to this heading">#</a></h4>
+<p>We are trying to estimate the quantity
+$<span class="math notranslate nohighlight">\( \Large
+\int_3^\infty \frac{1}{\pi (1 + x^2)} dx
+\)</span>$</p>
+<p>Using the substitution <span class="math notranslate nohighlight">\(y=3/x\)</span> (and a little algebra), we get
+$<span class="math notranslate nohighlight">\( \Large
+\int_0^1 \frac{3}{\pi(9 + y^2)} dy
+\)</span>$</p>
+<p>Hence, a much more efficient MC estimator is
+$<span class="math notranslate nohighlight">\( \Large
+\frac{1}{n} \sum_{i=1}^n \frac{3}{\pi(9 + y_i^2)}
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(y_i \sim \square(0,1)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">h_cv</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mf">3.0</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">h_cv</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_cv</span> <span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="span-style-color-lightblue-monte-carlo-swindles-span">
+<h3><span style="color:LightBlue">Monte Carlo Swindles</span><a class="headerlink" href="#span-style-color-lightblue-monte-carlo-swindles-span" title="Permalink to this heading">#</a></h3>
+<p>Apart from change of variables, there are several general techniques for variance reduction, sometimes known as Monte Carlo “swindles” since these methods improve the accuracy and convergence rate of Monte Carlo integration without increasing the number of Monte Carlo samples. Some Monte Carlo swindles are:</p>
+<ul class="simple">
+<li><p>importance sampling</p></li>
+<li><p>stratified sampling</p></li>
+<li><p>control variates</p></li>
+<li><p>antithetic variates</p></li>
+<li><p>conditioning swindles including Rao-Blackwellization and independent variance decomposition</p></li>
+</ul>
+<p>Most of these techniques are not particularly computational in nature, so we will not cover them in the course. I expect you will learn them elsewhere. We will illustrate importance sampling and antithetic variables here as examples.</p>
+<section id="span-style-color-tan-antithetic-variables-span">
+<h4><span style="color:Tan">Antithetic variables</span><a class="headerlink" href="#span-style-color-tan-antithetic-variables-span" title="Permalink to this heading">#</a></h4>
+<p>The idea behind antithetic variables is to choose two sets of random numbers that are negatively correlated, then take their average, so that the total variance of the estimator is smaller than it would be with two sets of independent and identically distributed (IID) random variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">71</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">integrate</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="mi">71</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using just vanilla Monte Carlo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">sol</span><span class="p">)</span><span class="o">/</span><span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using antithetic variables for the first half of <span class="math notranslate nohighlight">\(u\)</span> supplemented with <span class="math notranslate nohighlight">\(1-u\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">u</span><span class="p">[:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">[:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">sol</span><span class="p">)</span><span class="o">/</span><span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This works because the random draws are now negatively correlated, and hence the sum of the variances will be less than in the IID case, while the expectation is unchanged.</p>
+</section>
+<section id="span-style-color-tan-importance-sampling-span">
+<h4><span style="color:Tan">Importance Sampling</span><a class="headerlink" href="#span-style-color-tan-importance-sampling-span" title="Permalink to this heading">#</a></h4>
+<p>Ordinary Monte Carlo sampling evaluates</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+E[g(X)] = \int_X g(x)\, p(x) \, dx
+\]</div>
+<p>Using another distribution <span class="math notranslate nohighlight">\(h(x)\)</span> which is the so-called “importance function”, we can rewrite the above expression as an expectation with respect to <span class="math notranslate nohighlight">\(h\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \Large
+E_p[f(x)] \ = \ \int_X f(x) \frac{p(x)}{h(x)} h(x) dx \ = \ E_h\left[ \frac{f(X) p(X)}{h(X)} \right] 
+\]</div>
+<p>giving us the new estimator</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\bar{f_n} = \frac{1}{N} \sum_{i=1}^n \frac{p(x_i)}{h(x_i)} f(x_i)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_i \sim f\)</span> is a draw from the density <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p>This is helpful if the distribution <span class="math notranslate nohighlight">\(h\)</span> has a similar shape as the function <span class="math notranslate nohighlight">\(f(x)\)</span> that we are integrating over, since we will draw more samples from places where the integrand makes a larger or more “important” contribution. This is very dependent on a good choice for the importance function <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p>Two simple choices for <span class="math notranslate nohighlight">\(h\)</span> are scaling</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+h(x) = \frac{1}{a} ~p(x/a)
+\]</div>
+<p>and translation</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+h(x) = p ~(x - a)
+\]</div>
+<p>In these cases, the parameter a is typically chosen using some adaptive algorithm, giving rise to adaptive importance sampling. Alternatively, a different distribution can be chosen as shown in the example below.</p>
+<hr class="docutils" />
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Suppose we want to estimate the tail probability of <span class="math notranslate nohighlight">\(\square (0,1)\)</span> for <span class="math notranslate nohighlight">\(P(X&gt;5)\)</span>.</p>
+<p>Regular MC integration using samples from <span class="math notranslate nohighlight">\(\square (0,1)\)</span> is hopeless since nearly all samples will be rejected. However, we can use the exponential density truncated at 5 as the importance function and use importance sampling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-tan-expected-answer-span">
+<h4><span style="color:Tan">Expected answer</span><a class="headerlink" href="#span-style-color-tan-expected-answer-span" title="Permalink to this heading">#</a></h4>
+<p>We expect about 3 draws out of 10,000,000 from <span class="math notranslate nohighlight">\(\square (0,1)\)</span> to have a value greater than 5. Hence simply sampling from <span class="math notranslate nohighlight">\(\square (0,1)\)</span> is hopelessly inefficient for Monte Carlo integration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_true</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-tan-using-direct-monte-carlo-integration-span">
+<h4><span style="color:Tan">Using direct Monte Carlo integration</span><a class="headerlink" href="#span-style-color-tan-using-direct-monte-carlo-integration-span" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">h_mc</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1"># estimate and relative error</span>
+<span class="n">h_mc</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_mc</span> <span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-tan-using-importance-sampling-span">
+<h4><span style="color:Tan">Using importance sampling</span><a class="headerlink" href="#span-style-color-tan-using-importance-sampling-span" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">h_is</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="c1"># estimate and relative error</span>
+<span class="n">h_is</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_is</span><span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-lightblue-quasi-random-numbers-span">
+<h3><span style="color:LightBlue">Quasi-random numbers</span><a class="headerlink" href="#span-style-color-lightblue-quasi-random-numbers-span" title="Permalink to this heading">#</a></h3>
+<p>Recall that the convergence of Monte Carlo integration is <span class="math notranslate nohighlight">\(O(\sqrt{N})\)</span>. One issue with simple Monte Carlo is that randomly chosen points tend to be clumped. Clumping reduces accuracy since nearby points provide little additional information about the function begin estimated. One way to address this is to split the space into multiple integration regions, then sum them up. This is known as <span style="color:Violet">stratified sampling</span>. Another alternative is to use <span style="color:Violet">quasi-random numbers</span> which fill space more efficiently than random sequences.</p>
+<p>It turns out that if we use quasi-random or low discrepancy sequences, we can get convergence approaching <span class="math notranslate nohighlight">\(O(1/N)\)</span>. There are several such generators, but their use in statistical settings is limited to cases where we are integrating with respect to uniform distributions. The regularity can also give rise to errors when estimating integrals of periodic functions. However, these quasi-Monte Carlo methods are used in computational finance models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ghalton
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ghalton</span>
+
+<span class="n">gen</span> <span class="o">=</span> <span class="n">ghalton</span><span class="o">.</span><span class="n">Halton</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xs</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pseudo-random&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ys</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">ys</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Quasi-random&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_true</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">cauchy</span><span class="p">()</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span><span class="o">.</span><span class="n">rvs</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">h_mc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">h_mc</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_mc</span> <span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gen1</span> <span class="o">=</span> <span class="n">ghalton</span><span class="o">.</span><span class="n">Halton</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">gen1</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">h_qmc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">h_qmc</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_qmc</span> <span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-lightblue-vegas-method-span">
+<h3><span style="color:LightBlue">Vegas Method</span><a class="headerlink" href="#span-style-color-lightblue-vegas-method-span" title="Permalink to this heading">#</a></h3>
+<p>The VEGAS algorithm, due to G. Peter Lepage, is a method for reducing error in Monte Carlo simulations by using a known or approximate probability distribution function to concentrate the search in those areas of the integrand that make the greatest contribution to the final integral.</p>
+<p>The VEGAS algorithm is based on importance sampling. It samples points from the probability distribution described by the function <span class="math notranslate nohighlight">\(|f|\)</span> so that the points are concentrated in the regions that make the largest contribution to the integral</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: 4-D Monte Carlo integration with Vegas</p>
+<p>Here we illustrate the use of <a class="reference external" href="https://vegas.readthedocs.io/en/latest/vegas.html#module-vegas">vegas</a> by estimating the following integral:
+$<span class="math notranslate nohighlight">\( \Large
+C \int\limits_{-1}^{1} ~dx_0 ~ \int\limits_{0}^{1} ~dx_1 ~ \int\limits_{0}^{1} ~dx_2 ~ \int\limits_{0}^{1} ~dx_3 ~ e^{-100 \sum_d (x_d - 0.5)^2}
+\)</span>$</p>
+<p>First we define the integrand <span class="math notranslate nohighlight">\(f(x)\)</span> where <span class="math notranslate nohighlight">\(x[d]\)</span> specifies a point in the 4-dimensional space.</p>
+<p>We then create an integrator <code class="docutils literal notranslate"><span class="pre">integ</span></code> which is an integration operator that can be applied to any 4-dimensional function. It is where we specify the integration volume.</p>
+<p>Finally we apply <code class="docutils literal notranslate"><span class="pre">integ</span></code> to our integrand <span class="math notranslate nohighlight">\(f(x)\)</span>, telling the integrator to estimate the integral using <code class="docutils literal notranslate"><span class="pre">nitn=10</span></code> iterations of the vegas algorithm, each of which uses no more than <code class="docutils literal notranslate"><span class="pre">neval=1000</span></code> evaluations of the integrand. Each iteration produces an independent estimate of the integral.</p>
+<p>The final estimate is the weighted average of the results from all 10 iterations, and is returned by <code class="docutils literal notranslate"><span class="pre">integ(f</span> <span class="pre">...)</span></code>. The call <code class="docutils literal notranslate"><span class="pre">result.summary()</span></code> returns a summary of results from each iteration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>vegas
+
+<span class="kn">import</span> <span class="nn">vegas</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">dx2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">dx2</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dx2</span> <span class="o">*</span> <span class="mf">100.</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1013.2118364296088</span>
+
+<span class="c1"># seed the random number generator so results reproducible</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># assign integration volume to integrator</span>
+<span class="n">integ</span> <span class="o">=</span> <span class="n">vegas</span><span class="o">.</span><span class="n">Integrator</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+
+<span class="c1"># adapt to the integrand; discard results</span>
+<span class="n">integ</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">nitn</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">neval</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># do the final integral</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">integ</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">nitn</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">neval</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;result = </span><span class="si">%s</span><span class="s1">    Q = </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">Q</span><span class="p">))</span>
+<span class="n">integ</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">show_grid</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span">
+<h2><span style="color:Orange">Markov Chains and MCMC: A Brief Review</span><a class="headerlink" href="#span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov chain Monte Carlo (MCMC)</a> is a powerful class of methods to sample from probability distributions known only up to an (unknown) normalization constant.</p>
+<p>Recall the utility of such sampling: this is useful when you are either interested in the samples themselves (for example, inferring unknown parameters in Bayesian inference) or you need them to approximate expected values of functions w.r.t. to a probability distribution (for example, calculating thermodynamic quantities from the distribution of microstates in statistical physics). Sometimes, only the mode of a probability distribution is of primary interest. In this case, it’s obtained by numerical optimization so full sampling is not necessary.</p>
+<p>It turns out that sampling from any but the most basic probability distributions is a difficult task. <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">Inverse transform sampling</a> is an elementary method to sample from probability distributions, but requires the cumulative distribution function, which in turn requires knowledge of the, generally unknown, normalization constant. Now in principle, you could just obtain the normalization constant by numerical integration, but this quickly gets infeasible with an increasing number of dimensions. <a class="reference external" href="https://en.wikipedia.org/wiki/Rejection_sampling">Rejection sampling</a> does not require a normalized distribution, but efficiently implementing it requires a good deal of knowledge about the distribution of interest, and it suffers strongly from the curse of dimensionality, meaning that its efficiency decreases rapidly with an increasing number of variables. That’s when you need a smart way to obtain representative samples from your distribution which doesn’t require knowledge of the normalization constant. MCMC algorithms are a class of methods which do exactly that.</p>
+<p>Recall that a Markov chain is a random sequence of states in some state space in which the probability of picking a certain state next depends only on the current state in the chain and not on the previous history: it is memory-less.</p>
+<p>Under certain conditions, a Markov chain has a unique stationary distribution of states to which it will converge after a certain number of states. From that number on, states in the Markov chain will be distributed according to the invariant distribution.
+MCMC algorithms work by constructing a Markov chain with the probability distribution you want to sample from as the stationary distribution.</p>
+<p>In order to sample from a distribution <span class="math notranslate nohighlight">\(f(x)\)</span>, a MCMC algorithm constructs and simulates a Markov chain whose stationary distribution is <span class="math notranslate nohighlight">\(f(x)\)</span>, meaning that, after an initial “burn-in” phase, the states of that Markov chain are distributed according to <span class="math notranslate nohighlight">\(f(x)\)</span>. We thus just have to store the states to obtain samples from <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Sampling weather states</p>
+<p>Now just for fun (and for illustration), let’s quickly whip up a Markov chain which has a unique stationary distribution. Let’s for now consider both a discrete state space and discrete “time”. The key quantity characterizing a Markov chain is the transition operator <span class="math notranslate nohighlight">\(T(x_{i+1}|x_i)\)</span> which gives you the probability of being in state <span class="math notranslate nohighlight">\(x_{i+1}\)</span> at time <span class="math notranslate nohighlight">\(i+1\)</span> given that the chain is in state <span class="math notranslate nohighlight">\(x_i\)</span> at time <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The Markov chain will hop around on a discrete state space which is made up from three weather states:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_space</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;sunny&quot;</span><span class="p">,</span> <span class="s2">&quot;cloudy&quot;</span><span class="p">,</span> <span class="s2">&quot;rainy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a discrete state space, the transition operator is just a matrix.
+Columns and rows correspond, in our case, to sunny, cloudy, and rainy weather.
+We pick more or less sensible values for all transition probabilities:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transition_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The rows indicate the states the chain might currently be in and the columns the states the chains might transition to.
+If we take one “time” step of the Markov chain as one hour, then, if it’s sunny, there’s a 60% chance it stays sunny in the next hour, a 30% chance that in the next hour we will have cloudy weather and only a 10% chance of rain immediately after it had been sunny before.
+This also means that each row has to sum up to one.</p>
+<p>Now that wee have defined all of these transition probabilities we have made a Markov chain such as the one below.</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/MonteCarloSampleMethods-MC_weather.png"><img alt="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/MonteCarloSampleMethods-MC_weather.png" class="align-left" src="https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/img/MonteCarloSampleMethods-MC_weather.png" style="width: 400px;" /></a></img><br></p>
+<p>Let’s run our Markov chain for a while:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="n">transition_matrix</span><span class="p">[</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+<span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can monitor the convergence of our Markov chain to its stationary distribution by calculating the empirical probability for each of the states as a function of chain length:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">despine</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">spines</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">spines</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_space</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">offsets</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">states</span><span class="p">[:</span><span class="n">offset</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">offset</span> 
+            <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">offsets</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;number of steps&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;empirical probability&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">despine</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Next we provide a brief review on how to use Markov Chain Monte Carlo (MCMC) to compute expectation values, and contrast with Monte Carlo integration. In statistics, we study the properties of random variables <span class="math notranslate nohighlight">\(x\)</span> and their probability distributions <span class="math notranslate nohighlight">\(P(x)\)</span>.  We often care about computing expectation values of functions of the random variable such as
+$<span class="math notranslate nohighlight">\( \Large
+\langle f(x) \rangle = \sum_x f(x) P(x)
+\)</span>$</p>
+<p>In general, the probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span> can be very complicated and difficult to sample efficiently. In this case, we can use Markov chains to represent the probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span>.   It is possible to pick the transition probabilities of the Markov chain so that the chain’s equilibrium probability distribution is the desired probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span>. Once we have a correctly defined Markov chain, we can sample it to obtain a set of sampled states <span class="math notranslate nohighlight">\(x_1,x_2,...,x_T\)</span>.  These sampled states can be used to estimate expectation values in the following way
+$<span class="math notranslate nohighlight">\( \Large
+\langle f(x) \rangle \approx \frac{1}{T_{max}} \sum_{t=1}^{T_{max}} f(x_t)
+\)</span>$</p>
+<p>This should look familiar! However, you should be clear on the distinction between Monte Carlo and Markov chains:</p>
+<ul class="simple">
+<li><p>Monte Carlo methods are ways to evaluate integrals using random numbers.</p></li>
+<li><p>Markov chains are used to sample complicated probability distributions.</p></li>
+</ul>
+<p>When Monte Carlo is used to integrate a probability distribution specified by a Markov chain, then it is called <span style="color:Violet">Markov Chain Monte Carlo</span>.</p>
+<section id="span-style-color-lightgreen-metropolis-algorithm-span">
+<h3><span style="color:LightGreen">Metropolis Algorithm</span><a class="headerlink" href="#span-style-color-lightgreen-metropolis-algorithm-span" title="Permalink to this heading">#</a></h3>
+<p>Markov Chain Monte Carlo methods date back to a <a class="reference external" href="https://pdfs.semanticscholar.org/7b3d/c9438227f747e770a6fb6d7d7c01d98725d6.pdf">seminal paper by Metropolis et al.</a>, who developed the first MCMC algorithm, correspondingly called <a class="reference external" href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm">Metropolis algorithm</a>. It was proposed in 1953 by Edward Teller, Nicholas Metropolis, and others at Los Alamos National Laboratory in New Mexico during the early days of scientific computing. Teller and his physics colleagues were interested in using MCMC to calculate the thermodynamic properties of a weakly interacting classical gas, which was very difficult to calculate analytically. Impressively, more than half a century after its introduction, Metropolis MCMC is still in wide use today in many areas of science, engineering, and statistics.</p>
+<p>The <span style="color:Violet">Metropolis algorithm</span> samples a Markov chain by proposing moves between states, which are then either accepted or rejected according to a specific criterion. These proposed moves are chosen so that the Markov chain’s transition probabilities give the correct equilibrium distribution4. In general, Metropolis Markov chain sampling of a probability distribution <span class="math notranslate nohighlight">\(P(S)\)</span> works as follows:</p>
+<ol class="arabic simple">
+<li><p>Start at a state <span class="math notranslate nohighlight">\(𝑆_t\)</span>.</p></li>
+<li><p>Propose a move to a new state <span class="math notranslate nohighlight">\(S'\)</span> based on the current state <span class="math notranslate nohighlight">\(S_t\)</span>.</p></li>
+<li><p>Choose a uniform random number <span class="math notranslate nohighlight">\(r\)</span> between 0 and 1.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(r&lt;P(S')/P(S_t)\)</span> then accept the proposed move and transition to state <span class="math notranslate nohighlight">\(S'\)</span> so that <span class="math notranslate nohighlight">\(S_{t+1}=S'\)</span>. Otherwise, reject the move and stay at state <span class="math notranslate nohighlight">\(S_t\)</span> so that <span class="math notranslate nohighlight">\(S_{t+1}=S_t\)</span>.</p></li>
+<li><p>Increment <span class="math notranslate nohighlight">\(t\)</span> and repeat.</p></li>
+</ol>
+<p>This Markov chain’s samples <span class="math notranslate nohighlight">\(S_1,...S_{T_{max}}\)</span> are then used to estimate expectation values <span class="math notranslate nohighlight">\(\langle f(S) \rangle\)</span> in the way  discussed in the previous section. We will use this general Metropolis MCMC framework to sample the Boltzmann distribution, an important probability distribution in thermal physics.</p>
+</section>
+</section>
+<section id="span-style-color-orange-2d-ising-model-span">
+<h2><span style="color:Orange">2D Ising Model</span><a class="headerlink" href="#span-style-color-orange-2d-ising-model-span" title="Permalink to this heading">#</a></h2>
+<section id="span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span">
+<h3><span style="color:LightGreen">Ising Hamiltonian for a Ferromagnetic 2D System</span><a class="headerlink" href="#span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span" title="Permalink to this heading">#</a></h3>
+<p><em>Note: For a very good reference on this derivation (and where much of this notation comes from), <a class="reference external" href="https://farside.ph.utexas.edu/teaching/329/lectures/node110.html">see here</a>.  Other good references can be found in the “Additional Readings” section.</em></p>
+<p>Consider a system of ferromagnetic atoms, where each atom initially has spin up (+1) or down (-1).  Ferromagnetic means that the system wants to align all of the spins in the same direction to minimize energy, so that all of the spins should be up or all of the spins should be down.  If the net-magnetization of the system is zero, all of the spins cancel each other out.  If the net-magnetization of the system is greater than zero, then some percentage of the magnetic spins are aligned.</p>
+<p>We want to be able to study the phase transition of the system from disordered (spins randomly oriented) to ordered (spins aligned), and vice versa. In order to do this, let’s arrange the spins onto the grid points of a lattice as shown in the figure below.  Note that the picture shown is for a 2D system, but any useful dimensionality can be done.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code to show an example lattice with non-interacting spins</span>
+<span class="n">spin_up_or_down</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Up&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Down&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure 1. Lattice with non-interacting atoms on grid points&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To determine the energy of the <span class="math notranslate nohighlight">\(i^{th}\)</span> atom in the system above, we start with the energy of the atom in a magnetic field</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\epsilon_i = \mu H \sigma_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the atomic magnetic moment, <span class="math notranslate nohighlight">\(H\)</span> is an applied magnetic field, and the <span class="math notranslate nohighlight">\(\sigma\)</span> operator “measures” the spin of the atom and returns value <span class="math notranslate nohighlight">\(+1\)</span> for spin up or <span class="math notranslate nohighlight">\(-1\)</span> for spin down.</p>
+<p>Next, lets add a nearest-neighbors interaction between the particles, with strength <span class="math notranslate nohighlight">\(J\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code to show add nearest-neighbors interactions to the above figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Up&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">yv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">spin_up_or_down</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spin Down&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure 2. Adding Nearest Neighbor Interactions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To include the energy from each site interacting with the <span class="math notranslate nohighlight">\(i\)</span>th atom, we can update the above expression:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\epsilon_i = -\frac{1}{2}~J\sum_{j\in[1,4]} \sigma_i \sigma_j + \mu H \sigma_i
+\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p>the <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> factor ensures that we don’t double count the contributions from neighboring atoms.</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span> is the coupling between nearest neighbors (the gray lines in Figure 2)</p></li>
+<li><p>The negative sign “<span class="math notranslate nohighlight">\(-\)</span>” in front of the <span class="math notranslate nohighlight">\(J\)</span> means that this is a ferromagnetic system</p></li>
+<li><p><span class="math notranslate nohighlight">\(j\)</span> means that only four nearest neighbors for each atom in the above Figure will be included in the calculation</p></li>
+</ul>
+<p>It’s important to note here, that the <span class="math notranslate nohighlight">\(\sigma_i\)</span> term can be pulled out of the sum and we can divide by the magnetic moment <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\mu = -\frac{1}{2 \mu}J \sigma_i \sum_{j\in[1,4]} \sigma_j
+\]</div>
+<p>So that the total energy for the <span class="math notranslate nohighlight">\(i^\text{th}\)</span> spin can be written as</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\epsilon_i = \mu \sigma H_{eff}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+H_{eff} = -\frac{1}{2 \mu}J \sum_{j\in[1,4]} \sigma_j + H
+\]</div>
+<p>which means that for atom <span class="math notranslate nohighlight">\(i\)</span>, the only difference in energy for the atom in a spin up state or spin down state is a <span class="math notranslate nohighlight">\(+\)</span> or <span class="math notranslate nohighlight">\(-\)</span> sign:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\Large \epsilon_i\{\sigma_i, \uparrow \} = - \epsilon_i\{\sigma_i, \downarrow \}
+\]</div>
+<p>To get the total energy for the system, we sum over all the measured of the observed energies:</p>
+<p>$<span class="math notranslate nohighlight">\( \Large
+E = \sum_i \epsilon_i
+\)</span>$.</p>
+<p>Using this Hamiltonian, we want to understand the expected spin value given the temperature of the system. The probability <span class="math notranslate nohighlight">\(p\)</span> that a spin has a particular value can be calculated using the <a class="reference external" href="https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Kinetics/03%3A_Rate_Laws/3.01%3A_Gas_Phase_Kinetics/3.1.02%3A_Maxwell-Boltzmann_Distributions">Maxwell-Boltzmann distribution</a></p>
+<div class="math notranslate nohighlight">
+\[ \Large
+p_{i,\pm} = \frac{e^{\mp \epsilon_i/k_BT}}{\sum_i e^{\epsilon_i /k_B T}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is the energy of the atom, and <span class="math notranslate nohighlight">\(k_BT\)</span> is the energy environment (also referred to as a temperature bath) of the atom.  The denominator of the fraction normalizes the probability distribution, so that there is a max probability of 1.</p>
+<p>The average value of the magnetic moment of the atom for a given temperature is</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\langle \mu \rangle = \frac{\mu p_+ + (-\mu)p_-}{p_+ + p_-}
+\]</div>
+<p>After plugging in the expression for the probability and evaluating the <span class="math notranslate nohighlight">\(\sigma_i\)</span> operators appropriately, we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Large
+~~~~~~~~~~\langle \mu \rangle = \mu \frac{e^{- \mu H/k_BT} - e^{+ \mu H /k_BT}}{e^{- \mu H/k_BT} + e^{+ \mu H/k_BT}} \\
+= \mu \tanh(\frac{\mu H}{k_B T})
+\end{split}\]</div>
+<p>This is not an expression we can solve <strong>analytically</strong>, <span style="color:Violet">but it can be solved numerically</span>.</p>
+</section>
+<section id="span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span">
+<h3><span style="color:LightGreen">Metropolis-Hastings Algorithm Walk-through</span><a class="headerlink" href="#span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span" title="Permalink to this heading">#</a></h3>
+<p>This algorithm has multiple variations in addition to “<a class="reference external" href="https://pubs.aip.org/aip/jcp/article-abstract/21/6/1087/202680/Equation-of-State-Calculations-by-Fast-Computing?redirectedFrom=fulltext">Metropolis-Hastings</a>”, such as “<a class="reference external" href="https://machinelearningmastery.com/simulated-annealing-from-scratch-in-python/">Stochastic Simulated Annealing</a>” and “<a class="reference external" href="https://link.springer.com/article/10.1007/s10898-011-9838-3">Sequential Simulated Annealing</a>”.  The “simulated annealing” comes from the idea that the system begins in a random state that is equivalent to the system being at infinitely high temperature. The system is then “submerged” into a bath of temperature <span class="math notranslate nohighlight">\(T\)</span> where <span class="math notranslate nohighlight">\(T\)</span> is a finite temperature that “cools” the system off.</p>
+<hr class="docutils" />
+<ol class="arabic simple" start="0">
+<li><p>Initialize the system with the following variables:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: temperature of the “bath” which will anneal the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: the size of the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(s\)</span>: the state of each particle in the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span>: the coupling between particles in the system</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span>: the applied magnetic field</p></li>
+</ul>
+</li>
+<li><p>Select an atom in the system</p></li>
+<li><p>Calculate the energy <span class="math notranslate nohighlight">\(e_i\)</span> of that atom</p></li>
+<li><p>Determine if changing the spin of the atom would decrease the energy</p></li>
+<li><p>If it decreases the energy <strong>OR</strong> if the probability of the state in the Boltzmann distribution is greater than a sample from a uniform probability distribution, then change the spin state of the atom.</p></li>
+<li><p>Continue with steps 1-4 until the stopping criteria is met.</p></li>
+<li><p>Return to step 0 and re-initialize the system with different variables as desired.</p></li>
+</ol>
+<hr class="docutils" />
+<p>Let’s go through these steps in code:</p>
+<section id="step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span">
+<h4><em><strong>Step 0</strong></em>: <span style="color:Tan">Initialize the lattice and the simulation</span><a class="headerlink" href="#step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span" title="Permalink to this heading">#</a></h4>
+<p>We want a square, 10x10 lattice (N = 100). By calling the <code class="docutils literal notranslate"><span class="pre">np.random.uniform()</span></code> function, I know I will get an uniform distribution of values between 0 and 1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we want to prepare the system into spin up and spin down</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span><span class="p">[</span><span class="n">lattice</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># any values greater than 0.5, I set equal to 1</span>
+<span class="n">lattice</span><span class="p">[</span><span class="n">lattice</span> <span class="o">!=</span><span class="mi">1</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span> <span class="c1"># anything I don&#39;t change before, I make equal to -1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Last thing for the lattice is to visually check and see if everything turned out okay.  Every value in the lattice should be <span class="math notranslate nohighlight">\(+1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we are going to create a temperature variable. In the equations above, the inverse temperature is represented by <span class="math notranslate nohighlight">\(1/k_B T\)</span>, where <span class="math notranslate nohighlight">\(k_B\)</span> is the Boltzmann constant. If <span class="math notranslate nohighlight">\(T = \inf\)</span>, then the inverse temperature will zero, and if <span class="math notranslate nohighlight">\(T=0\)</span> then the inverse temperature will be <span class="math notranslate nohighlight">\(∞\)</span>.  Accordingly, we can define:</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+\beta = 1/k_B T
+\]</div>
+<p>where we can artificially restrict <span class="math notranslate nohighlight">\(\beta \ge 0\)</span> to make calculations simple.  We already know what the system is like at infinite temperature because we are starting out in a thermalized state, so this way as <span class="math notranslate nohighlight">\(T → 0\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> will become very large.  For now, let’s start with <span class="math notranslate nohighlight">\(\beta=0\)</span>, just to make sure things are working.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># thermodynamic inverse temperature variable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For right now, let’s set <span class="math notranslate nohighlight">\(H=0\)</span>, <span class="math notranslate nohighlight">\(J=1\)</span>, and <span class="math notranslate nohighlight">\(\mu=1\)</span>.  This means I can omit them from my code, and proceed to step 1 of the algorithm.</p>
+</section>
+<section id="step-1-span-style-color-tan-select-an-atom-in-the-system-span">
+<h4><em><strong>Step 1</strong></em>: <span style="color:Tan">Select an atom in the system</span><a class="headerlink" href="#step-1-span-style-color-tan-select-an-atom-in-the-system-span" title="Permalink to this heading">#</a></h4>
+<p>This is where we need to make another coding decision. If we start with the atom at location (0, 0), then there are no neighbors located at (-1, 0) and (0, -1) because of how <code class="docutils literal notranslate"><span class="pre">numpy</span></code> matrices are indexed. This same thing will happen for all of the other atoms at the edges of my lattice: they are missing neighbors. So for right now, we will start in the <em>second</em> row and <em>second</em> column, then stop at the <em>second-to-last</em> row and <em>second-to-last</em> column. We won’t be able to update the edge atoms with the lower energy configurations, but my code will run for right now.</p>
+</section>
+<section id="step-2-5-span-style-color-tan-see-the-code-comments-span">
+<h4><em><strong>Step 2 - 5</strong></em>: <span style="color:Tan">See the code comments</span><a class="headerlink" href="#step-2-5-span-style-color-tan-see-the-code-comments-span" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --&gt; Step 1: double for-loop</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span> <span class="c1"># the range is from (1,9) instead of (0, 10)</span>
+  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span> <span class="c1"># the range is from (1,9) instead of (0, 10)</span>
+
+        <span class="c1"># --&gt; Step 2: Calculate the energy of the atom</span>
+        <span class="c1"># the sum over the nearest neighbors is completed first to make it easy to check</span>
+        <span class="n">sum_NN</span> <span class="o">=</span> <span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># then the total energy for the atom is calculated</span>
+        <span class="n">E_a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">sum_NN</span>
+
+        <span class="c1"># --&gt; Step 3: Change the spin and re-calculate the energy</span>
+        <span class="c1"># Remember we said above that changing the spin just changes the sign</span>
+        <span class="c1"># of the energy</span>
+        <span class="n">E_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">E_a</span>
+
+        <span class="c1"># --&gt; Step 4: If the energy decreased or the probability sample</span>
+        <span class="c1"># meets the requirement</span>
+        <span class="k">if</span> <span class="n">E_b</span> <span class="o">&lt;</span> <span class="n">E_a</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">E_b</span> <span class="o">-</span> <span class="n">E_a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">():</span>
+            <span class="c1"># Update the actual spin value in the lattice</span>
+            <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="c1"># --&gt; Step 5: The stop condition for this code block is that all of the</span>
+        <span class="c1"># interior atoms have been updated at least once</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we are going to visualize the system again to see if anything changed. Since we set the thermodynamic temperature at <span class="math notranslate nohighlight">\(\beta=0 → T = \infty\)</span>, it should still be in a mixed state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Above, we implemented a Monte Carlo Markov Chain (MCMC) to update the atom’s spin state. The state transition was considered based on sampling from both the Boltzmann distribution and the uniform distribution. The MCMC simulation allowed us to implement the Hamiltonian model for how we think the sytem should behave.</p>
+<p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Temperature Experiment</p>
+<p>So far, so good!</p>
+<p>Let’s make some improvements to the code, and simulate the model for a range of temperatures.</p>
+<p>In the code below, the variable <code class="docutils literal notranslate"><span class="pre">sqrt_N</span></code> = <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>.  Since we have <span class="math notranslate nohighlight">\(N\)</span> atoms in the system, the lattice has dimension <span class="math notranslate nohighlight">\(\sqrt{N} \times \sqrt{N}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making the lattice a little larger</span>
+<span class="n">sqrt_N</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="c1"># Create a new lattice</span>
+<span class="n">init_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">,</span><span class="n">sqrt_N</span><span class="p">))</span>
+
+<span class="c1">#mask lattice</span>
+<span class="n">init_lattice</span><span class="p">[</span><span class="n">init_lattice</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">init_lattice</span><span class="p">[</span><span class="n">init_lattice</span> <span class="o">!=</span><span class="mi">1</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span>
+
+<span class="c1"># A new step here to create non-interacting atoms around the edge by padding</span>
+<span class="c1"># the array edges with zeroes.  This way, we can iterate over all N atoms in the</span>
+<span class="c1"># system without causing an out-of-bounds error</span>
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sqrt_N</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">sqrt_N</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">sqrt_N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">sqrt_N</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">init_lattice</span>
+
+<span class="c1"># Define a range of temperatures to test</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Empty variable to hold the magnetism calculations</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># For each temperature</span>
+<span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">beta</span><span class="p">):</span>
+
+    <span class="c1"># Repeat the MCMC step 100 times to make sure the system is stable</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+
+        <span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">shape</span> <span class="c1"># Figure out the size of the lattice</span>
+
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># keep the neighbors inside the region</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+
+                <span class="c1"># sum over the nearest neighbors</span>
+                <span class="n">sum_NN</span> <span class="o">=</span> <span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+                <span class="c1"># calculate the energy</span>
+                <span class="n">E_a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">sum_NN</span>
+
+                <span class="c1"># re-calculate the energy for a spin state change</span>
+                <span class="n">E_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">E_a</span>
+
+                <span class="c1"># choose whether to keep the new state or not</span>
+                <span class="k">if</span> <span class="n">E_b</span> <span class="o">&lt;</span> <span class="n">E_a</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">E_b</span> <span class="o">-</span> <span class="n">E_a</span><span class="p">)</span><span class="o">*</span><span class="n">temp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()):</span>
+                    <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="c1"># After the system is stable, calculate the net magnetism by summing over</span>
+    <span class="c1"># all of the spin values and averaging them</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">lattice</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt_N</span><span class="o">*</span><span class="n">sqrt_N</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the final lattice to see how the overall spin state has changed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also plot the net-magnetism as a function of temperature, as shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Inverse Temperature $\beta$&quot;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Net Magnetism M&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The plot above shows a noisy transition from 0 net magnetism at <span class="math notranslate nohighlight">\(\beta=0\)</span> (or <span class="math notranslate nohighlight">\(T=\infty\)</span>), to completely magnetized by <span class="math notranslate nohighlight">\(\beta=2\)</span>.  The phase transition resembles the <a class="reference external" href="https://mathworld.wolfram.com/HyperbolicTangent.html"><span class="math notranslate nohighlight">\(tanh\)</span></a> function, but centered around 1.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Initial version: Mark Neubauer</p></li>
+<li><p>From APS DSECOP materials and <a class="reference external" href="https://people.duke.edu/~ccc14/sta-663-2016/15C_MonteCarloIntegration.html">https://people.duke.edu/~ccc14/sta-663-2016/15C_MonteCarloIntegration.html</a></p></li>
+</ul>
+<p>© Copyright 2023</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_sources/lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week_13.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../homework/Homework_13.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assignment 13: Monte Carlo Integration and Sampling Methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-introduction-span"><span style="color:Orange">Introduction</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-monte-carlo-integration-span"><span style="color:Orange">Monte Carlo Integration</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-multidimensional-monte-carlo-integration-and-variance-scaling-span"><span style="color:LightBlue">Multidimensional Monte Carlo integration and variance scaling</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-variance-and-bias-in-monte-carlo-integration-span"><span style="color:LightBlue">Variance and Bias in Monte Carlo integration</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-single-monte-carlo-estimate-span"><span style="color:Tan">Single Monte Carlo estimate</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-using-multiple-independent-sequences-to-monitor-convergence-span"><span style="color:Tan">Using multiple independent sequences to monitor convergence</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-proof-that-monte-carlo-estimator-is-unbiased-span"><span style="color:Tan">Proof that Monte Carlo Estimator is Unbiased</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-change-of-variables-span"><span style="color:LightBlue">Change of Variables</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-a-change-of-variables-lets-us-use-100-of-draws-span"><span style="color:Tan">A change of variables lets us use 100% of draws</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-monte-carlo-swindles-span"><span style="color:LightBlue">Monte Carlo Swindles</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-antithetic-variables-span"><span style="color:Tan">Antithetic variables</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-importance-sampling-span"><span style="color:Tan">Importance Sampling</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-expected-answer-span"><span style="color:Tan">Expected answer</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-using-direct-monte-carlo-integration-span"><span style="color:Tan">Using direct Monte Carlo integration</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-tan-using-importance-sampling-span"><span style="color:Tan">Using importance sampling</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-quasi-random-numbers-span"><span style="color:LightBlue">Quasi-random numbers</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-vegas-method-span"><span style="color:LightBlue">Vegas Method</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-markov-chains-and-mcmc-a-brief-review-span"><span style="color:Orange">Markov Chains and MCMC: A Brief Review</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-algorithm-span"><span style="color:LightGreen">Metropolis Algorithm</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-2d-ising-model-span"><span style="color:Orange">2D Ising Model</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-ising-hamiltonian-for-a-ferromagnetic-2d-system-span"><span style="color:LightGreen">Ising Hamiltonian for a Ferromagnetic 2D System</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-metropolis-hastings-algorithm-walk-through-span"><span style="color:LightGreen">Metropolis-Hastings Algorithm Walk-through</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-span-style-color-tan-initialize-the-lattice-and-the-simulation-span"><em><strong>Step 0</strong></em>: <span style="color:Tan">Initialize the lattice and the simulation</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-span-style-color-tan-select-an-atom-in-the-system-span"><em><strong>Step 1</strong></em>: <span style="color:Tan">Select an atom in the system</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-5-span-style-color-tan-see-the-code-comments-span"><em><strong>Step 2 - 5</strong></em>: <span style="color:Tan">See the code comments</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Neubauer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

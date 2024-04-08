@@ -1,0 +1,902 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Unfolding &#8212; PHYS 398 DAP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/ResponseConvolutionUnfolding';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unfolding" href="../homework/Homework_10.html" />
+    <link rel="prev" title="Response, Convolution and Unfolding" href="../Week_10.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PHYS 398 DAP - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PHYS 398 DAP - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    <span style="color:Blue">Data Analysis for Physics</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pandas.html">Handling Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_01.html">Homework 01: Numerical python and data handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_02.html"><span style="color: blue;"><b>Probability Theory</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityTheory.html">Probability Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityTheory2.html"><span style="color:Orange">Bayes’ Rule</span></a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Visualization.html">Visualizing Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_02.html">Homework 02: Probability Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_03.html"><span style="color: blue;"><b>Important Probability Distributions</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProbabilityDistributions.html">Important Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_03.html">Homework 03: Important Probability Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Statistics.html">Statistics</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Statistics2.html"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Density.html">Estimating Probability Density from Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_05.html">Homework 05: Kernel Density Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UncertaintiesandFitting.html">Uncertainties and Fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_07.html"><span style="color: blue;"><b>Frequentist and Bayesian Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FrequentistBayesian.html">Frequentist and Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MCMC.html">Markov Chain Monte Carlo in Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_07.html">Homework 07: Bayesian Statistics and MCMC</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_01.html"><span style="color: blue;"><b>Project 01</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_HiggsTauTau.html">Higgs Boson Decaying to Tau Leptons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_ExoticParticles.html">Searching for Exotic Particles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_GalaxyZoo.html">Galaxy Zoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_08.html"><span style="color: blue;"><b>Stochastic Processes, Markov Chains &amp; Variational Inference</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Markov.html">Stochastic Processes and Markov-Chain Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Variational.html">Variational Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_08.html">Homework 08: Markov Chains</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConfidenceIntervals.html">Confidence from Data</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="HypothesisTesting.html">Hypothesis Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Unfolding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_10.html">Unfolding</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FourierMethods.html">Fourier Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TimeSeries.html">Time Series Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_12.html">Homework 12: Time Series Analysis of Projectile Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_02.html"><span style="color: blue;"><b>Project 02</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_HiggsTauTau.html"><em><strong><span style="color:Yellow">Higgs Boson Decaying to Tau Leptons</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_ExoticParticles.html"><em><strong><span style="color:Yellow">Searching for Exotic Particles</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_GalaxyZoo.html"><em><strong><span style="color:Yellow">Galaxy Zoo</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_13.html"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MonteCarloSamplingMethods.html">Monte Carlo and Sampling Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_13.html">Assignment 13: Monte Carlo Integration and Sampling Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_14.html"><span style="color: blue;"><b>Bias and Blind Analysis</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BiasBlindAnalysis.html">Bias and Blind Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_15.html"><span style="color: blue;"><b>Machine Learning Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MachineLearningMethodsInference.html">Deep Learning</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/illinois-dap/DataAnalysisForPhysicists/blob/main/_sources/lectures/ResponseConvolutionUnfolding.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/illinois-dap/DataAnalysisForPhysicists" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_sources/lectures/ResponseConvolutionUnfolding.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Unfolding</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import seaborn as sns; sns.set()
+import numpy as np
+import pandas as pd
+from random import gauss
+from random import random
+from numpy.linalg import inv
+!pip install pyunfold
+from pyunfold import iterative_unfold
+from pyunfold.callbacks import Logger
+</pre></div>
+</div>
+</div>
+</div>
+<p>Your measurement isn’t perfect.  For example:</p>
+<ul class="simple">
+<li><p>there is a finite resolution to the detector.  Often this will take the place of a Gaussian (or Gaussian-like) smearing around the true value.</p></li>
+<li><p>your measurement could be systematically off in scale (e.g. your ruler is 0.5cm too long)</p></li>
+<li><p>you can have an inefficiency in your detector either from the finite apature or some random loss.</p></li>
+</ul>
+<p>Mathetmatically, you can think about it this way:
+$<span class="math notranslate nohighlight">\(\vec{M} = \bf{R} \vec{T}\)</span><span class="math notranslate nohighlight">\(
+Your measurement \)</span>\vec{M}<span class="math notranslate nohighlight">\( with has precision which is described by a *response matrix* \)</span>\bf{R}<span class="math notranslate nohighlight">\( which operates on the truth, \)</span>\vec{T}<span class="math notranslate nohighlight">\(.  You are interested in knowing \)</span>\bf{T}<span class="math notranslate nohighlight">\(.  The process of getting to \)</span>\bf{T}<span class="math notranslate nohighlight">\( from \)</span>\vec{M}$ is <em>unfolding</em>.</p>
+<p>Do you know <span class="math notranslate nohighlight">\(\bf{R}\)</span>?  Yes, you can likely know <span class="math notranslate nohighlight">\(\bf{R}\)</span> because it’s based on knowledge of your detector and measurement process.  Often this means that there is a detailed Monte Carlo simulation of your detector and measurement process.</p>
+<p>The most obvious thing to do is to invert <span class="math notranslate nohighlight">\(\bf{R}\)</span> to get:
+$<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\bf{R} \vec{T}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} =  \vec{T}\)</span>$ Let’s try that.</p>
+<p>First we’ll generate samples, <em>num_samples</em>, according to a distribution.  This is what nature made for us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s1">&#39;poster&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.markeredgewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="nb">range</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">nbins</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
+<span class="n">true_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">true_samples</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="nb">range</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">data_true</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">true_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">data_true</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_true</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s mess up the truth.  Instead of a detailed Monte Carlo in this case we will just add noise via a shift in the mean with a Gaussian smearing.  This is what we think our detector actually measures given these truth samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noise_width</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">noise_shift</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">random_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">noise_shift</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">noise_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">observed_samples</span> <span class="o">=</span> <span class="n">true_samples</span> <span class="o">+</span> <span class="n">random_noise</span>
+<span class="c1">#observed_samples = true_samples #this was a check I did to make sure that the inversion method worked if I didn&#39;t smear the observation</span>
+<span class="n">data_observed</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">observed_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">data_observed</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_true</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_observed</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_observed_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data_observed</span><span class="p">)</span>
+<span class="n">data_observed_err</span>
+
+<span class="n">efficiencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">data_observed</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">efficiencies</span>
+<span class="n">efficiencies_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">efficiencies</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">efficiencies_err</span>
+<span class="n">response_hist</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">observed_samples</span><span class="p">,</span> <span class="n">true_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">response_hist_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">response_hist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we are going to require each <em>column</em> (truth bin) to sum up to the efficiency value (here we’ve just taken all the efficiencies to be unity so all the columns will add up to one).  This is equivalent to saying that every truth value will be measured somewhere.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">column_sums</span> <span class="o">=</span> <span class="n">response_hist</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">normalization_factor</span> <span class="o">=</span> <span class="n">efficiencies</span> <span class="o">/</span> <span class="n">column_sums</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">response_hist</span> <span class="o">*</span> <span class="n">normalization_factor</span>
+<span class="n">response_err</span> <span class="o">=</span> <span class="n">response_hist_err</span> <span class="o">*</span> <span class="n">normalization_factor</span>
+<span class="c1">#checking...</span>
+<span class="n">response</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">inv_response_hist</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$P(E_i|C_{\mu})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Truth (cause) bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Measured (effect) bins&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Normalized response matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So now we have the response matrix and it’s inverse so we can try:
+$<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} =  \vec{T}\)</span>$</p>
+<p>We’ve called that, awkwardly, “new_truth”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_truth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">inv_response_hist</span><span class="p">,</span><span class="n">data_observed</span><span class="p">)</span>
+<span class="c1">#I was surprised that just multiplying the matrices didn&#39;t work the way I expcted and I had to find &quot;matmul&quot;...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_truth</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inv_response_hist</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_observed</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_true</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_observed</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">new_truth</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;from matrix inversion&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_truth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Well that didn’t work well.  The green curve looks vaguely like the original distribution but it has far too many fluctuations to be useful in any way. Why? Well, let’s take a look at this inverse matrix.  What does it look like when we just let the truth equal the observations?  It’s easy to go back and turn the noise down to zero.  Seeing that then the inversion works is a trivial but important check.</p>
+<p>(Also, run the process of generating the “observed” points that go into the response matrix multiple times; you will see that the inverse of the response matrix changes noticably depending on the particular random number set.)</p>
+<p>Finally, the matrix inversion method requires the response to be a square matrix; from the physics point of view, the response can be square, but need not be.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">inv_response_hist</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Cause bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Effect bins&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Inverse of response matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="unfolding">
+<h1>Unfolding<a class="headerlink" href="#unfolding" title="Permalink to this heading">#</a></h1>
+<p>So where do we go from here?  The basic idea is <em>unfolding</em>.  This improves on the matrix inversion by including some additional infomration.  Usually there is a requirement of a smooth final distribution.  This usually makes sense from a physical point of view but there are some clear dangers here.</p>
+<p>There is another approach, convolving any theory you want to compare to with the response function to match the data.  This essentially smears the model to match the data.  The problem with this is that you can’t actually compare your measurement to anyone elses directly anymore.  In my world, unfolding is the proper step, but it must be taken with care.</p>
+<p>We’re going to discuss <em>Iterative Bayesian Unfolding</em>.  This is based on Bayes’ Theorem (go back to the beginning when we discussed the basics of probability).  This method is documented <a class="reference external" href="https://inspirehep.net/literature/374574">here</a>.</p>
+<p>Let’s start with:
+$<span class="math notranslate nohighlight">\(\hat{n}(C_i) = n(E) P(C_i|E) \)</span><span class="math notranslate nohighlight">\(
+so for each effect \)</span>j<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(P(C_i|E_j) = \frac{P(E_j|C_i)P_{a}(C_i)}{n(E)}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(P(C_i|E_j) = \frac{P(E_j|C_i)P_{a}(C_i)}{\sum_lP(E_j|C_l)P_a(C_l)}\)</span>$</p>
+<p>Given a <em>guess</em> at what the truth (<span class="math notranslate nohighlight">\(P_{a}(C_i)\)</span>) and our understanding from simulation of how the pdf for each effect bin in terms of the cause bin, <span class="math notranslate nohighlight">\(P(E_j|C_i)\)</span>, is we can get a constraint on <span class="math notranslate nohighlight">\(P(C_i|E_j)\)</span> and then we have both terms on the rhs of:
+$<span class="math notranslate nohighlight">\(\hat{n}(C_i) = n(E) P(C_i|E) \)</span>$</p>
+<p>Then we iterate.  We calcuate <span class="math notranslate nohighlight">\(\hat{n}(C_i)\)</span> based on the intial guess and then use, those values as the new <span class="math notranslate nohighlight">\(P_a(C_i)\)</span>.  We iterate as many times as necessary until <span class="math notranslate nohighlight">\(\hat{n}(C_i)\)</span> is stable from one iteration to the next.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">unfolded_results</span> <span class="o">=</span> <span class="n">iterative_unfold</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_observed</span><span class="p">,</span>
+                                    <span class="n">data_err</span><span class="o">=</span><span class="n">data_observed_err</span><span class="p">,</span>
+                                    <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
+                                    <span class="n">response_err</span><span class="o">=</span><span class="n">response_err</span><span class="p">,</span>
+                                    <span class="n">efficiencies</span><span class="o">=</span><span class="n">efficiencies</span><span class="p">,</span>
+                                    <span class="c1">#ts=&#39;rmd&#39;,</span>
+                                    <span class="n">efficiencies_err</span><span class="o">=</span><span class="n">efficiencies_err</span><span class="p">,</span>
+                                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">Logger</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1: ts = 0.1997, ts_stopping = 0.01
+Iteration 2: ts = 0.0365, ts_stopping = 0.01
+Iteration 3: ts = 0.0111, ts_stopping = 0.01
+Iteration 4: ts = 0.0040, ts_stopping = 0.01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_true</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_observed</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">unfolded_results</span><span class="p">[</span><span class="s1">&#39;unfolded&#39;</span><span class="p">],</span>
+            <span class="n">yerr</span><span class="o">=</span><span class="n">unfolded_results</span><span class="p">[</span><span class="s1">&#39;sys_err&#39;</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+            <span class="n">elinewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bayesian unf. dist.&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a430c07234092509bc221b974e7a69af2c6bc09972f5bb4a5c5583bc33e42fdc.png" src="../../_images/a430c07234092509bc221b974e7a69af2c6bc09972f5bb4a5c5583bc33e42fdc.png" />
+</div>
+</div>
+<p><strong>Additionally, it’s worth noting that we have cheated!.</strong> We have generated the response matrix with our truth and our observations, paired together point by point.  In reality everything we’ve done so far would be with <em>simulation</em> and nothing is from our actual measurement. This is great for checking the code (if this doesn’t work, we’ve got errors…).</p>
+<p>So now we will generate a new set of observed samples <em>observed_samples2</em>.  These are drawn from the same truth function and the same noise parameterizations but are independent of the truth/observed pairs that are used in generating the response matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">#here the ...2 variables are independent of true_samples and observed_samples that we used to make the response</span>
+<span class="n">true_samples2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">random_noise2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">noise_shift</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">noise_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">observed_samples2</span> <span class="o">=</span> <span class="n">true_samples2</span> <span class="o">+</span> <span class="n">random_noise2</span>
+<span class="n">data_observed2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">observed_samples2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">data_observed_err2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data_observed2</span><span class="p">)</span>
+<span class="c1">#now we&#39;ll redo the unfolding using as our &quot;measurement&quot;</span>
+<span class="n">unfolded_results2</span> <span class="o">=</span> <span class="n">iterative_unfold</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_observed2</span><span class="p">,</span>
+                                    <span class="n">data_err</span><span class="o">=</span><span class="n">data_observed_err2</span><span class="p">,</span>
+                                    <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
+                                    <span class="n">response_err</span><span class="o">=</span><span class="n">response_err</span><span class="p">,</span>
+                                    <span class="n">efficiencies</span><span class="o">=</span><span class="n">efficiencies</span><span class="p">,</span>
+                                    <span class="n">efficiencies_err</span><span class="o">=</span><span class="n">efficiencies_err</span><span class="p">,</span>
+                                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">Logger</span><span class="p">()],</span>
+                                     <span class="n">ts_stopping</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_true</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_observed2</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">unfolded_results2</span><span class="p">[</span><span class="s1">&#39;unfolded&#39;</span><span class="p">],</span>
+            <span class="n">yerr</span><span class="o">=</span><span class="n">unfolded_results2</span><span class="p">[</span><span class="s1">&#39;sys_err&#39;</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+            <span class="n">elinewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bayesian unfolded distribution (independent)&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The concept of “closure” is a quantification of how well the unfolding process works.  There are two kinds of closure here:</p>
+<ul class="simple">
+<li><p><em>technical closure</em> is a measure how how well the smeared ‘data’ unfolds to the truth it was created from.</p></li>
+<li><p><em>closure</em> is using independent ‘data’ from the response matrix generation.</p></li>
+</ul>
+<p>In both cases, the ratio of the unfolded simulation to the truth is used.  Here neither of the closures are very good on the tails of the distributions.  This is most likely because we are not sampling enough counts to populate the Gaussians that far out on the tails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">closure</span> <span class="o">=</span> <span class="n">data_observed2</span><span class="o">/</span><span class="n">data_true</span>
+<span class="n">closure_tech</span> <span class="o">=</span> <span class="n">data_observed</span><span class="o">/</span><span class="n">data_true</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">closure</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;closure&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">closure_tech</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;tech. closure&#39;</span><span class="p">)</span>
+
+<span class="c1">#ax.errorbar(np.arange(num_bins), unfolded_results2[&#39;unfolded&#39;],</span>
+<span class="c1">#            yerr=unfolded_results2[&#39;sys_err&#39;],</span>
+<span class="c1">#            alpha=0.7,</span>
+<span class="c1">#            elinewidth=3,</span>
+<span class="c1">#            capsize=4,</span>
+<span class="c1">#            ls=&#39;None&#39;, marker=&#39;.&#39;, ms=10,</span>
+<span class="c1">#            label=&#39;Bayesian unfolded distribution (independent)&#39;)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>With unfolding you don’t have information on what a given measured events truth value was.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/hep-ph/9509307.pdf">Singluar Value Decomposition</a> provides another way of avoiding the issues with the inversion method.</p></li>
+<li><p>The Bayesian method discussed here is well-suited to multiple dimensions (e.g. you want to unfold in x and y and those measurements are not necessarily independent of each other).  The initial guess becomes harder to constrain with multple dimensions. pyunfold uses a flat prior as default but that is not universal and can be changed.</p></li>
+<li><p>There are those that want to use ML for unfolding.  This seems likely to create a dangerous dependence on the model without very careful checks (especially combined with multi-dimensional unfolding). A recent paper is <a class="reference external" href="https://inspirehep.net/literature/1766424">here</a>.  The code is <a class="reference external" href="https://github.com/ericmetodiev/OmniFold">here</a>.</p></li>
+<li><p>The best way to reduce all of these issues/worries is to have an unfolding with the most diagonal response matrix possible, then the unfolding process has to do less work.</p></li>
+<li><p>Pyunfold propagates the uncertainties directly.  Often the error propagation is done using bootstrapping for simplicity.</p></li>
+</ul>
+<p>The simplest method of “unfolding” is a <em>bin-by-bin</em> correction.  Here, you just take a histogram of the reconstructed simulation and divide it by the truth simulation.  This ratio can be applied as a correction factor to the measured data.</p>
+<p>This works well primarily  when the response matrix is very close to diagonial and the correction is mainly for efficiency (e.g. you measure the energy of each photon with very good precision but don’t measure all the photons).  In other cases, this has a strong dependence on the <em>slope</em> of the simulations being similar to that of the real data that.</p>
+<p>The advantage of this is the simplicity of the method, both computationally and conceptually.  The downside is that if it is used in the cases where migration is significant, there is a large dependence on whether the shape of the simulation used to generate the correction is the same as the shape of the data itself.</p>
+<p>Here is an example.  There are two underlying truth distributions, a Gaussian and a flat distribution.  The resolution causes a 10% Gaussian smearing of each value.  The bin-by-bin correction is calcuated as the ratio of the reconstructed distribution to the truth distribution.</p>
+<p><img alt="eff.png" src="data:image/png;base64,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" /></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_sources/lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week_10.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../homework/Homework_10.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unfolding</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Neubauer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

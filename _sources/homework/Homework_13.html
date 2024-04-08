@@ -1,0 +1,1291 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Assignment 13: Monte Carlo Integration and Sampling Methods &#8212; PHYS 398 DAP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/homework/Homework_13';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bias and Blind Analysis" href="../Week_14.html" />
+    <link rel="prev" title="Monte Carlo and Sampling Methods" href="../lectures/MonteCarloSamplingMethods.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PHYS 398 DAP - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PHYS 398 DAP - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    <span style="color:Blue">Data Analysis for Physics</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Pandas.html">Handling Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_01.html">Homework 01: Numerical python and data handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_02.html"><span style="color: blue;"><b>Probability Theory</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ProbabilityTheory.html">Probability Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ProbabilityTheory2.html"><span style="color:Orange">Bayes’ Rule</span></a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Visualization.html">Visualizing Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_02.html">Homework 02: Probability Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_03.html"><span style="color: blue;"><b>Important Probability Distributions</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ProbabilityDistributions.html">Important Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_03.html">Homework 03: Important Probability Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics.html">Statistics</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics2.html"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Density.html">Estimating Probability Density from Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_05.html">Homework 05: Kernel Density Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/UncertaintiesandFitting.html">Uncertainties and Fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_07.html"><span style="color: blue;"><b>Frequentist and Bayesian Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/FrequentistBayesian.html">Frequentist and Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/MCMC.html">Markov Chain Monte Carlo in Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_07.html">Homework 07: Bayesian Statistics and MCMC</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_01.html"><span style="color: blue;"><b>Project 01</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_HiggsTauTau.html">Higgs Boson Decaying to Tau Leptons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_ExoticParticles.html">Searching for Exotic Particles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_GalaxyZoo.html">Galaxy Zoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_01_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_08.html"><span style="color: blue;"><b>Stochastic Processes, Markov Chains &amp; Variational Inference</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Markov.html">Stochastic Processes and Markov-Chain Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Variational.html">Variational Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_08.html">Homework 08: Markov Chains</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ConfidenceIntervals.html">Confidence from Data</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../lectures/HypothesisTesting.html">Hypothesis Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ResponseConvolutionUnfolding.html">Unfolding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_10.html">Unfolding</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/FourierMethods.html">Fourier Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/TimeSeries.html">Time Series Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="Homework_12.html">Homework 12: Time Series Analysis of Projectile Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_02.html"><span style="color: blue;"><b>Project 02</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_HiggsTauTau.html"><em><strong><span style="color:Yellow">Higgs Boson Decaying to Tau Leptons</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_ExoticParticles.html"><em><strong><span style="color:Yellow">Searching for Exotic Particles</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_GalaxyZoo.html"><em><strong><span style="color:Yellow">Galaxy Zoo</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../projects/Project_02_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_13.html"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/MonteCarloSamplingMethods.html">Monte Carlo and Sampling Methods</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Assignment 13: Monte Carlo Integration and Sampling Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_14.html"><span style="color: blue;"><b>Bias and Blind Analysis</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/BiasBlindAnalysis.html">Bias and Blind Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_15.html"><span style="color: blue;"><b>Machine Learning Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/MachineLearningMethodsInference.html">Deep Learning</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/illinois-dap/DataAnalysisForPhysicists/blob/main/_sources/homework/Homework_13.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/illinois-dap/DataAnalysisForPhysicists" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_sources/homework/Homework_13.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 13: Monte Carlo Integration and Sampling Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-1-span-optimizing-speed-of-the-2d-ising-model-simulations"><span style="color:Orange">Problem 1</span>: <em><strong>Optimizing Speed of the 2D Ising Model Simulations</strong></em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-complexity-analysis-span"><span style="color:LightGreen">Complexity Analysis</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-execution-optimization-span"><span style="color:LightGreen">Execution Optimization</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-execution-optimization-toolkit-span"><span style="color:LightBlue">Execution Optimization Toolkit</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-violet-problem-1a-span-complete-the-functions-intialize-lattice-and-mcmc-step"><span style="color:Violet">Problem 1a)</span> <em><strong>Complete the functions <code class="docutils literal notranslate"><span class="pre">intialize_lattice</span></code> and <code class="docutils literal notranslate"><span class="pre">MCMC_step</span></code></strong></em></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-violet-problem-1b-span-perform-the-following-experiment"><span style="color:Violet">Problem 1b)</span> <em><strong>Perform the following experiment</strong></em></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-violet-problem-1c-span-optimize-the-code-to-see-if-you-can-reduce-the-time-it-takes-to-run"><span style="color:Violet">Problem 1c)</span> <em><strong>Optimize the code to see if you can reduce the time it takes to run</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-2-span-study-of-magnetic-domain-formation"><span style="color:Orange">Problem 2</span>: <em><strong>Study of Magnetic Domain Formation</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-3-span-monte-carlo-integration"><span style="color:Orange">Problem 3</span>: <em><strong>Monte Carlo Integration</strong></em></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-13-monte-carlo-integration-and-sampling-methods">
+<h1>Assignment 13: Monte Carlo Integration and Sampling Methods<a class="headerlink" href="#assignment-13-monte-carlo-integration-and-sampling-methods" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="span-style-color-orange-problem-1-span-optimizing-speed-of-the-2d-ising-model-simulations">
+<h2><span style="color:Orange">Problem 1</span>: <em><strong>Optimizing Speed of the 2D Ising Model Simulations</strong></em><a class="headerlink" href="#span-style-color-orange-problem-1-span-optimizing-speed-of-the-2d-ising-model-simulations" title="Permalink to this heading">#</a></h2>
+<p>In this problem, you will work on optimizing the execution time for the 2D Ising model simulations from the <code class="docutils literal notranslate"><span class="pre">MonteCarloSamplingMethods</span></code> lecture <a class="reference external" href="https://github.com/illinois-dap/DataAnalysisForPhysicists/blob/b7c54e68571ac727d7bfd945ecf11af326d6924b/_sources/lectures/MonteCarloSamplingMethods.ipynb">notebook</a>. That code takes a few minutes to run for even a fairly small system of atoms. We want to optimize the code to make it as fast as possible so that we can repeat our results many times to make sure they are reliable, study larger systems, and use computational resources wisely.</p>
+<p>Optimizing code requires two different types of analysis:</p>
+<ol class="arabic simple">
+<li><p><span style="color:Violet">Complexity analysis</span>. This approach considers the number of commands required to finish your simulation, and can be used to estimate the amount of time it takes to run your code before you run it.  Complexity analysis leverages mathematical cleverness to solve a problem using the fewest number of steps possible.  It does not depend on what programming language you use, or what computer your code will run on, which makes it a very powerful and flexible technique.  <a class="reference external" href="https://discrete.gr/complexity/">For a good introduction, see here.</a></p></li>
+<li><p><span style="color:Violet">Execution optimization</span>. This approach considers how to best use the hardware resources available to you, so it requires an understanding of both the different code libraries and languages you are using, and how the hardware uses these libraries to return your result.  Significant improvements can be made, but it can be difficult to reduplicate the optimization for your algorithm on another machine or in a different programming language.</p></li>
+</ol>
+<p>Execution optimization is more challenging than complexity analysis and is hardware specific, so in general you will want to start with complexity analysis, and then add execution optimization as the second optimization step.</p>
+<section id="span-style-color-lightgreen-complexity-analysis-span">
+<h3><span style="color:LightGreen">Complexity Analysis</span><a class="headerlink" href="#span-style-color-lightgreen-complexity-analysis-span" title="Permalink to this heading">#</a></h3>
+<p>To gain an understanding of complexity analysis, let’s start by looking at a function that defines just the MCMC step.  Prepare to dust off your counting skills:</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="k">def</span> <span class="nf">MCMC_step</span><span class="p">(</span><span class="n">T</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="mf">2.</span>     <span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">shape</span>
+<span class="mf">3.</span>     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="mf">4.</span>         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="mf">5.</span>             <span class="n">sum_NN</span> <span class="o">=</span> <span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">+</span>
+                         <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">+</span>
+                         <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span>
+                         <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="mf">6.</span>             <span class="n">E_a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">sum_NN</span>           
+<span class="mf">7.</span>             <span class="n">E_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">E_a</span>
+<span class="mf">8.</span>             <span class="k">if</span> <span class="n">E_b</span> <span class="o">&lt;</span> <span class="n">E_a</span><span class="p">:</span>
+<span class="mf">9.</span>                 <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="mf">10.</span>             <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">E_b</span> <span class="o">-</span> <span class="n">E_a</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">():</span>
+<span class="mf">11.</span>                <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="mf">12.</span>    <span class="k">return</span> <span class="n">lattice</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>We want to try and <em>estimate</em> how many commands happen inside this function.  The actual number of commands is not as important as gaining intuition about what parts of the code take the most time to run.  We want to find the slowest things first, so that we can fix them the fastest.  Use the following guide lines to help with the analysis:</p>
+<ol class="arabic simple">
+<li><p><span style="color:LightBlue">Work from inside nested code to outside nested code</span>.</p></li>
+<li><p><span style="color:LightBlue">Corollary: Find the <code class="docutils literal notranslate"><span class="pre">for</span></code> loops first</span>.</p></li>
+</ol>
+<p>There are two <code class="docutils literal notranslate"><span class="pre">for</span></code> loops defined, on lines 3 and 4, and the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop on line 4 is inside the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop on line 3.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop on line 4 repeatedly executes commands on lines 5-11.  Since these commands have a constant number of steps, where the number of steps does not depend on the input arguments to the function, we can say that there are <span class="math notranslate nohighlight">\(C_1\)</span> commands for lines 5-11, and the total number of commands <span class="math notranslate nohighlight">\(T\)</span> for lines 5-11 is
+$<span class="math notranslate nohighlight">\( \Large
+T_{5:11} = C_1
+\)</span>$</p></li>
+<li><p>Now, because there is a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop on line 4, we know that the commands on lines 5-11 will be repeated for <span class="math notranslate nohighlight">\(x = (cols-1) - 1\)</span> times, because that is the number of iterations of the line 4 <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, where the index variable <code class="docutils literal notranslate"><span class="pre">c</span></code> goes through the different column values of the lattice.  Furthermore, we can tell from line 2 that the value of <code class="docutils literal notranslate"><span class="pre">cols</span></code> depends on the input argument to this function.  So when including the command on line 4, we will want to use a variable <span class="math notranslate nohighlight">\(x\)</span> for the number of times this <code class="docutils literal notranslate"><span class="pre">for</span></code> loop executes, and the total number of commands becomes
+$<span class="math notranslate nohighlight">\( \Large
+T_{4:11} = C_1  x
+\)</span>$</p></li>
+<li><p>Next, we need to consider the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop on line 3.  For this notebook, we will only use square matrices, which means that the number of rows and columns will be the same, and the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop on line 3 will execute <span class="math notranslate nohighlight">\(x\)</span> times, the same as the loop on line 4.  The total number of commands increases to
+$<span class="math notranslate nohighlight">\( \Large
+T_{3:11} = C_1x^2
+\)</span>$</p></li>
+<li><p>Finally, we need to account for the command on line 2.  This command is expected to have a constant run time because it is returning the shape of the input, and returning the shape requires the same calculations regardless of what the shape actually is.  Therefore, we can say that the number of commands for line 2 is <span class="math notranslate nohighlight">\(C_2\)</span>.  We can omit lines 1 and 12 because they initialize and exit the function, so the total time is
+$<span class="math notranslate nohighlight">\( \Large
+T = C_1x^2 + C_2
+\)</span>$</p></li>
+</ul>
+<p><strong>Here’s what we know from this analysis</strong></p>
+<ul class="simple">
+<li><p><span style="color:LightBlue">The primary parameter controlling the speed of this algorithm is the size of the lattice that we are simulating.</span>  The <span class="math notranslate nohighlight">\(x\)</span> value is the number of rows/columns in the system.  The value of the other parameter, <span class="math notranslate nohighlight">\(T\)</span>, does not change how fast or slow the code is.</p></li>
+<li><p><span style="color:LightBlue">The slowest part of the code will be the nested for-loop.</span>  The nested for-loop structure is why we have the highest power term in <span class="math notranslate nohighlight">\(T\)</span> is the <span class="math notranslate nohighlight">\(x^2\)</span>.  This is a <em>polynomial run time</em>, which means that if we change from a <span class="math notranslate nohighlight">\(10\times10\)</span> lattice to a <span class="math notranslate nohighlight">\(20\times20\)</span> lattice, we should expect the time it takes to run the code to approximately quadruple.  This can be shown mathematically as follows:
+$<span class="math notranslate nohighlight">\( \Large
+T_1(x=10) = 100C_1 + C_2
+\)</span>$</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \Large
+T_2(x=20) = 400C_1 + C_2
+\]</div>
+<div class="math notranslate nohighlight">
+\[ \Large
+T_2 \approx 4 T_1
+\]</div>
+<p>In general, good coding practices means you will repeat a command as few times as possible. <strong>DON’T</strong> put anything inside a for-loop (i.e. a variable initialization) unless it absolutely must be there, and be careful using for-loops in the first place.</p>
+<p>This function is already very minimal, which means that to optimize it further we need to consider how it can be executed on the hardware.</p>
+</section>
+<section id="span-style-color-lightgreen-execution-optimization-span">
+<h3><span style="color:LightGreen">Execution Optimization</span><a class="headerlink" href="#span-style-color-lightgreen-execution-optimization-span" title="Permalink to this heading">#</a></h3>
+<p>Before we get started optimizing, here are some things to know:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.cs.mtsu.edu/~xyang/2170/computerLanguages.html">Computers convert every programming language to machine code in the end.</a>  However, the compiler a computer uses to do this conversion can make a huge difference in how quickly your code runs.</p></li>
+<li><p><a class="reference external" href="https://www.scaler.com/topics/why-python-is-interpreted-language/">Python is an interpreted language,</a> which means that every time a line of code is executed the computer pretends it has never compiled it before (even if it has, as in the case of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop).  This means Python is easy to read and easy to change as you work, but the flexibility slows the computer down.  Python was designed to be human-friendly, not computer-friendly.</p></li>
+<li><p>The big Python data science libraries like NumPy, SciPy, SciKit-Learn, TensorFlow/Keras, and PyTorch have typically undergone execution optimization to make them as fast as possible.  For example, <a class="reference external" href="https://numpy.org/doc/stable/dev/internals.code-explanations.html">NumPy uses the C programming language to speed up calculations; calculations actually aren’t executed in Python because C has a very good compiler.</a>  As a scientist, sometimes you will need decide whether to choose the speed gained by using a pre-optimized function, or the transparency that comes from coding your own version.</p></li>
+<li><p>Python libraries for visualization like Matplotlib and Pandas will always be slower than libraries used for calculation, even if they have some calculation functionality included (<em>cough</em> Pandas <em>cough</em>).  Keep this in mind when deciding where in your code to generate plots.</p></li>
+</ul>
+<section id="span-style-color-lightblue-execution-optimization-toolkit-span">
+<h4><span style="color:LightBlue">Execution Optimization Toolkit</span><a class="headerlink" href="#span-style-color-lightblue-execution-optimization-toolkit-span" title="Permalink to this heading">#</a></h4>
+<p>Here are some common tools useful for analyzing how your code runs. These tools focus on optimizing <em>speed</em> and <em>memory</em>; there are other tools for optimizing other aspects of programming like <a class="reference external" href="https://docs.python.org/3/library/pydoc.html">documentation</a> and <a class="reference external" href="https://www.techbeamers.com/pylint-tool/">code consistency</a>.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>What you are optimizing</p></th>
+<th class="head"><p>What you use to optimize it</p></th>
+<th class="head"><p>How it works</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Speed</p></td>
+<td><p><a class="reference external" href="https://docs.python.org/3/library/timeit.html">timeit</a></p></td>
+<td><p>Measures how long a code snippet takes to execute</p></td>
+</tr>
+<tr class="row-odd"><td><p>Speed</p></td>
+<td><p><a class="reference external" href="https://tqdm.github.io/">tqdm</a></p></td>
+<td><p>Measures how long a loop takes to execute <em>with a loading bar!!!</em></p></td>
+</tr>
+<tr class="row-even"><td><p>Memory</p></td>
+<td><p><a class="reference external" href="https://pypi.org/project/memory-profiler/#description">memory-profiler</a></p></td>
+<td><p>See which variables and programs use what memory resource</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that these are diagnostic tools that provide a way to measure what the computer does with your code.  It is still up to you to find solutions to slow parts or out-of-memory (OOM) errors and implement them.</p>
+</section>
+<section id="span-style-color-violet-problem-1a-span-complete-the-functions-intialize-lattice-and-mcmc-step">
+<h4><span style="color:Violet">Problem 1a)</span> <em><strong>Complete the functions <code class="docutils literal notranslate"><span class="pre">intialize_lattice</span></code> and <code class="docutils literal notranslate"><span class="pre">MCMC_step</span></code></strong></em><a class="headerlink" href="#span-style-color-violet-problem-1a-span-complete-the-functions-intialize-lattice-and-mcmc-step" title="Permalink to this heading">#</a></h4>
+<p>Use the information provided above and the commented hints in the function templates provided below.  Feel free to copy code from above as you fill in the blanks, but be careful!  Some variable names have been changed…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete the initialize_lattice function below</span>
+
+<span class="k">def</span> <span class="nf">initialize_lattice</span><span class="p">(</span><span class="n">sqrt_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to initialize lattice.  Adds a border of zeros</span>
+<span class="sd">    to represent non-interacting atoms and make the neighbor</span>
+<span class="sd">    calculation easier</span>
+
+<span class="sd">    sqrt_n: The square root of the number of atoms in the lattice</span>
+<span class="sd">    returns padded_lattice: A lattice of size (sqrt_n+2, sqrt_n+2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># initialize the lattice using np.random.random for a lattice of size</span>
+    <span class="c1"># sqrt_n x sqrt_n</span>
+
+    <span class="n">new_lattice</span> <span class="o">=</span>
+
+    <span class="c1"># create a lattice of zeros that has an extra row on the top and bottom,</span>
+    <span class="c1"># and an extra column on the left and the right</span>
+
+    <span class="n">padded_lattice</span> <span class="o">=</span>
+
+    <span class="c1">#mask lattice by setting values above 0.5 to 1, and everything else to -1</span>
+    <span class="n">new_lattice</span><span class="p">[</span><span class="n">new_lattice</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span>
+    <span class="n">new_lattice</span><span class="p">[</span><span class="n">new_lattice</span><span class="o">!=</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
+
+    <span class="c1"># added step to create non-interacting atoms</span>
+    <span class="n">padded_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">sqrt_n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">sqrt_n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">padded_lattice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete the MCMC_step function below</span>
+
+<span class="k">def</span> <span class="nf">MCMC_step</span><span class="p">(</span><span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to repeat the Monte Carlo Markov Chain for this system.</span>
+<span class="sd">    beta: the inverse temperature value for the MCMC step</span>
+<span class="sd">    lattice: the system of spins that will be simulated</span>
+<span class="sd">    returns: an updated version of the input lattice</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Figure out the size of the lattice</span>
+    <span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># keep the neighbors inside the region</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+
+            <span class="c1"># sum over the nearest neighbors</span>
+            <span class="n">sum_NN</span> <span class="o">=</span>
+
+            <span class="c1"># calculate the energy</span>
+            <span class="n">E_a</span> <span class="o">=</span>
+
+            <span class="c1"># re-calculate the energy for a spin state change</span>
+            <span class="n">E_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">E_a</span>
+
+            <span class="c1"># choose whether to keep the new state or not</span>
+            <span class="k">if</span> <span class="c1">#&lt;ENTER LOGIC STATEMENT HERE&gt;</span>
+                <span class="n">lattice</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">lattice</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-violet-problem-1b-span-perform-the-following-experiment">
+<h4><span style="color:Violet">Problem 1b)</span> <em><strong>Perform the following experiment</strong></em><a class="headerlink" href="#span-style-color-violet-problem-1b-span-perform-the-following-experiment" title="Permalink to this heading">#</a></h4>
+<p>By calling the <code class="docutils literal notranslate"><span class="pre">main_exercise1b</span></code> function using different arguments:</p>
+<ol class="arabic simple">
+<li><p>Re-run the simulation for lattice sizes of <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> = [10, 15, 20, 25, 40].</p></li>
+<li><p>For each simulation of <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> values, record how long it took to run.  Use <code class="docutils literal notranslate"><span class="pre">timeit</span></code> and/or <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> to measure the how long the code takes to run. (What is the difference between the reported values if you use both?)</p></li>
+<li><p>Make a plot showing how the time it took to run depends on the size of the simulation.</p></li>
+<li><p>Make a plot showing the net-magnetization curves for each system size.</p></li>
+</ol>
+<p>The function <code class="docutils literal notranslate"><span class="pre">main_exercise1b</span></code> is provided for you below; it calls the two functions you just completed.</p>
+<blockquote>
+<div><p>Note: This computation may take some time to complete.  Discuss with your instructor how long you should wait for a simulation to run.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main_exercise1b</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to complete a simple Metropolis-Hastings Ising model</span>
+<span class="sd">    experiment.</span>
+
+<span class="sd">    sqrt_N: integer that is the square root of the number of atoms in the system</span>
+
+<span class="sd">    returns [inverse_temperature, M]: where M is the net magnetization at each</span>
+<span class="sd">            temperature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">spin_lattice</span> <span class="o">=</span> <span class="n">initialize_lattice</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">)</span>
+
+    <span class="n">inverse_temperature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#empty variable to hold net magnetism</span>
+
+    <span class="c1"># For each temperature</span>
+    <span class="k">for</span> <span class="n">beta</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">inverse_temperature</span><span class="p">):</span>
+
+        <span class="c1"># Repeat the MCMC step 100 times to make sure the system is stable</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+
+            <span class="n">spin_lattice</span> <span class="o">=</span> <span class="n">MCMC_step</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">spin_lattice</span><span class="p">)</span>
+
+        <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spin_lattice</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt_N</span><span class="o">*</span><span class="n">sqrt_N</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">inverse_temperature</span><span class="p">,</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Call the main function in the code cell below like this.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+<span class="n">beta_N5</span><span class="p">,</span> <span class="n">M_N5</span> <span class="o">=</span> <span class="n">main_exercise1b</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Time to completion for N = 5: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Make sure to keep the <code class="docutils literal notranslate"><span class="pre">beta</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> values for plotting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enter your code to call the main function here.  You can either</span>
+<span class="c1"># call the function multiple times in one cell, or add code cells</span>
+<span class="c1"># for each call</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Manually enter your results for each run here:</span>
+<span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">measured_time</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put your plotting code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-violet-problem-1c-span-optimize-the-code-to-see-if-you-can-reduce-the-time-it-takes-to-run">
+<h4><span style="color:Violet">Problem 1c)</span> <em><strong>Optimize the code to see if you can reduce the time it takes to run</strong></em><a class="headerlink" href="#span-style-color-violet-problem-1c-span-optimize-the-code-to-see-if-you-can-reduce-the-time-it-takes-to-run" title="Permalink to this heading">#</a></h4>
+<ol class="arabic simple" start="0">
+<li><p>Copy-paste the <code class="docutils literal notranslate"><span class="pre">MCMC_step</span></code> function from above into the empty code cell below.  We are going to modify it to make it faster, but we also want to keep the original for reference.  Rename the function <code class="docutils literal notranslate"><span class="pre">MCMC_step_optimized</span></code>.</p></li>
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">numba</span></code> “decorator” to the line just above the function declaration.  It should look like this:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@jit</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">MCMC_step_optimized</span><span class="p">(</span><span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;jit()</span></code> decorator comes from the <code class="docutils literal notranslate"><span class="pre">numba</span></code> python package and, when placed before the function, tells the Python compiler to treat this code like a statically compiled C object. The first time the function is called, it won’t show any improvement because it isn’t compiled yet.  However, the second time the function is called, the compiled version should still be in memory, and we will see some improvements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy-paste the MCMC_step function from above here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>A slightly altered main function <code class="docutils literal notranslate"><span class="pre">main_exercise1c</span></code> is provided for you here.  No need to change anything.  Just call it the same way you did before.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+<span class="n">beta_N5</span><span class="p">,</span> <span class="n">M_N5</span> <span class="o">=</span> <span class="n">main_exercise1c</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Time to completion for N = 5: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#from tqdm.gui import tqdm_gui</span>
+<span class="c1"># Here is a slightly altered main function for you</span>
+
+<span class="k">def</span> <span class="nf">main_exercise1c</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to complete a simple Metropolis-Hastings Ising model</span>
+<span class="sd">    experiment.</span>
+
+<span class="sd">    sqrt_N: integer that is the square root of the number of atoms in the system</span>
+
+<span class="sd">    returns [inverse_temperature, M]: where M is the net magnetization at each</span>
+<span class="sd">            temperature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">spin_lattice</span> <span class="o">=</span> <span class="n">initialize_lattice</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">)</span>
+
+    <span class="n">inverse_temperature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1">#empty variable to hold net magnetism</span>
+
+    <span class="c1"># For each temperature</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inverse_temperature</span><span class="p">)):</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">inverse_temperature</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+
+        <span class="c1"># Repeat the MCMC step 500 times to make sure the system is stable</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+
+            <span class="n">spin_lattice</span> <span class="o">=</span> <span class="n">MCMC_step_optimized</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">spin_lattice</span><span class="p">)</span>
+
+        <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spin_lattice</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt_N</span><span class="o">*</span><span class="n">sqrt_N</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">inverse_temperature</span><span class="p">,</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Repeat the experiment with the same values for <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> from above, and record the new time values.  Create a two more plots to compare with the ones created above (Time vs <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>, and Net Magnetization vs Temp), and compare them with the plot from earlier.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the optimized version of the functions here:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create plotting code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style="color:Violet">Answer the following questions</span>:</p>
+<ul class="simple">
+<li><p>What things are the same in the Net Magnetization plot?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>What things are different in the Timing plot?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>How effective is using the <code class="docutils literal notranslate"><span class="pre">numba</span></code> package at improving your code?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="span-style-color-orange-problem-2-span-study-of-magnetic-domain-formation">
+<h2><span style="color:Orange">Problem 2</span>: <em><strong>Study of Magnetic Domain Formation</strong></em><a class="headerlink" href="#span-style-color-orange-problem-2-span-study-of-magnetic-domain-formation" title="Permalink to this heading">#</a></h2>
+<p>Now that we have code up and running for a large system efficiently, let’s watch some magnetic domains form.  Complete the following experiment:</p>
+<ol class="arabic simple">
+<li><p>Write a new main function <code class="docutils literal notranslate"><span class="pre">main_exercise2</span></code> by making the following changes to <code class="docutils literal notranslate"><span class="pre">main_exercise1c</span></code>:</p>
+<ul class="simple">
+<li><p>create a new <code class="docutils literal notranslate"><span class="pre">list</span></code> variable: <code class="docutils literal notranslate"><span class="pre">lattice_at_T</span></code>.  This variable will hold a set of lattices at different temperatures</p></li>
+<li><p>update the <code class="docutils literal notranslate"><span class="pre">lattice_at_T</span></code> variable after the net magnetism <code class="docutils literal notranslate"><span class="pre">M</span></code> is calculated by appending the <code class="docutils literal notranslate"><span class="pre">spin_lattice</span></code> to the list.</p></li>
+<li><p>return the <code class="docutils literal notranslate"><span class="pre">lattice_at_T</span></code> variable along with the <code class="docutils literal notranslate"><span class="pre">inverse_temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> variables</p></li>
+<li><p>A template is started for you below.</p></li>
+</ul>
+</li>
+<li><p>Choose the largest value of <code class="docutils literal notranslate"><span class="pre">N</span></code> that you can simulate within a reasonable amount of time.  Use the code in <em>Exercise 1C</em> to figure out how large to go.</p></li>
+<li><p>Execute the new <code class="docutils literal notranslate"><span class="pre">main_exercise2</span></code> function.  Save all three outputs.</p></li>
+<li><p>Plotting code is created for you below.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main_exercise2</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to complete a simple Metropolis-Hastings Ising model</span>
+<span class="sd">    experiment.</span>
+
+<span class="sd">    sqrt_N: integer that is the square root of the number of atoms in the system</span>
+
+<span class="sd">    returns [inverse_temperature, M]: where M is the net magnetization at each</span>
+<span class="sd">            temperature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">lattices</span> <span class="o">=</span> <span class="n">main_exercise2</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Inverse Temperature $\beta$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Net-magnetism M&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_mag_domains</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattices</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\beta$ = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">interactive_plot</span> <span class="o">=</span> <span class="n">interactive</span><span class="p">(</span><span class="n">plot_mag_domains</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">999</span><span class="p">))</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">interactive_plot</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">output</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="s1">&#39;500px&#39;</span>
+<span class="n">interactive_plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style="color:Violet">Answer the following questions</span>:</p>
+<p>Explore the set of simulated lattices above using the slider, and see if you can detect changes in the magnetic domains generated.  Edit this cell with your answers to the questions.</p>
+<ul class="simple">
+<li><p>At what inverse temperature <span class="math notranslate nohighlight">\(\beta &lt; 1\)</span> do you notice a significant change in the lattice domain states?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>How does this compare to the plotted values?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>How would you describe the shapes of the domains that form at <span class="math notranslate nohighlight">\(\beta \in [0.75, 0.85]\)</span>?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Do you have a lattice that is completely aligned?  For what <span class="math notranslate nohighlight">\(\beta\)</span> value?  Is there one that is close?</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+</section>
+<section id="span-style-color-orange-problem-3-span-monte-carlo-integration">
+<h2><span style="color:Orange">Problem 3</span>: <em><strong>Monte Carlo Integration</strong></em><a class="headerlink" href="#span-style-color-orange-problem-3-span-monte-carlo-integration" title="Permalink to this heading">#</a></h2>
+<p>In this problem, you will study the accuracy of Monte Carlo integration in each of four different expressions, each with some physical significance, shown in the table below:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression #</p></th>
+<th class="head"><p>Function                    </p></th>
+<th class="head"><p>Interval</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.</p></td>
+<td><p><span class="math notranslate nohighlight">\({x = \int_0^1 7-10t\ dt} \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(t\)</span> is time; <span class="math notranslate nohighlight">\(t = [0, 1]\)</span> s</p></td>
+<td><p>Gives position at <br>time <span class="math notranslate nohighlight">\(t\)</span> for this system</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.</p></td>
+<td><p><span class="math notranslate nohighlight">\({\Delta S}\)</span> <span class="math notranslate nohighlight">\({= \int_{300}^{400}\frac{mc}{T}\ dT }\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(m\)</span> is mass; <span class="math notranslate nohighlight">\(m=1\)</span> kg<br> <span class="math notranslate nohighlight">\(c\)</span> is specific heat capacity; <span class="math notranslate nohighlight">\(c = 4190\)</span> J/kg K<br><span class="math notranslate nohighlight">\(T\)</span> is temperature; <span class="math notranslate nohighlight">\(T = [300, 400]\)</span> K</p></td>
+<td><p>Change in entropy for <br>thermal processes</p></td>
+</tr>
+<tr class="row-even"><td><p>3.</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi = \int_1^2 \frac{Q}{4 \pi \epsilon_o r^2} dr\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(r\)</span> is distance; <span class="math notranslate nohighlight">\(r = [1, 2]\)</span> m<br><span class="math notranslate nohighlight">\(\epsilon_o\)</span> is the Permittivity of Free Space<br><span class="math notranslate nohighlight">\(Q\)</span> is the charge; <span class="math notranslate nohighlight">\(Q = 1\)</span> C</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi\)</span> is the electric potential energy <br>gained by moving along line <span class="math notranslate nohighlight">\(r\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4.</p></td>
+<td><p><span class="math notranslate nohighlight">\(I = \int_0^\infty \frac{2 \pi h c^2}{\lambda^5(e^{hc/\lambda k T} - 1)}\ d\lambda\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(h\)</span> is Planck’s constant<br> <span class="math notranslate nohighlight">\(c\)</span> is speed of light <br> <span class="math notranslate nohighlight">\(k\)</span> is Boltzmann’s Constant <br> <span class="math notranslate nohighlight">\(T\)</span> is the absolute temperature; T = 400K <br> <span class="math notranslate nohighlight">\(\lambda\)</span> is wavelength; <span class="math notranslate nohighlight">\(\lambda = [0, \infty]\)</span> m</p></td>
+<td><p>Planck’s radiation law; <br>Integrating gives Stefan Boltzmann Law</p></td>
+</tr>
+</tbody>
+</table>
+<p>Analytically integrate each for the region and values provided, and record your answer in the <code class="docutils literal notranslate"><span class="pre">analytical_result</span></code> variables below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analytical_result_expr1</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># replace the None&#39;s with your results</span>
+<span class="n">analytical_result_expr2</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">analytical_result_expr3</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">analytical_result_expr4</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show your work in the cell below, either in a picture file for written derivations or in Latex</p>
+<p>Write the each expression to be integrated as a python function.</p>
+<blockquote>
+<div><p>For example, if I want to integrate the expression</p>
+<div class="math notranslate nohighlight">
+\[ \Large 
+&gt; F = \int 3x^2 + 17\ dx
+&gt; \]</div>
+<p>then my integrand is</p>
+<div class="math notranslate nohighlight">
+\[ \Large
+&gt; f(x) = 3x^2 + 17
+&gt; \]</div>
+<p>and I would write the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">f_x</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">17</span>
+    <span class="k">return</span> <span class="n">f_x</span>
+</pre></div>
+</div>
+<p>This function takes <code class="docutils literal notranslate"><span class="pre">x</span></code> as my function argument, and returns the calculated value <code class="docutils literal notranslate"><span class="pre">f_x</span></code>.  Note that I am not yet evaluating the limits of my integrand.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helpful constants:</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="c1">#unitless</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">2.99E8</span> <span class="c1">#m/s</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">6.62607015E-34</span> <span class="c1">#J</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.380649E-23</span> <span class="c1">#J/K</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">8.854187817E-12</span> <span class="c1">#F/m</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">5.6704E-8</span> <span class="c1">#W/(m^2 K^4)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Randomly choose values for <code class="docutils literal notranslate"><span class="pre">x</span></code> from a distribution between the limits of the definite integral.</p>
+<blockquote>
+<div><p><em>Hint</em>: if one of your limits is <span class="math notranslate nohighlight">\(\infty\)</span>, it is okay to approximate it with a large number.  Another way to do it is to plot [x, f(x)] and visually estimate the most important region of your integration.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lower_limit</span> <span class="o">=</span> <span class="c1"># this can be a float</span>
+<span class="n">upper_limit</span> <span class="o">=</span> <span class="c1"># this can be a float</span>
+<span class="n">num_x_vals</span>  <span class="o">=</span> <span class="c1"># this must be an integer value less than or equal to 10^8</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span> <span class="n">num_x_vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate the <code class="docutils literal notranslate"><span class="pre">f_x</span></code> values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">integrand</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approx_int</span> <span class="o">=</span> <span class="p">((</span><span class="n">upper_limit</span> <span class="o">-</span> <span class="n">lower_limit</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">num_x_vals</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Monte Carlo approximation is </span><span class="si">{</span><span class="n">approx_int</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate the error between the <code class="docutils literal notranslate"><span class="pre">approx_int</span></code> and the <code class="docutils literal notranslate"><span class="pre">analytical_result</span></code> variables using one or more of the metrics discussed above</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># replace with your calculation</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Mean Squared Error is </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">pe</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># replace with your calculation</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Percent Error is </span><span class="si">{</span><span class="n">pe</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we want to visualize how the error decreases as the number of random trials <code class="docutils literal notranslate"><span class="pre">num_x_vals</span></code> increases.  Write code to the do the following:</p>
+<ul class="simple">
+<li><p>Using the error metric you decided on above, write a for-loop that calculates the error as a function of the number of points you sampled.  For example, calculate the error when you summed two values of <span class="math notranslate nohighlight">\(\langle F^N \rangle\)</span>, then calculate the error for three summed values of <span class="math notranslate nohighlight">\(\langle F^N \rangle\)</span>, and so on until you have calculated the errors for the full range of <span class="math notranslate nohighlight">\(\langle F^N \rangle\)</span>.</p></li>
+<li><p>IMPORTANT: You do not need to re-do the experiment to calculate this analysis; if you do it will slow down your for-loop and potentially crash your notebook kernel.  Instead, you will want to reuse all of the integrand values are stored in the <code class="docutils literal notranslate"><span class="pre">y</span></code> variable.  Python indexing into this list using the <code class="docutils literal notranslate"><span class="pre">y[:N]</span></code> functionality will give you the first <code class="docutils literal notranslate"><span class="pre">N</span></code> values in this list.  The first <code class="docutils literal notranslate"><span class="pre">N</span></code> values can then be used to calculate a <span class="math notranslate nohighlight">\(\langle F^N \rangle\)</span> value for the first <code class="docutils literal notranslate"><span class="pre">N</span></code> samples.</p></li>
+<li><p>Make a figure showing how the error changes with the number of values in the sum.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">error_data</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="c1"># Write code here to fill error_data with the percentage error corresponding to each of the number of points you sampled in the MC integration</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, plot it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">,</span> <span class="mi">1999998</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">error_data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Values in Sum&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Percent Error&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style="color:Violet">Answer the following questions</span>:</p>
+<ul class="simple">
+<li><p>Model vs Simulation: In your own words, describe the difference between a model and a simulation.  Give your own example of a model, and how you would simulate it.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Markov Chain: In your own words, describe a Markov Chain and its properties. Give your own example of a stochastic system and how you would implement a Markov Chain for it.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Answer:</strong></p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_sources/homework"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lectures/MonteCarloSamplingMethods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Monte Carlo and Sampling Methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week_14.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span style="color: blue;"><b>Bias and Blind Analysis</b></span></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-1-span-optimizing-speed-of-the-2d-ising-model-simulations"><span style="color:Orange">Problem 1</span>: <em><strong>Optimizing Speed of the 2D Ising Model Simulations</strong></em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-complexity-analysis-span"><span style="color:LightGreen">Complexity Analysis</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-execution-optimization-span"><span style="color:LightGreen">Execution Optimization</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightblue-execution-optimization-toolkit-span"><span style="color:LightBlue">Execution Optimization Toolkit</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-violet-problem-1a-span-complete-the-functions-intialize-lattice-and-mcmc-step"><span style="color:Violet">Problem 1a)</span> <em><strong>Complete the functions <code class="docutils literal notranslate"><span class="pre">intialize_lattice</span></code> and <code class="docutils literal notranslate"><span class="pre">MCMC_step</span></code></strong></em></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-violet-problem-1b-span-perform-the-following-experiment"><span style="color:Violet">Problem 1b)</span> <em><strong>Perform the following experiment</strong></em></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-violet-problem-1c-span-optimize-the-code-to-see-if-you-can-reduce-the-time-it-takes-to-run"><span style="color:Violet">Problem 1c)</span> <em><strong>Optimize the code to see if you can reduce the time it takes to run</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-2-span-study-of-magnetic-domain-formation"><span style="color:Orange">Problem 2</span>: <em><strong>Study of Magnetic Domain Formation</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-problem-3-span-monte-carlo-integration"><span style="color:Orange">Problem 3</span>: <em><strong>Monte Carlo Integration</strong></em></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Neubauer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
